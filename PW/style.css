@@ -25,15 +25,17 @@ header
     align-items: center;
     z-index: 10000;
 }
-header .logo
-{
-    color: #ffff;
+header .logo {
+    position: sticky;
+    top: 0; /* Adjust the top value as needed */
+    color: #ffffff;
     font-weight: 700;
     text-decoration: none;
     font-size: 2em;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
 header ul
 {
     display: flex;
@@ -129,6 +131,11 @@ section img#mountains_front
     margin-bottom: 10px;
     color: #fff;
 }
+.sec h3 {
+    margin-bottom: 10px;
+    color: white; /* Set the color to white */
+}
+
 .sec p
 {
     font-size: 1em;
