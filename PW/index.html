@@ -6,11 +6,12 @@
     </head>
     <body>
         <header>
-            <a href="#" class="logo">Logo</a>
+            <a href="#" class="logo">TS</a>
             <ul>
                 <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Work</a></li>
+                <li><a href="#top">About</a></li>
+                <li><a href="#middle">Projects</a></li>
+                <li><a href="#bottom">Education</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </header>
@@ -18,38 +19,92 @@
             <img src="assets/stars.png" id="stars">
             <img src="assets/moon.png" id="moon">
             <img src="assets/mountains_behind.png" id="mountains_behind">
-            <h2 id="text">Moon Light Parallax</h2>
-            <a href="#sec" id="btn">Explore</a>
+            <h2 id="text">Toufic Saleh</h2>
             <img src="assets/mountains_front.png" id="mountains_front">
         </section>
-        <div class="sec" id="sec">
-            <h2>Parallax Scrolling Effect Demonstration</h2>
-            <p>Parallax is the apparent displacement of an object because of a change in the observer's point of view.
-                Parallax also affects optical instruments such as rifle scopes, binoculars, microscopes, and twin-lens reflex
-                cameras that view objects from slightly different angles. 
-                Many animals, along with humans, have two eyes with overlapping visual fields that use parallax 
-                to gain depth perception; this process is known as stereopsis. 
-                In computer vision the effect is used for computer stereo vision, and there is a 
-                device called a parallax rangefinder that uses it to find range, and in some variations also 
-                altitude to a target. <br><br>
-                Parallax is the apparent displacement of an object because of a change in the observer's point of view.
-                Parallax also affects optical instruments such as rifle scopes, binoculars, microscopes, and twin-lens reflex
-                cameras that view objects from slightly different angles. 
-                Many animals, along with humans, have two eyes with overlapping visual fields that use parallax 
-                to gain depth perception; this process is known as stereopsis. 
-                In computer vision the effect is used for computer stereo vision, and there is a 
-                device called a parallax rangefinder that uses it to find range, and in some variations also 
-                altitude to a target. <br><br>
-                Parallax also affects optical instruments such as rifle scopes, binoculars, microscopes, and twin-lens reflex
-                cameras that view objects from slightly different angles. 
-                Many animals, along with humans, have two eyes with overlapping visual fields that use parallax 
-                to gain depth perception; this process is known as stereopsis. 
-                In computer vision the effect is used for computer stereo vision, and there is a 
-                device called a parallax rangefinder that uses it to find range, and in some variations also 
-                altitude to a target. 
+        <div class="sec" id="top">
+            <h2>About Me..</h2>
+            <p>
+                I'm Toufic Saleh, currently in my final year as a computer 
+                science student at Virginia Tech. My technical repertoire 
+                encompasses a wide array of skills essential for modern tech 
+                endeavors. Proficient in programming languages like Python, 
+                Java, and C++, I also have a solid grasp of web development 
+                frameworks such as HTML, CSS, and JavaScript. Moreover, my 
+                expertise extends to networking, data structures and algorithms, 
+                and operating systems. Whether it's configuring intricate network 
+                architectures, optimizing data structures for efficiency, or 
+                delving into the intricacies of operating system functionality, 
+                I thrive on the challenges presented by these core components 
+                of computing.
+            <br><br>
+            Beyond mastering technical intricacies, my overarching aim is to 
+            leverage technology for impactful change. I envision a world where 
+            technology serves as a force for good, addressing pressing societal 
+            challenges and enhancing lives. From developing software solutions 
+            that streamline processes to contributing to projects that advance 
+            accessibility and sustainability, I'm committed to making a tangible 
+            difference in the tech industry. Let's collaborate and innovate, as 
+            we harness the transformative potential of technology to create a 
+            brighter, more inclusive future for all.
             </p>
         </div>
+
+        <div class="sec" id="middle">
+            <h2>
+                Projects
+            </h2>
+            <h3> Stock Predictor</h3>
+            <p>
+                In this project, I developed an advanced stock price predictor using 
+                Python, leveraging the yfinance library for historical stock data 
+                acquisition and scikit-learn for its extensive machine learning 
+                functionalities. The application allows for user-defined stock symbol 
+                input, employing sophisticated data preprocessing and feature engineering 
+                to optimize the input for the RandomForestRegressor model. With a focus 
+                on enhancing the machine learning foundation, I iterated on model selection, 
+                parameter tuning, and performance evaluation to ensure accurate and robust 
+                stock price predictions.
+            </p>
+                
+            <br><br>
+            <h3>Automated News Email</h3>
+            <p>
+                    I've made a Python email bot that smartly aggregates and condenses daily 
+                news from Google News, Bing News, and Twitter for users, based on their 
+                specific interests indicated by the notifications they've activated for 
+                certain followers. By ensuring that the bot curates content only from followed 
+                entities with active notifications, it delivers a highly personalized and relevant 
+                news digest directly to users' inboxes every evening at 10 pm, making staying 
+                informed both effortless and efficient. This project not only highlights my adeptness 
+                in API integration and Python programming but also underscores my commitment to 
+                creating user-centric solutions.
+            </p>
+                
+            <br><br>
+            <h3>Youtube NoteTaker Chrome Extension</h3>
+            <p>
+                    I developed "YouTube NoteTaker," a Chrome extension designed to enhance the learning 
+                experience on YouTube. This tool allows users to mark specific timestamps during a video 
+                to create checkpoints, where they can add detailed notes for later reference. It's 
+                particularly aimed at aiding students in their study sessions by enabling digital annotations 
+                directly within the YouTube interface. These checkpoints and notes are persistently saved 
+                within the extension, allowing users to return to them or navigate between different videos 
+                without losing their data. Completing this project honed my skills in JavaScript, Chrome API 
+                utilization, and UI/UX design, further solidifying my ability to create practical, user-focused 
+                applications.
+            </p>
+        </div>
+        <div class="sec" id="bottom">
+        <h2>Education</h2>
+        <h3>Virginia Tech</h3>
+        <p>Pursuing a Bacherlers Degree in Computer Science</p>
+        
+        
+        </div>
+        <input type="button" onClick="document.getElementById('middle').scrollIntoView();" />
         <script>
+
             let stars = document.getElementById('stars');
             let moon = document.getElementById('moon');
             let mountains_behind = document.getElementById('mountains_behind');
@@ -66,7 +121,6 @@
                 mountains_front.style.top = value * 0 + 'px';
                 text.style.marginRight = value * 4 + 'px';
                 text.style.marginTop = value * 1.5 + 'px';
-                btn.style.marginTop = value * 1.5 + 'px';
                 header.style.top = value * 0.5 + 'px';
             })
         </script>
