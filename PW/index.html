@@ -1,41 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <title>Welcome to My Portfolio</title>
-</head>
-<body>
-    <div id="particles-js"></div>
-    <div class="welcome-section" id="home">
-        <div id="dynamic-title">
-            <h1>Hello, I'm [Your Name]</h1>
+<!doctype html>
+<html>
+    <head>
+        <title>Parallax Scrolling Website using Vanilla JavaScript</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <header>
+            <a href="#" class="logo">Logo</a>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </header>
+        <section>
+            <img src="assets/stars.png" id="stars">
+            <img src="assets/moon.png" id="moon">
+            <img src="assets/mountains_behind.png" id="mountains_behind">
+            <h2 id="text">Moon Light Parallax</h2>
+            <a href="#sec" id="btn">Explore</a>
+            <img src="assets/mountains_front.png" id="mountains_front">
+        </section>
+        <div class="sec" id="sec">
+            <h2>Parallax Scrolling Effect Demonstration</h2>
+            <p>Parallax is the apparent displacement of an object because of a change in the observer's point of view.
+                Parallax also affects optical instruments such as rifle scopes, binoculars, microscopes, and twin-lens reflex
+                cameras that view objects from slightly different angles. 
+                Many animals, along with humans, have two eyes with overlapping visual fields that use parallax 
+                to gain depth perception; this process is known as stereopsis. 
+                In computer vision the effect is used for computer stereo vision, and there is a 
+                device called a parallax rangefinder that uses it to find range, and in some variations also 
+                altitude to a target. <br><br>
+                Parallax is the apparent displacement of an object because of a change in the observer's point of view.
+                Parallax also affects optical instruments such as rifle scopes, binoculars, microscopes, and twin-lens reflex
+                cameras that view objects from slightly different angles. 
+                Many animals, along with humans, have two eyes with overlapping visual fields that use parallax 
+                to gain depth perception; this process is known as stereopsis. 
+                In computer vision the effect is used for computer stereo vision, and there is a 
+                device called a parallax rangefinder that uses it to find range, and in some variations also 
+                altitude to a target. <br><br>
+                Parallax also affects optical instruments such as rifle scopes, binoculars, microscopes, and twin-lens reflex
+                cameras that view objects from slightly different angles. 
+                Many animals, along with humans, have two eyes with overlapping visual fields that use parallax 
+                to gain depth perception; this process is known as stereopsis. 
+                In computer vision the effect is used for computer stereo vision, and there is a 
+                device called a parallax rangefinder that uses it to find range, and in some variations also 
+                altitude to a target. 
+            </p>
         </div>
-        <div class="social-icons">
-            <!-- Your social icons here -->
-        </div>
-    </div>
-    <div class="section about-me" id="about">
-        <h2>About Me</h2>
-        <p>[Your Bio]</p>
-    </div>
-    <div class="section projects" id="projects">
-        <h2>Projects</h2>
-        <p>[Details of your projects]</p>
-    </div>
-    <div class="section education" id="education">
-        <h2>Education</h2>
-        <p>[Your educational background]</p>
-    </div>
-    <div class="contact-modal" id="contactModal">
-        <!-- Contact Modal Content -->
-    </div>
-    <footer>
-        <p>&copy; [Year] [Your Name]. All rights reserved.</p>
-    </footer>
-    <script src="script.js"></script>
-</body>
+        <script>
+            let stars = document.getElementById('stars');
+            let moon = document.getElementById('moon');
+            let mountains_behind = document.getElementById('mountains_behind');
+            let text = document.getElementById('text');
+            let btn = document.getElementById('btn');
+            let mountains_front = document.getElementById('mountains_front');
+            let header = document.querySelector('header');
+
+            window.addEventListener('scroll', function() {
+                let value = window.scrollY;
+                stars.style.left = value * 0.25 + 'px';
+                moon.style.top = value * 1.05 + 'px';
+                mountains_behind.style.top = value * 0.5 + 'px';
+                mountains_front.style.top = value * 0 + 'px';
+                text.style.marginRight = value * 4 + 'px';
+                text.style.marginTop = value * 1.5 + 'px';
+                btn.style.marginTop = value * 1.5 + 'px';
+                header.style.top = value * 0.5 + 'px';
+            })
+        </script>
+    </body>
 </html>
