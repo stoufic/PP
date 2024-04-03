@@ -42,30 +42,27 @@
             </p>            
             <div class="social-media">
                 <a href="https://github.com/stoufic"><i class='bx bxl-github'></i></a>
-                <a href="https://www.instagram.com/toufic.saleh/?hl=en"><i class='bx bxl-instagram-alt'></i></a>
+                <a href="https://www.instagram.com/toufic.saleh/?hl=h67"><i class='bx bxl-instagram-alt'></i></a>
                 <a href="https://www.linkedin.com/in/toufic-saleh-3b2915289/"><i class='bx bxl-linkedin'></i></a>
             </div>
             <a href="C:\Users\toufi\OneDrive\Desktop\PP\PW2\Resume.Toufic_Saleh.pdf" download="Resume.Toufic_Saleh" class="btn">Download Resume</a>
         </div>
 
         <div class="home-img">
-            <img src="images/home.png" alt="">
+            <img src="(image)" alt="">
         </div>
     </section>
 
     <!-- about section design -->
     <section class="about" id="about">
-        <div class="about-img">
-            <img src="images/about.png" alt="">
+        <div class="about-img">324567a
+            <img src="(image)" alt="">
         </div>
 
         <div class="about-content">
             <h2 class="heading">About <span>Me</span></h2>
-            <h3>Frontend Developer!</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore officia asperiores labore officiis
-                suscipit ex at non impedit nostrum animi illum mollitia itaque reprehenderit laudantium molestiae eum
-                porro molestias repudiandae, amet ea eos alias corporis laborum nobis. Tempore deserunt repellendus quos
-                nihil voluptas aut est suscipit.</p>
+            <h3>Toufic Saleh</h3>
+            <p>I am a self taught Software Engineer. A rising Senior  </p>
             <a href="#" class="btn">Read More</a>
         </div>
     </section>
@@ -93,7 +90,7 @@
 
             <div class="services-box">
                 <i class='bx bx-bar-chart-alt'></i>
-                <h3>Digital Marketing</h3>
+                <h3>Stock and Trading Predictor</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi dignissimos vitae magni aut commodi
                     non laborum nisi alias iusto voluptatibus.</p>
                 <a href="#" class="btn">Read More</a>
@@ -154,8 +151,8 @@
             <div class="portfolio-box">
                 <img src="images/portfolio6.jpg" alt="">
                 <div class="portfolio-layer">
-                    <h4>Web Design</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, ratione.</p>
+                    <h4>Stock/Trading Predictor</h4>
+                    <p>something, something</p>
                     <a href="#"><i class='bx bx-link-external'></i></a>
                 </div>
             </div>
@@ -165,30 +162,45 @@
     <!-- contact section design -->
     <section class="contact" id="contact">
         <h2 class="heading">Contact <span>Me!</span></h2>
-
-        <form action="#">
+    
+        <form id="contactForm" action="#">
             <div class="input-box">
-                <input type="text" placeholder="Full Name">
-                <input type="email" placeholder="Email Address">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
             </div>
             <div class="input-box">
-                <input type="number" placeholder="Mobile Number">
-                <input type="text" placeholder="Email Subject">
+                <input type="number" placeholder="Mobile Number" required>
+                <input type="text" placeholder="Email Subject" required>
             </div>
-            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <textarea name="" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
             <input type="submit" value="Send Message" class="btn">
         </form>
     </section>
+    
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        // Here you can also implement your logic to send form data using AJAX or Fetch API
+        
+        alert('Your message has been sent!'); // Show the alert box
+    
+        // Optionally, you can clear the form fields after submission
+        this.reset();
+    });
+    </script>
+    
 
     <!-- footer design -->
     <footer class="footer">
         <div class="footer-text">
             <p>Copyright &copy; 2023 by Toufic Saleh | All Rights Reserved.</p>
         </div>
-
+<center>
         <div class="footer-iconTop">
             <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
         </div>
+</center>
     </footer>
 
 
@@ -200,6 +212,8 @@
 
     <!-- custom js -->
     <script src="js/script.js"></script>
+    <!-- <script src="js/js.js"></script> -->
+
 </body>
 
 </html>
