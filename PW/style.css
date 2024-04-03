@@ -1,20 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
-*
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     scroll-behavior: smooth;
 }
-body
-{
+body {
     min-height: 100vh;
     overflow-x: hidden;
-    background: linear-gradient(#2b1055,#7597de);
+    background: linear-gradient(#2b1055, #7597de);
 }
-header
-{
+header {
     position: absolute;
     top: 0;
     left: 0;
@@ -27,7 +24,7 @@ header
 }
 header .logo {
     position: sticky;
-    top: 0; /* Adjust the top value as needed */
+    top: 0;
     color: #ffffff;
     font-weight: 700;
     text-decoration: none;
@@ -35,32 +32,27 @@ header .logo {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
-
-header ul
-{
+header ul {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-header ul li
-{
+header ul li {
     list-style: none;
     margin-left: 20px;
 }
-header ul li a
-{
+header ul li a {
     text-decoration: none;
     padding: 6px 15px;
     color: #fff;
     border-radius: 20px;
 }
-header ul li a:hover , header ul li a.active
-{
+header ul li a:hover,
+header ul li a.active {
     background: #fff;
     color: #2b1055;
 }
-section
-{
+section {
     position: relative;
     width: 100%;
     height: 100vh;
@@ -70,18 +62,16 @@ section
     align-items: center;
     overflow: hidden;
 }
-section::before
-{
+section::before {
     content: '';
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 100px;
-    background: linear-gradient(to top,#1c0522,transparent);
+    background: linear-gradient(to top, #1c0522, transparent);
     z-index: 1000;
 }
-section img 
-{
+section img {
     position: absolute;
     top: 0;
     left: 0;
@@ -89,26 +79,21 @@ section img
     height: 100%;
     object-fit: cover;
 }
-section img#moon
-{
+section img#moon {
     mix-blend-mode: screen;
 }
-section img#mountains_front
-{
+section img#mountains_front {
     z-index: 10;
 }
-#text
-{
+#text {
     position: absolute;
     color: #fff;
     right: -350px;
     white-space: nowrap;
     font-size: 7.5vw;
     z-index: 9;
-    
 }
-#btn
-{
+#btn {
     text-decoration: none;
     padding: 8px 30px;
     display: inline-block;
@@ -118,26 +103,57 @@ section img#mountains_front
     font-size: 1.5em;
     transform: translateY(100px);
 }
-.sec
-{
+.sec {
     position: relative;
     padding: 100px;
     background: #1c0522;
-
 }
-.sec h2 
-{
+.sec h2 {
     font-size: 3.5em;
     margin-bottom: 10px;
     color: #fff;
 }
 .sec h3 {
     margin-bottom: 10px;
-    color: white; /* Set the color to white */
+    color: white;
 }
-
-.sec p
-{
+.sec p {
     font-size: 1em;
     color: #fff;
+}
+
+.content-box {
+    position: fixed;
+    top: 50%;
+    right: -40%; /* Initially hidden */
+    transform: translateY(-50%);
+    width: 40%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border-radius: 20px; /* Rounded box */
+    transition: right 0.5s ease; /* Transition for sliding in */
+}
+
+.left {
+    right: auto;
+    left: -40%;
+}
+
+.right {
+    right: -40%;
+    left: auto;
+}
+
+.content-box.visible {
+    right: 5%; /* Show when visible */
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }
