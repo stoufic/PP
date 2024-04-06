@@ -513,3 +513,28 @@ span {
         width: 90vw;
     }
 }
+
+/* css/custom-cursor.css */
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.pointer {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    /* Specify the URL of your custom cursor image */
+    cursor: url(images/cusor.png), auto;
+}
+
+
+/* Example styling for hover effect */
+.pointer:hover {
+    background-color: #fff;
+    border-color: rgb(24, 146, 155);
+}
