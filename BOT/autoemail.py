@@ -21,9 +21,9 @@ def compile_news_content(articles):
     return content
 
 def send_news_email(receiver_email):
-    api_url = 'https://newsapi.org/v2/everything'  # Example API endpoint
-    api_key = '2ddb1ee14ee04c34b1080f37b46e39a6'  # Replace with your actual API key
-    #topics = topic_choices  # Customize your topics
+    api_url = 'https://newsapi.org/v2/everything'
+    api_key = '899b637044f445f69c8bd67d98c7818a' 
+    
 
     articles = fetch_news(api_url, api_key, user_topics)
     if not articles:
@@ -32,8 +32,8 @@ def send_news_email(receiver_email):
 
     email_body = compile_news_content(articles)
 
-    sender = 'touficsaleh.2003@gmail.com'
-    password = 'fqdu jqfe lyta lytg'
+    sender = 'salehtoufic15@gmail.com'
+    password = 'rkoi keku rneg yqkl'
     subject = "Here's What You've Missed"
 
     message = EmailMessage()

@@ -1,13 +1,15 @@
 import statistics
 from typing import Optional
 from fastapi import FastAPI
-from fastapi.params import Body
+from fastapi.params import B 
 from pydantic import BaseModel
 from random import randrange
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from .import models
-from .database import engine, SessionLocal
+import mod
+els
+import database
+import engine, SessionLocal
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -89,3 +91,4 @@ def update_post(id: int, post: Post):
     post_dict['id'] = id
     my_posts[index] = post_dict
     return {"data": post_dict}
+
