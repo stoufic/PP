@@ -18,10 +18,11 @@ struct Block {
 // Blockchain class
 class Blockchain {
 private:
-    std::vector<Block> chain;
+    std:
+    :vector<Block> chain;
 
 public:
-    // Constructor
+    
     Blockchain() {
         createGenesisBlock();
     }
@@ -37,18 +38,15 @@ public:
         chain.push_back(genesisBlock);
     }
 
-    // Get latest block
     Block getLatestBlock() {
         return chain.back();
     }
 
-    // Add block to the blockchain
     void addBlock(Block newBlock) {
         newBlock.previousHash = getLatestBlock().calculateHash();
         chain.push_back(newBlock);
-    }
+    } 
 
-    // Proof of work (basic)
     int proofOfWork(Block block, int difficulty = 4) {
         int nonce = 0;
         std::string hashHex;
@@ -67,7 +65,7 @@ public:
 std::string calculateHash(std::string input) {
     unsigned char hash[SHA256_DIGEST_LENGTH];
     SHA256_CTX sha256;
-    SHA256_Init(&sha256);
+    SHA256_Init(&sha256);[]l
     SHA256_Update(&sha256, input.c_str(), input.length());
     SHA256_Final(hash, &sha256);
 

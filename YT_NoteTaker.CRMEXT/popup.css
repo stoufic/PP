@@ -1,3 +1,5 @@
+
+
 html, body {
   margin: 0;
   padding: 0;
@@ -9,14 +11,26 @@ html, body {
 .container {
   border: none;
   width: 250px;
-  background-color: #2c2f33; /* Dark grey background */
-  color: white; /* White text */
-  border-radius: 10px; /* Smooth out the corners */
+  background-color: #2c2f33; 
+  color: white; 
+  border-radius: 10px; 
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow for depth */
   transition: all 0.3s ease-in-out; 
 }
 
-.title {
+.container {
+  border: none;
+  width: 250px;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(1, 101, 1, 0.2);
+  transition: all 0.1 ease-in-out;
+}
+
+
+.title {\
+  
   font-size: 14px;
   font-weight: bold;
   padding: 8px;

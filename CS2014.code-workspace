@@ -1,0 +1,9 @@
+{
+	"folders": [
+		{
+			"uri": "vscode-remote://ssh-remote+rlogin.cs.vt.edu/home/ugrads/majors/toufics/CS2014"
+		}
+	],
+	"remoteAuthority": "ssh-remote+rlogin.cs.vt.edu",
+	"settings": {}
+}

@@ -15,4 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
             pointer.classList.remove('hover');
         });
     });
+
+    document.addEventListener('pointerup', e=>{
+        this.elementFromPoint.toString(this.hasFocus)
+    })
 });
