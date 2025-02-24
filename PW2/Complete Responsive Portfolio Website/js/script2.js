@@ -51,13 +51,8 @@ ScrollReveal().reveal('.home-img, .services-container, .portfolio-box, .contact 
 ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left' });
 ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
 
-
-/*==================== typed js ====================*/
-const typed = new Typed('.multiple-text', {
-    strings: ['Specialize in Tailored Solutions', 'Cover all Niches', 'Partnered with Specialists in all Fields'],
-    typeSpeed: 50,
-    backSpeed: 50,
-    backDelay: 1000,
-    loop: true
+const typed = new Typed('.multiple-text1', {
+    strings: ['we uniquely combine expertise across Construction, Software, AI Workflow Automation, Marketing, and Command Centers. This multidisciplinary approach enables us to efficiently address complex challenges that span multiple domains. By choosing us, you avoid the hassle of juggling multiple service providers, which streamlines your operations and enhances project coherence. Our integrated team works synergistically to deliver innovative and effective solutions, ensuring that every component is aligned with your business goals. With NexGen Solutions, you gain a reliable, all-in-one partner who is committed to elevating your business with high-quality, customized results.'],
+    typeSpeed: 10,
+    loop: false
 });
-

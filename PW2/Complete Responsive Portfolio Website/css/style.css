@@ -322,6 +322,7 @@ span {
 }
 
 .contact {
+    background-color: #1f242d;
     min-height: auto;
     padding-bottom: 7rem;
 }
@@ -535,6 +536,81 @@ span {
 
 /* Example styling for hover effect */
 .pointer:hover {
-    background-color: #fff;
-    border-color: rgb(24, 146, 155);
+    background-color: #323946;
+    border-color: rgb(0, 0, 0);
+}
+
+.companies {
+    color: var(--text-color);
+    background-color: #1f242d;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.company-slider {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+}
+
+.company-slide {
+    display: inline-flex;
+    animation: slide 60s linear infinite;
+}
+
+.company-slide img {
+    width: 120px; /* Adjust based on actual logo sizes */
+    height: auto;
+    margin: 0 20px;
+    display: inline-block;
+    animation: rotate-in 5s linear infinite;
+    animation-delay: inherit; /* This ensures rotation timing matches slide positioning */
+}
+
+/* Keyframes for sliding */
+@keyframes slide {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Keyframes for rotating as logos re-enter */
+
+
+/* This will stagger the animation of each logo so they don't all rotate at the same time */
+
+/* Continue the pattern for more logos */.company-data {
+    background-color: #323946;
+    padding: 20px;
+    text-align: center;
+}
+
+.data-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.data-box {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+    padding: 20px;
+    background: rgb(36, 23, 80);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.data-box h3 {
+    color: #333;
+    font-size: 2em;
+}
+
+.data-box p {
+    color: #666;
+    font-weight: bold;
 }
