@@ -33,6 +33,7 @@
             <a href="#services">Niche Catgories</a>
             <a href="#portfolio">Projects</a>
             <a href="#companies">Partners</a>
+            <a href="#company-data"> Testimonials</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
@@ -62,20 +63,21 @@
     <!-- about section design -->
     <section class="about" id="about">
         <div class="about-img">
-            <img src="(image)" alt="">
+            <img src="images/logo.png" alt="">
         </div>
 
         <div class="about-content">
             <h2 class="heading">About <span>Us</span></h2>
             <p> At NexGen Solutions, we are pioneers in providing cutting-edge, multi-disciplinary solutions tailored to propel businesses into the future. Our expertise spans across Construction, Software Development, AI Workflow Automation, Marketing, and Command Centers, ensuring comprehensive coverage of your business needs. Committed to innovation and excellence, NexGen Solutions partners with enterprises to transform challenges into opportunities, fostering growth and operational efficiency.</p>
             <a href="choose.html" class="btn">Why Choose Us?</a>
+           
 
         </div>
     </section>
 
     <!-- services section design -->
     <section class="services" id="services">
-        <h2 class="heading">Our<span>Skill Sets</span></h2>
+        <h2 class="heading">Our <span>Skill Sets</span></h2>
 
         <div class="services-container">
             <div class="services-box">
@@ -109,8 +111,7 @@
             <div class="services-box">
                 <i class='bx bx-bar-chart-alt'></i>
                 <h3>Command Centers</h3>
-                <p>We design and implement state-of-the-art command centers for various sectors, enhancing decision-making through real-time data integration and sophisticated monitoring tools
-                    </p>
+                <p>We design and implement state-of-the-art command centers for various sectors, enhancing decision-making through real-time data integration and sophisticated monitoring tools</p>
                 <a href="#" class="btn">Read More</a>
             </div>
         </div>
@@ -176,8 +177,8 @@
         </div>
     </section>
 
-        <h1 class="companies" id="companies">
-            <h2 class="heading">Parterned Companies</h2>
+        <footer class="companies" id="companies">
+            <h1 class="heading">Parterned <span>Companies</span> </h1>
             <div class="company-slider">
                 <div class="company-slide">
                     <img src="images/logo1.png" alt="Company One">
@@ -187,10 +188,10 @@
                 <!-- Add more logos as needed -->
                 </div>
             </div>
-        </h1>
+        </footer>
 
-        <section class="company-data">
-            <h2 class="heading">Impact Statistics</h2>
+        <section class="company-data" id="company-data">
+            <h2 class="heading">Impact <span>Statistics</span></h2>
             <div class="data-container">
                 <div class="data-box">
                     <h3>95%</h3>
@@ -201,9 +202,29 @@
                     <p>Increase in Efficiency</p>
                 </div>
                 <div class="data-box">
-                    <canvas id="impactChart" width="400" height="400"></canvas>
+                    <h3>95%</h3>
+                    <p>Customer Satisfaction</p>
+                </div>
+                <div class="data-box">
+                    <h3>30%</h3>
+                    <p>Increase in Efficiency</p>
+                </div>
+                <div class="data-box">
+                    <h3>40%</h3>
+                    <p>Growth in Client Base</p>
+                </div>
+                <div class="data-box">
+                    <h3>50+</h3>
+                    <p>Successful Projects</p>
+                </div>
+                <div class="review-slider">
+                    <div class="review">"NexGen Solutions revolutionized our workflow with outstanding AI automation."</div>
+                    <div class="review">"Their bespoke software solutions are a game-changer for scalability."</div>
+                    <div class="review">"Exceptional customer service and project delivery ahead of schedule!"</div>
                 </div>
             </div>
+                <div class="data-box">
+                    <canvas id="impactChart" width="400" height="400"></canvas>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     var ctx = document.getElementById('impactChart').getContext('2d');
@@ -233,6 +254,8 @@
                     });
                 });
                 </script>
+                </div>
+            </div>
                 
         </section>
         
