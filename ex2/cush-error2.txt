@@ -1,0 +1,13 @@
+cc -Wall -Werror -Wmissing-prototypes -I../posix_spawn -g -O2
+    -fsanitize=undefined -o cush -L../posix_spawn cush.o
+    shell-grammar.o list.o shell-ast.o termstate_management.o utils.o
+    signal_support.o -lspawn -ll -lreadline
+/usr/bin/ld: signal_support.o: in function `signal_is_blocked':
+/.../cs3214-cush/src/signal_support.c:23:
+    undefined reference to `mask'
+/usr/bin/ld: /.../cs3214-cush/src/signal_support.c:26:
+    undefined reference to `mask'
+/usr/bin/ld: /.../cs3214-cush/src/signal_support.c:26:
+    undefined reference to `mask'
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:27: cush] Error 1

@@ -1,0 +1,21 @@
+
+diff --git a/src/termstate_management.c b/src/termstate_management.c
+index e69de29..4b825dc 100644
+--- a/src/termstate_management.c
++++ b/src/termstate_management.c
+@@ -0,0 +1 @@
++int shell_pgrp;
+
+diff --git a/src/cush.c b/src/cush.c
+index e69de29..4b825dc 100644
+--- a/src/cush.c
++++ b/src/cush.c
+@@ -0,0 +1 @@
++int shell_pgrp;
+
+diff --git a/src/signal_support.c b/src/signal_support.c
+index e69de29..4b825dc 100644
+--- a/src/signal_support.c
++++ b/src/signal_support.c
+@@ -22 +22 @@
++ extern int mask; mask++;

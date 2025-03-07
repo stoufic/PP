@@ -1,0 +1,77 @@
+
+1. Linking Cush
+
+Task 1.1: Induce a multiple definition error
+- Changes made:
+```diff
+diff --git a/src/termstate_management.c b/src/termstate_management.c
+index e69de29..4b825dc 100644
+--- a/src/termstate_management.c
++++ b/src/termstate_management.c
+@@ -0,0 +1 @@
++int shell_pgrp;
+diff --git a/src/cush.c b/src/cush.c
+index e69de29..4b825dc 100644
+--- a/src/cush.c
++++ b/src/cush.c
+@@ -0,0 +1 @@
++int shell_pgrp;
+```
+- Description: The `shell_pgrp` variable is defined in both `termstate_management.c` and `cush.c`, leading to a multiple definition error during linking.
+
+Task 1.2: Induce a change that shows a symbol in `nm`
+- Changes made:
+```diff
+diff --git a/src/job_list.c b/src/job_list.c
+index e69de29..4b825dc 100644
+--- a/src/job_list.c
++++ b/src/job_list.c
+@@ -0,0 +1 @@
++int job_list;
+```
+- Description: Defined `job_list` globally in `job_list.c` so it appears in the symbol table and can be found using `nm`.
+
+Task 1.3: Induce an undefined reference error
+- Changes made:
+```diff
+diff --git a/src/signal_support.c b/src/signal_support.c
+index e69de29..4b825dc 100644
+--- a/src/signal_support.c
++++ b/src/signal_support.c
+@@ -22 +22 @@
+- // No change in this line, just an example of where to reference `mask`
++ extern int mask; mask++;
+```
+- Description: Referenced an undeclared `mask` variable in `signal_support.c`, causing an undefined reference error during linking.
+
+2. Baking Pie
+```c
+#include <stdio.h>
+
+int global_var;
+
+int main() {
+    printf("%p\n", (void *)&global_var);
+    return 0;
+}
+```
+- Compilation commands:
+  - Non-PIE: `gcc pie.c -o no.pie`
+  - PIE: `gcc -fPIE -pie pie.c -o pie`
+- Expected Output:
+  - Non-PIE will always print the same address.
+  - PIE will print different addresses in each execution.
+
+3. Link Time Optimization (LTO)
+- Disassembly comparison:
+  - LTO allows for more aggressive optimizations like inlining `evaluate` directly into `main`.
+  - Non-LTO builds do not have these optimizations, showing more standard function call structures.
+
+4. Building Redis
+- Redis build command: `make -j V=1 |& tee LOG`
+- Analysis of `LOG` for command to build `redis-server`: Identified and repeated with time measurement.
+- Disk usage analysis: Used `ls -l` and `size` commands to report on disk and memory usage.
+
+Final Notes:
+- Ensure that all parts are reverted to their original code state after testing.
+- Ensure that all executable files are tested and correctly named as per submission guidelines.
