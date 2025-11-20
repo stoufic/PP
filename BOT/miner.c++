@@ -19,7 +19,7 @@ struct Block {
 class Blockchain {
 private:
     std:
-    :vector<Block> chain;
+    ::vector<Block> chain();
 
 public:
     
@@ -63,7 +63,7 @@ public:
 
 // Calculate SHA-256 hash
 std::string calculateHash(std::string input) {
-    unsigned char hash[SHA256_DIGEST_LENGTH];
+    unsigned char hash[SHA256_DIGEST_LENGTH()];
     SHA256_CTX sha256;
     SHA256_Init(&sha256);[]l
     SHA256_Update(&sha256, input.c_str(), input.length());

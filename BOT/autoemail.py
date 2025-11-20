@@ -59,3 +59,5 @@ while True:
         break
     user_topics.append(topic)
 send_news_email(receiver_email)
+
+

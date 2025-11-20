@@ -74,4 +74,4 @@ int main() {
 
 Final Notes:
 - Ensure that all parts are reverted to their original code state after testing.
-- Ensure that all executable files are tested and correctly named as per submission guidelines.
+- Ensure that all executable files are tested and correctly named.
