@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Platform — DevCraft Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a08;--paper:#f5f2eb;--gold:#c8a96e;--rust:#b85c38;--bg:#070d14;--surface:#0d1520;--border:rgba(255,255,255,.07);--green:#4caf50;--red:#ef5350;--font-d:'Syne',sans-serif;--font-m:'DM Mono',monospace;--font-s:'Fraunces',serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--paper);font-family:var(--font-d);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+.back-bar{position:fixed;top:0;left:0;right:0;z-index:9999;height:48px;background:rgba(10,10,8,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,169,110,.2);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;}
+.back-link{display:flex;align-items:center;gap:.6rem;font-family:var(--font-m);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);transition:gap .2s;}
+.back-link:hover{gap:1rem;}
+.back-tag{font-family:var(--font-m);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid rgba(200,169,110,.3);color:rgba(200,169,110,.6);}
+.cs-intro{padding:7rem 3rem 4rem;max-width:900px;margin:0 auto;text-align:center;}
+.cs-tag{font-family:var(--font-m);font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem;}
+.cs-title{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:1.5rem;}
+.cs-title em{font-family:var(--font-s);font-style:italic;font-weight:300;color:var(--gold);}
+.cs-desc{font-size:.95rem;line-height:1.8;color:rgba(245,242,235,.5);max-width:600px;margin:0 auto;}
+.cs-stats{display:flex;justify-content:center;gap:3rem;margin-top:3rem;padding-top:3rem;border-top:1px solid var(--border);}
+.cs-stat-num{font-size:2rem;font-weight:800;color:var(--gold);}
+.cs-stat-label{font-family:var(--font-m);font-size:.55rem;letter-spacing:.2em;color:rgba(245,242,235,.3);text-transform:uppercase;margin-top:.3rem;}
+.app-wrap{max-width:1200px;margin:0 auto;padding:0 2rem;}
+.app-shell{background:var(--surface);border:1px solid var(--border);display:grid;grid-template-columns:48px 1fr 230px;grid-template-rows:44px 1fr;height:580px;}
+.app-sidebar{grid-row:1/3;background:rgba(0,0,0,.3);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:.6rem 0;gap:.3rem;}
+.sicon{width:34px;height:34px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.85rem;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.25);}
+.sicon:hover,.sicon.active{background:rgba(200,169,110,.15);color:var(--gold);}
+.sicon.active{border-left:2px solid var(--gold);}
+.app-topbar{grid-column:2/4;height:44px;background:rgba(0,0,0,.2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 1rem;gap:1rem;}
+.asearch{flex:1;max-width:240px;height:24px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;padding:0 .6rem;font-family:var(--font-m);font-size:.58rem;color:rgba(255,255,255,.35);display:flex;align-items:center;}
+.abalance{font-family:var(--font-m);font-size:.68rem;color:var(--paper);}
+.abalance span{color:var(--green);}
+.astatus{display:flex;align-items:center;gap:.4rem;font-family:var(--font-m);font-size:.52rem;color:rgba(255,255,255,.3);}
+.sdot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);animation:sdp 2s ease-in-out infinite;}
+@keyframes sdp{0%,100%{opacity:1}50%{opacity:.3}}
+.app-main{padding:.9rem;display:flex;flex-direction:column;gap:.7rem;overflow:hidden;}
+.chart-hdr{display:flex;align-items:center;justify-content:space-between;}
+.chart-asset{display:flex;align-items:baseline;gap:.5rem;}
+.csym{font-size:1rem;font-weight:800;}
+.cprice{font-family:var(--font-m);font-size:1.2rem;}
+.cchg{font-family:var(--font-m);font-size:.65rem;padding:.15rem .4rem;border-radius:2px;}
+.cchg.pos{background:rgba(76,175,80,.15);color:var(--green);}
+.cchg.neg{background:rgba(239,83,80,.15);color:var(--red);}
+.cperiods{display:flex;gap:.2rem;}
+.cper{font-family:var(--font-m);font-size:.52rem;letter-spacing:.08em;padding:.22rem .5rem;border:1px solid var(--border);cursor:pointer;transition:all .2s;color:rgba(255,255,255,.3);}
+.cper:hover,.cper.active{border-color:var(--gold);color:var(--gold);}
+.chart-bars{flex:1;min-height:0;display:flex;align-items:flex-end;gap:2px;border-bottom:1px solid var(--border);padding-bottom:3px;}
+.cbar{flex:1;border-radius:1px 1px 0 0;min-height:3px;cursor:pointer;transition:height .45s cubic-bezier(.16,1,.3,1),filter .2s;background:rgba(200,169,110,.3);}
+.cbar:hover{filter:brightness(1.6);}
+.cbar.up{background:rgba(76,175,80,.35);}
+.cbar.pk{background:rgba(200,169,110,.55);}
+.cstats{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;}
+.cs2{background:rgba(255,255,255,.03);border:1px solid var(--border);padding:.5rem .7rem;}
+.cs2l{font-family:var(--font-m);font-size:.44rem;color:rgba(255,255,255,.25);letter-spacing:.1em;text-transform:uppercase;}
+.cs2v{font-size:.88rem;font-weight:700;margin-top:.15rem;}
+.cs2v.pos{color:var(--green);}
+.cs2v.neg{color:var(--red);}
+.app-right{border-left:1px solid var(--border);display:flex;flex-direction:column;}
+.rtabs{display:flex;border-bottom:1px solid var(--border);}
+.rtab{flex:1;text-align:center;padding:.55rem;font-family:var(--font-m);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;color:rgba(255,255,255,.25);transition:all .2s;border-bottom:2px solid transparent;}
+.rtab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.wlist{overflow-y:auto;flex:1;}
+.wlist::-webkit-scrollbar{width:2px;}
+.wlist::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);}
+.wi{display:flex;align-items:center;justify-content:space-between;padding:.55rem .8rem;cursor:pointer;transition:background .2s;border-bottom:1px solid rgba(255,255,255,.03);border-left:2px solid transparent;}
+.wi:hover,.wi.active{background:rgba(200,169,110,.06);}
+.wi.active{border-left-color:var(--gold);}
+.wsym{font-size:.75rem;font-weight:700;}
+.wname{font-family:var(--font-m);font-size:.45rem;color:rgba(255,255,255,.28);margin-top:1px;}
+.wprice{font-family:var(--font-m);font-size:.68rem;text-align:right;}
+.wchg{font-family:var(--font-m);font-size:.52rem;text-align:right;margin-top:1px;}
+.wchg.pos{color:var(--green);}
+.wchg.neg{color:var(--red);}
+.tpanel{padding:.7rem;border-top:1px solid var(--border);}
+.ttabs{display:flex;gap:.25rem;margin-bottom:.55rem;}
+.ttab{flex:1;text-align:center;padding:.3rem;border-radius:2px;font-family:var(--font-m);font-size:.52rem;cursor:pointer;transition:all .2s;}
+.ttab.buy{background:rgba(76,175,80,.12);color:var(--green);}
+.ttab.buy.act,.ttab.buy:hover{background:rgba(76,175,80,.4);color:#fff;}
+.ttab.sell{background:rgba(239,83,80,.12);color:var(--red);}
+.ttab.sell.act,.ttab.sell:hover{background:rgba(239,83,80,.4);color:#fff;}
+.tlabel{font-family:var(--font-m);font-size:.44rem;color:rgba(255,255,255,.25);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem;}
+.tinput{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);padding:.35rem .5rem;font-family:var(--font-m);font-size:.68rem;color:var(--paper);margin-bottom:.4rem;}
+.tinput:focus{outline:none;border-color:var(--gold);}
+.tbtn{width:100%;padding:.45rem;border:none;font-family:var(--font-m);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s;}
+.tbtn.b{background:var(--green);color:#fff;}
+.tbtn.b:hover{background:#43a047;}
+.tbtn.s{background:var(--red);color:#fff;}
+.tbtn.s:hover{background:#e53935;}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;background:var(--surface);border:1px solid rgba(200,169,110,.3);padding:.7rem 1rem;font-family:var(--font-m);font-size:.65rem;display:flex;align-items:center;gap:.5rem;transform:translateY(80px);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1);}
+.toast.show{transform:translateY(0);opacity:1;}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--green);}
+.cs-body{max-width:820px;margin:0 auto;padding:5rem 3rem;}
+.cs-body .stag{font-family:var(--font-m);font-size:.6rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;}
+.cs-body .stag::before{content:'';width:20px;height:1px;background:var(--gold);}
+.cs-body h2{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.2rem;}
+.cs-body h2 em{font-family:var(--font-s);font-style:italic;font-weight:300;color:var(--gold);}
+.cs-body p{font-size:.9rem;line-height:1.8;color:rgba(245,242,235,.5);margin-bottom:1rem;}
+.div{width:100%;height:1px;background:var(--border);margin:2.5rem 0;}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.5rem;}
+.feat{background:rgba(255,255,255,.03);border:1px solid var(--border);padding:1.2rem;}
+.feat-i{font-size:1rem;margin-bottom:.6rem;}
+.feat-t{font-size:.85rem;font-weight:700;margin-bottom:.3rem;}
+.feat-d{font-family:var(--font-m);font-size:.6rem;line-height:1.6;color:rgba(245,242,235,.35);}
+.results{display:flex;gap:2rem;margin-top:1.5rem;flex-wrap:wrap;}
+.res{flex:1;min-width:120px;border-left:2px solid var(--gold);padding-left:1rem;}
+.res-n{font-size:2.2rem;font-weight:800;color:var(--gold);}
+.res-l{font-family:var(--font-m);font-size:.55rem;letter-spacing:.15em;color:rgba(245,242,235,.35);text-transform:uppercase;margin-top:.2rem;}
+.cta-section{background:rgba(200,169,110,.05);border-top:1px solid rgba(200,169,110,.15);border-bottom:1px solid rgba(200,169,110,.15);padding:5rem 3rem;text-align:center;}
+.cta-section h2{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.8rem;}
+.cta-section h2 em{font-family:var(--font-s);font-style:italic;font-weight:300;color:var(--gold);}
+.cta-section p{font-size:.9rem;color:rgba(245,242,235,.4);margin-bottom:1.8rem;}
+.cta-btn{display:inline-flex;align-items:center;gap:.7rem;background:var(--gold);color:var(--ink);padding:.85rem 2.2rem;font-family:var(--font-m);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;transition:background .2s;}
+.cta-btn:hover{background:#d4b87a;}
+@media(max-width:768px){
+  .cs-intro{padding:5rem 1.5rem 3rem;}
+  .cs-stats{flex-direction:column;gap:1.5rem;align-items:center;text-align:center;}
+  .app-wrap{padding:0 1rem;}
+  .app-shell{grid-template-columns:1fr;grid-template-rows:44px 44px 320px 200px;height:auto;}
+  .app-sidebar{grid-row:auto;flex-direction:row;height:44px;width:100%;border-right:none;border-bottom:1px solid var(--border);}
+  .app-topbar{grid-column:1;}
+  .app-right{border-left:none;border-top:1px solid var(--border);}
+  .cstats{grid-template-columns:1fr 1fr;}
+  .cs-body{padding:3rem 1.5rem;}
+  .feats{grid-template-columns:1fr;}
+  .results{gap:1rem;}
+  .cta-section{padding:3rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+<div class="back-bar">
+  <a href="index.html" class="back-link">← Back to DevCraft</a>
+  <span class="back-tag">Fintech · Case Study</span>
+</div>
+
+<div class="cs-intro">
+  <div class="cs-tag">Case Study — 2024</div>
+  <h1 class="cs-title">A trading platform <em>built to perform</em></h1>
+  <p class="cs-desc">A real-time portfolio and trading dashboard for a multi-asset fintech firm. Live data, custom charting, and an execution engine their traders rely on daily.</p>
+  <div class="cs-stats">
+    <div><div class="cs-stat-num">$2.4M</div><div class="cs-stat-label">Daily Volume</div></div>
+    <div><div class="cs-stat-num">40%</div><div class="cs-stat-label">Faster Execution</div></div>
+    <div><div class="cs-stat-num">12wk</div><div class="cs-stat-label">Concept to Launch</div></div>
+  </div>
+</div>
+
+<div class="app-wrap">
+  <div class="app-shell">
+    <div class="app-sidebar">
+      <div class="sicon active" onclick="setSicon(this)" title="Dashboard">⬡</div>
+      <div class="sicon" onclick="setSicon(this)" title="Portfolio">◈</div>
+      <div class="sicon" onclick="setSicon(this)" title="Markets">▣</div>
+      <div class="sicon" onclick="setSicon(this)" title="Analytics">◉</div>
+      <div style="flex:1"></div>
+      <div class="sicon" onclick="setSicon(this)" title="Settings">◆</div>
+    </div>
+    <div class="app-topbar">
+      <div class="asearch">⌕ &nbsp;Search assets...</div>
+      <div style="display:flex;align-items:center;gap:1.2rem;">
+        <div class="abalance">Balance: <span>$84,291.40</span></div>
+        <div class="astatus"><div class="sdot"></div>MARKET OPEN</div>
+      </div>
+    </div>
+    <div class="app-main">
+      <div class="chart-hdr">
+        <div class="chart-asset">
+          <div class="csym" id="csym">BTC</div>
+          <div class="cprice" id="cprice">$67,420</div>
+          <div class="cchg pos" id="cchg">+2.14%</div>
+        </div>
+        <div class="cperiods">
+          <div class="cper active" onclick="setPer(this,'1D')">1D</div>
+          <div class="cper" onclick="setPer(this,'1W')">1W</div>
+          <div class="cper" onclick="setPer(this,'1M')">1M</div>
+          <div class="cper" onclick="setPer(this,'3M')">3M</div>
+          <div class="cper" onclick="setPer(this,'1Y')">1Y</div>
+        </div>
+      </div>
+      <div class="chart-bars" id="chartBars"></div>
+      <div class="cstats">
+        <div class="cs2"><div class="cs2l">Open</div><div class="cs2v" id="sOpen">$66,102</div></div>
+        <div class="cs2"><div class="cs2l">High</div><div class="cs2v pos" id="sHigh">$68,901</div></div>
+        <div class="cs2"><div class="cs2l">Low</div><div class="cs2v neg" id="sLow">$65,480</div></div>
+        <div class="cs2"><div class="cs2l">Volume</div><div class="cs2v" id="sVol">$2.4M</div></div>
+      </div>
+    </div>
+    <div class="app-right">
+      <div class="rtabs">
+        <div class="rtab active" onclick="rSwitch(this,'w')">Watchlist</div>
+        <div class="rtab" onclick="rSwitch(this,'t')">Trade</div>
+      </div>
+      <div class="wlist" id="wPanel">
+        <div class="wi active" onclick="selAsset(this,'BTC','$67,420','+2.14%',true,'$66,102','$68,901','$65,480','$2.4M')"><div><div class="wsym">BTC</div><div class="wname">Bitcoin</div></div><div><div class="wprice">$67,420</div><div class="wchg pos">+2.14%</div></div></div>
+        <div class="wi" onclick="selAsset(this,'ETH','$3,842','+1.82%',true,'$3,780','$3,910','$3,740','$890K')"><div><div class="wsym">ETH</div><div class="wname">Ethereum</div></div><div><div class="wprice">$3,842</div><div class="wchg pos">+1.82%</div></div></div>
+        <div class="wi" onclick="selAsset(this,'AAPL','$189.40','+1.23%',true,'$187.20','$190.80','$186.50','$4.2B')"><div><div class="wsym">AAPL</div><div class="wname">Apple Inc.</div></div><div><div class="wprice">$189.40</div><div class="wchg pos">+1.23%</div></div></div>
+        <div class="wi" onclick="selAsset(this,'TSLA','$241.80','-0.84%',false,'$243.90','$245.20','$240.10','$1.8B')"><div><div class="wsym">TSLA</div><div class="wname">Tesla</div></div><div><div class="wprice">$241.80</div><div class="wchg neg">-0.84%</div></div></div>
+        <div class="wi" onclick="selAsset(this,'NVDA','$875.20','+3.40%',true,'$847.00','$882.10','$843.50','$6.1B')"><div><div class="wsym">NVDA</div><div class="wname">NVIDIA</div></div><div><div class="wprice">$875.20</div><div class="wchg pos">+3.40%</div></div></div>
+        <div class="wi" onclick="selAsset(this,'SPX','$5,204','+0.41%',true,'$5,183','$5,218','$5,179','$38B')"><div><div class="wsym">SPX</div><div class="wname">S&P 500</div></div><div><div class="wprice">$5,204</div><div class="wchg pos">+0.41%</div></div></div>
+      </div>
+      <div class="tpanel" id="tPanel" style="display:none">
+        <div class="ttabs">
+          <div class="ttab buy act" onclick="setTTab(this,'b')">Buy</div>
+          <div class="ttab sell" onclick="setTTab(this,'s')">Sell</div>
+        </div>
+        <div class="tlabel">Amount (USD)</div>
+        <input class="tinput" type="number" placeholder="0.00" id="tAmt">
+        <div class="tlabel">Quantity</div>
+        <input class="tinput" type="number" placeholder="0.0000" id="tQty">
+        <button class="tbtn b" id="tBtn" onclick="execTrade()">Place Buy Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cs-body">
+  <div class="stag">The Problem</div>
+  <h2>Their old system was <em>costing trades</em></h2>
+  <p>The client — a boutique multi-asset trading firm — was operating on a legacy dashboard built five years prior. Latency issues, no real-time streaming, and a UI that required three clicks to execute a single trade. In fast markets, that costs real money.</p>
+  <p>They needed a complete ground-up rebuild — not a facelift. WebSocket-driven live data, a clean execution interface, and an analytics layer their team could rely on under pressure.</p>
+  <div class="div"></div>
+  <div class="stag">The Build</div>
+  <h2>Real-time everything, <em>zero compromise</em></h2>
+  <p>We built on Next.js with a Node.js WebSocket layer feeding live price data from multiple exchange APIs. Custom charting renders 1,000+ data points without frame drops. Trade execution hits a secured REST endpoint with sub-200ms response times.</p>
+  <div class="feats">
+    <div class="feat"><div class="feat-i">◉</div><div class="feat-t">Live WebSocket Feed</div><div class="feat-d">Price updates stream across all watched assets in real-time — no polling, no page refresh.</div></div>
+    <div class="feat"><div class="feat-i">▣</div><div class="feat-t">Custom Charting</div><div class="feat-d">Built from scratch — 5 time periods, 1,000+ point resolution, smooth animated transitions.</div></div>
+    <div class="feat"><div class="feat-i">⬡</div><div class="feat-t">One-Click Execution</div><div class="feat-d">Buy and sell from the same panel with no modal chains and no unnecessary confirmation loops.</div></div>
+    <div class="feat"><div class="feat-i">◈</div><div class="feat-t">Portfolio Analytics</div><div class="feat-d">P&L tracking, exposure breakdowns, and performance attribution — all live, all accurate.</div></div>
+  </div>
+  <div class="div"></div>
+  <div class="stag">The Results</div>
+  <h2>Numbers that <em>matter</em></h2>
+  <div class="results">
+    <div class="res"><div class="res-n">40%</div><div class="res-l">Faster Execution</div></div>
+    <div class="res"><div class="res-n">$2.4M</div><div class="res-l">Daily Volume</div></div>
+    <div class="res"><div class="res-n">12wk</div><div class="res-l">To Launch</div></div>
+    <div class="res"><div class="res-n">99.8%</div><div class="res-l">Uptime</div></div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>Building something <em>similar?</em></h2>
+  <p>We've done it. Let's talk about your product.</p>
+  <a href="index.html#contact" class="cta-btn">Start the Conversation →</a>
+</div>
+
+<div class="toast" id="toast"><div class="tdot"></div><span id="tmsg">Order placed</span></div>
+
+<script>
+var cData={
+  '1D':[35,48,42,58,52,65,60,72,66,80,73,85,78,90,83,76,88,92,84,89,78,86,80,94],
+  '1W':[55,62,58,70,65,80,74,82,70,76,84,79,87,91,86,89,93,88,96,89,83,91,86,93],
+  '1M':[40,46,53,49,56,61,57,66,63,71,67,73,69,76,81,77,83,86,81,89,85,91,87,93],
+  '3M':[30,36,41,39,46,51,49,56,53,61,66,63,71,76,73,81,79,86,83,91,89,86,93,96],
+  '1Y':[20,29,36,33,41,46,43,51,49,59,56,63,61,71,69,77,75,83,81,89,87,85,91,96]
+};
+var curPer='1D';var curTab='b';
+function drawChart(p){
+  var data=cData[p];var bars=document.getElementById('chartBars');bars.innerHTML='';
+  var max=Math.max.apply(null,data);
+  data.forEach(function(v,i){
+    var b=document.createElement('div');
+    b.className='cbar'+(v>75?' pk':v>52?' up':'');
+    b.style.height='0%';bars.appendChild(b);
+    setTimeout(function(){b.style.height=(v/max*92)+'%';},i*15);
+  });
+}
+drawChart('1D');
+function setPer(el,p){document.querySelectorAll('.cper').forEach(function(e){e.classList.remove('active');});el.classList.add('active');curPer=p;drawChart(p);}
+var assets={'BTC':{o:'$66,102',h:'$68,901',l:'$65,480',v:'$2.4M'},'ETH':{o:'$3,780',h:'$3,910',l:'$3,740',v:'$890K'},'AAPL':{o:'$187.20',h:'$190.80',l:'$186.50',v:'$4.2B'},'TSLA':{o:'$243.90',h:'$245.20',l:'$240.10',v:'$1.8B'},'NVDA':{o:'$847.00',h:'$882.10',l:'$843.50',v:'$6.1B'},'SPX':{o:'$5,183',h:'$5,218',l:'$5,179',v:'$38B'}};
+function selAsset(el,sym,price,chg,pos,o,h,l,v){
+  document.querySelectorAll('.wi').forEach(function(e){e.classList.remove('active');});el.classList.add('active');
+  document.getElementById('csym').textContent=sym;
+  document.getElementById('cprice').textContent=price;
+  var ce=document.getElementById('cchg');ce.textContent=chg;ce.className='cchg '+(pos?'pos':'neg');
+  var a=assets[sym]||{o:o,h:h,l:l,v:v};
+  document.getElementById('sOpen').textContent=a.o;document.getElementById('sHigh').textContent=a.h;document.getElementById('sLow').textContent=a.l;document.getElementById('sVol').textContent=a.v;
+  drawChart(curPer);
+}
+function rSwitch(el,tab){
+  document.querySelectorAll('.rtab').forEach(function(e){e.classList.remove('active');});el.classList.add('active');
+  document.getElementById('wPanel').style.display=tab==='w'?'block':'none';
+  document.getElementById('tPanel').style.display=tab==='t'?'block':'none';
+}
+function setTTab(el,tab){
+  curTab=tab;document.querySelectorAll('.ttab').forEach(function(e){e.classList.remove('act');});el.classList.add('act');
+  var btn=document.getElementById('tBtn');btn.className='tbtn '+(tab==='b'?'b':'s');btn.textContent='Place '+(tab==='b'?'Buy':'Sell')+' Order';
+}
+function execTrade(){
+  var sym=document.getElementById('csym').textContent;
+  showToast((curTab==='b'?'✓ Bought ':'✓ Sold ')+sym+' successfully');
+  document.getElementById('tAmt').value='';document.getElementById('tQty').value='';
+}
+function showToast(msg){
+  var t=document.getElementById('toast');document.getElementById('tmsg').textContent=msg;
+  t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);
+}
+function setSicon(el){document.querySelectorAll('.sicon').forEach(function(e){e.classList.remove('active');});el.classList.add('active');}
+</script>
+</body>
+</html>
