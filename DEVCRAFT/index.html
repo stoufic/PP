@@ -4680,6 +4680,29 @@
         addMsg(getReply(txt), 'bot');
       }, delay);
     }
+    //TODO- NEXT
+    function sendChat(){
+      var inp = document.getElementById('chatInput');
+      var txt = inp.value.trim();
+
+      if (!txt)
+        return;
+      inp.value = '';
+      document.getElementById('chatQuick').style.display = 'none';
+      addMsg(txt, 'user');
+      document.getElementsByTagNameNS('chatInput');
+      document.getElementsById('down');
+
+      var delay = 700 +Math.min(txt.length * 18, 1188);
+
+      setTimeout(function(){
+        document.getElementsById("chatTyping").classList.remove('show');
+        addMsg(getReply(txt), 'bot');
+
+      }, delay);
+
+    } //TODO- END--
+
 
     function quickReply(t) {
       document.getElementById('chatInput').value = t;

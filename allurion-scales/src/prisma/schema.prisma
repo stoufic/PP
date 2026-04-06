@@ -1,0 +1,204 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// EXISTING MODELS (assumed to already exist)
+// ============================================
+
+enum Role {
+  PATIENT
+  DOCTOR
+  ADMIN
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  role          Role      @default(PATIENT)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  patientProfile PatientProfile?
+  doctorProfile  DoctorProfile?
+  
+  @@index([email])
+}
+
+model PatientProfile {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id])
+  firstName       String
+  lastName        String
+  dateOfBirth     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  devices         Device[]
+  readings        MeasurementReading[]
+  assignments     DoctorPatientAssignment[]
+  
+  @@index([userId])
+}
+
+model DoctorProfile {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id])
+  firstName       String
+  lastName        String
+  licenseNumber   String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  assignments     DoctorPatientAssignment[]
+  
+  @@index([userId])
+}
+
+model DoctorPatientAssignment {
+  id          String   @id @default(uuid())
+  doctorId    String
+  patientId   String
+  doctor      DoctorProfile @relation(fields: [doctorId], references: [id])
+  patient     PatientProfile @relation(fields: [patientId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([doctorId, patientId])
+  @@index([patientId])
+  @@index([doctorId])
+}
+
+// ============================================
+// NEW MODELS FOR SMART SCALE INTEGRATION
+// ============================================
+
+enum ReadingSource {
+  MANUAL_PATIENT
+  MANUAL_DOCTOR
+  DEVICE_VENDOR
+}
+
+enum DeviceStatus {
+  PENDING
+  ACTIVE
+  INACTIVE
+  MAINTENANCE
+}
+
+model Device {
+  id              String         @id @default(uuid())
+  deviceId        String         @unique // Vendor's device ID
+  serialNumber    String         @unique
+  vendor          String         @default("WITHINGS") // WITHINGS, FITBIT, etc.
+  vendorUserId    String?        // User ID in vendor's system
+  firmwareVersion String?
+  status          DeviceStatus   @default(PENDING)
+  assignedPatientId String?
+  assignedPatient PatientProfile? @relation(fields: [assignedPatientId], references: [id])
+  assignedAt      DateTime?
+  unassignedAt    DateTime?
+  lastSyncedAt    DateTime?
+  metadata        Json?          // Additional vendor-specific metadata
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  
+  assignments     DeviceAssignmentHistory[]
+  readings        MeasurementReading[]
+  
+  @@index([assignedPatientId])
+  @@index([status])
+  @@index([vendor])
+}
+
+model DeviceAssignmentHistory {
+  id          String   @id @default(uuid())
+  deviceId    String
+  device      Device   @relation(fields: [deviceId], references: [id])
+  patientId   String?
+  action      String   // ASSIGNED, UNASSIGNED, REASSIGNED
+  reason      String?
+  performedBy String?  // User ID who performed the action
+  createdAt   DateTime @default(now())
+  
+  @@index([deviceId])
+  @@index([patientId])
+}
+
+model MeasurementReading {
+  id              String       @id @default(uuid())
+  patientId       String
+  patient         PatientProfile @relation(fields: [patientId], references: [id])
+  deviceId        String?
+  device          Device?      @relation(fields: [deviceId], references: [id])
+  source          ReadingSource
+  weightKg        Float?
+  bmi             Float?
+  bodyFatPct      Float?
+  muscleMassKg    Float?
+  waterPct        Float?
+  boneMassKg      Float?
+  visceralFat     Float?
+  bmrKcal         Float?
+  metabolicAge    Float?
+  measuredAt      DateTime
+  receivedAt      DateTime     @default(now())
+  rawPayload      Json         // Store full vendor payload for traceability
+  externalEventId String?      // Vendor's event ID for idempotency
+  isCorrected     Boolean      @default(false)
+  correctedById   String?      // Admin user ID if corrected
+  correctedAt     DateTime?
+  correctionNote  String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  
+  @@index([patientId, measuredAt])
+  @@index([deviceId, measuredAt])
+  @@index([externalEventId])
+  @@index([source])
+}
+
+model VendorWebhookEvent {
+  id              String   @id @default(uuid())
+  externalEventId String   @unique // Vendor's event ID
+  vendor          String
+  eventType       String
+  payload         Json
+  signature       String
+  receivedAt      DateTime @default(now())
+  processedAt     DateTime?
+  status          String   @default("PENDING") // PENDING, PROCESSED, FAILED, DUPLICATE
+  errorMessage    String?
+  retryCount      Int      @default(0)
+  createdAt       DateTime @default(now())
+  
+  @@index([externalEventId])
+  @@index([vendor, status])
+  @@index([receivedAt])
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  entityType  String   // DEVICE, READING, ASSIGNMENT, etc.
+  entityId    String
+  action      String   // CREATE, UPDATE, DELETE, ASSIGN, UNASSIGN, etc.
+  userId      String?  // Who performed the action
+  changes     Json?    // Before/after snapshot
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  
+  @@index([entityType, entityId])
+  @@index([userId])
+  @@index([createdAt])
+}
