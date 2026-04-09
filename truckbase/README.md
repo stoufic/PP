@@ -323,9 +323,3 @@ MIT License - see LICENSE file
 4. **Mobile app** - React Native version
 5. **POS integrations** - Square, Toast, Clover APIs
 6. **Multi-language support** - i18n for diverse operators
-
----
-
-**Built with ❤️ for food truck entrepreneurs everywhere.**
-
-Questions? Reach out at support@truckbase.io (placeholder)
