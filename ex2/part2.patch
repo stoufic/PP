@@ -1,0 +1,16 @@
+
+diff --git a/pie.c b/pie.c
+index dfsg45g..4hj3k34 100644
+--- a/pie.c
++++ b/pie.c
+@@ -3,6 +3,7 @@
+ 
+ int global_var;
+
++void sample_function() { printf("This is a sample function.\n"); }
+ 
+ int main() {
+     printf("Address of global_var: %p\n", (void *)&global_var);
++    printf("Address of sample_function: %p\n", (void *)&sample_function);
+     return 0;
+ }

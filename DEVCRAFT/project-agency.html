@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand & Marketing — DevCraft Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0a0a08;
+      --paper: #f5f2eb;
+      --gold: #c8a96e;
+      --rust: #b85c38;
+      --font-d: 'Syne', sans-serif;
+      --font-m: 'DM Mono', monospace;
+      --font-s: 'Fraunces', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-d);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .back-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      height: 48px;
+      background: rgba(10, 10, 8, .96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200, 169, 110, .2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: var(--font-m);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      transition: gap .2s;
+    }
+
+    .back-link:hover {
+      gap: 1rem;
+    }
+
+    .back-tag {
+      font-family: var(--font-m);
+      font-size: .55rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border: 1px solid rgba(200, 169, 110, .3);
+      color: rgba(200, 169, 110, .6);
+    }
+
+    .cs-intro {
+      padding: 7rem 3rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cs-tag {
+      font-family: var(--font-m);
+      font-size: .65rem;
+      letter-spacing: .3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .cs-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .cs-title em {
+      font-family: var(--font-s);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .cs-desc {
+      font-size: .95rem;
+      line-height: 1.8;
+      color: rgba(245, 242, 235, .5);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cs-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .cs-stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .cs-stat-label {
+      font-family: var(--font-m);
+      font-size: .55rem;
+      letter-spacing: .2em;
+      color: rgba(245, 242, 235, .3);
+      text-transform: uppercase;
+      margin-top: .3rem;
+    }
+
+    /* BRAND SITE DEMO */
+    .brand-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .brand-shell {
+      background: var(--ink);
+      border: 1px solid rgba(255, 255, 255, .07);
+      overflow: hidden;
+    }
+
+    /* Brand site nav */
+    .brand-nav {
+      height: 52px;
+      background: rgba(10, 10, 8, .9);
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand-logo-text {
+      font-size: .95rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .brand-nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .bnl {
+      font-family: var(--font-m);
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: rgba(255, 255, 255, .4);
+      transition: color .2s;
+      padding: .4rem 0;
+      border-bottom: 1px solid transparent;
+    }
+
+    .bnl:hover,
+    .bnl.active {
+      color: var(--paper);
+      border-bottom-color: var(--gold);
+    }
+
+    .brand-nav-cta {
+      padding: .4rem 1rem;
+      border: 1px solid rgba(200, 169, 110, .4);
+      font-family: var(--font-m);
+      font-size: .55rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      cursor: pointer;
+      background: none;
+      transition: all .2s;
+    }
+
+    .brand-nav-cta:hover {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+    }
+
+    /* sections */
+    .brand-section {
+      display: none;
+    }
+
+    .brand-section.active {
+      display: block;
+    }
+
+    /* Hero */
+    .brand-hero {
+      min-height: 440px;
+      display: flex;
+      align-items: center;
+      padding: 4rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 80% 40%, rgba(200, 169, 110, .12), transparent), radial-gradient(ellipse 50% 40% at 20% 70%, rgba(184, 92, 56, .07), transparent);
+    }
+
+    .brand-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .brand-hero-tag {
+      font-family: var(--font-m);
+      font-size: .55rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .3);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+
+    .brand-hero-tag::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .brand-hero-h {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: .95;
+      margin-bottom: 1.2rem;
+    }
+
+    .brand-hero-h em {
+      font-family: var(--font-s);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .brand-hero-p {
+      font-size: .9rem;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, .45);
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .brand-hero-actions {
+      display: flex;
+      gap: .8rem;
+      align-items: center;
+    }
+
+    .bha-pri {
+      padding: .7rem 1.8rem;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: var(--font-m);
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background .2s;
+    }
+
+    .bha-pri:hover {
+      background: #d4b87a;
+    }
+
+    .bha-sec {
+      font-family: var(--font-m);
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .35);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      transition: color .2s;
+    }
+
+    .bha-sec:hover {
+      color: var(--paper);
+    }
+
+    /* Glow bar */
+    .glow-bar {
+      height: 1px;
+      background: rgba(255, 255, 255, .06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glow-bar-inner {
+      position: absolute;
+      top: 0;
+      left: -30%;
+      width: 30%;
+      height: 100%;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      animation: glowRun 3s ease-in-out infinite;
+    }
+
+    @keyframes glowRun {
+      0% {
+        left: -30%
+      }
+
+      100% {
+        left: 110%
+      }
+    }
+
+    /* Partner logos */
+    .brand-partners {
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .bp-label {
+      font-family: var(--font-m);
+      font-size: .48rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .2);
+      white-space: nowrap;
+    }
+
+    .bp-pill {
+      height: 5px;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* Services section */
+    .brand-services {
+      padding: 3rem 2.5rem;
+    }
+
+    .bs-header {
+      margin-bottom: 2rem;
+    }
+
+    .bs-tag {
+      font-family: var(--font-m);
+      font-size: .55rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .6rem;
+    }
+
+    .bs-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+
+    .bs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .8rem;
+    }
+
+    .bs-card {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .06);
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bs-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width .4s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .bs-card:hover {
+      border-color: rgba(200, 169, 110, .25);
+      background: rgba(255, 255, 255, .05);
+    }
+
+    .bs-card:hover::after {
+      width: 100%;
+    }
+
+    .bs-num {
+      font-family: var(--font-m);
+      font-size: .5rem;
+      color: var(--gold);
+      letter-spacing: .15em;
+      margin-bottom: .5rem;
+    }
+
+    .bs-name {
+      font-size: .9rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+    }
+
+    .bs-desc {
+      font-family: var(--font-m);
+      font-size: .58rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, .3);
+    }
+
+    /* Contact section */
+    .brand-contact {
+      padding: 3rem 2.5rem;
+      text-align: center;
+    }
+
+    .bc-title {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      margin-bottom: .8rem;
+    }
+
+    .bc-title em {
+      font-family: var(--font-s);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .bc-sub {
+      font-size: .85rem;
+      color: rgba(255, 255, 255, .35);
+      margin-bottom: 2rem;
+    }
+
+    .bc-form {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .bc-input {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      padding: .65rem 1rem;
+      font-family: var(--font-m);
+      font-size: .68rem;
+      color: var(--paper);
+      transition: border-color .2s;
+    }
+
+    .bc-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .bc-submit {
+      padding: .7rem;
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      font-family: var(--font-m);
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .bc-submit:hover {
+      background: #d4b87a;
+    }
+
+    .bc-sent {
+      display: none;
+      font-family: var(--font-m);
+      font-size: .7rem;
+      color: var(--gold);
+      margin-top: .8rem;
+    }
+
+    /* case study text */
+    .cs-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+    }
+
+    .stag {
+      font-family: var(--font-m);
+      font-size: .6rem;
+      letter-spacing: .3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: .8rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .stag::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .cs-body h2 {
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .cs-body h2 em {
+      font-family: var(--font-s);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .cs-body p {
+      font-size: .9rem;
+      line-height: 1.8;
+      color: rgba(245, 242, 235, .5);
+      margin-bottom: 1rem;
+    }
+
+    .div {
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, .07);
+      margin: 2.5rem 0;
+    }
+
+    .feats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+      margin-top: 1.5rem;
+    }
+
+    .feat {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid rgba(255, 255, 255, .07);
+      padding: 1.2rem;
+    }
+
+    .feat-i {
+      font-size: 1rem;
+      margin-bottom: .6rem;
+    }
+
+    .feat-t {
+      font-size: .85rem;
+      font-weight: 700;
+      margin-bottom: .3rem;
+    }
+
+    .feat-d {
+      font-family: var(--font-m);
+      font-size: .6rem;
+      line-height: 1.6;
+      color: rgba(245, 242, 235, .35);
+    }
+
+    .results {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .res {
+      flex: 1;
+      min-width: 120px;
+      border-left: 2px solid var(--gold);
+      padding-left: 1rem;
+    }
+
+    .res-n {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .res-l {
+      font-family: var(--font-m);
+      font-size: .55rem;
+      letter-spacing: .15em;
+      color: rgba(245, 242, 235, .35);
+      text-transform: uppercase;
+      margin-top: .2rem;
+    }
+
+    .cta-section {
+      background: rgba(200, 169, 110, .05);
+      border-top: 1px solid rgba(200, 169, 110, .15);
+      border-bottom: 1px solid rgba(200, 169, 110, .15);
+      padding: 5rem 3rem;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      margin-bottom: .8rem;
+    }
+
+    .cta-section h2 em {
+      font-family: var(--font-s);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .cta-section p {
+      font-size: .9rem;
+      color: rgba(245, 242, 235, .4);
+      margin-bottom: 1.8rem;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      background: var(--gold);
+      color: var(--ink);
+      padding: .85rem 2.2rem;
+      font-family: var(--font-m);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: background .2s;
+    }
+
+    .cta-btn:hover {
+      background: #d4b87a;
+    }
+
+    @media(max-width:768px) {
+      .cs-intro {
+        padding: 5rem 1.5rem 3rem;
+      }
+
+      .cs-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      .brand-wrap {
+        padding: 0 0 2rem;
+      }
+
+      .brand-nav-links {
+        display: none;
+      }
+
+      .brand-hero {
+        padding: 3rem 1.5rem;
+        min-height: 300px;
+      }
+
+      .bs-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cs-body {
+        padding: 3rem 1.5rem;
+      }
+
+      .feats {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-section {
+        padding: 3rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="back-bar">
+    <a href="index.html" class="back-link">← Back to DevCraft</a>
+    <span class="back-tag">Brand Site · Case Study</span>
+  </div>
+
+  <div class="cs-intro">
+    <div class="cs-tag">Case Study — 2023</div>
+    <h1 class="cs-title">A brand experience <em>that commands attention</em></h1>
+    <p class="cs-desc">A complete digital presence for a B2B marketing consultancy — hero, services, and a built-in
+      contact flow. The kind of site that makes prospects say yes before they pick up the phone.</p>
+    <div class="cs-stats">
+      <div>
+        <div class="cs-stat-num">180%</div>
+        <div class="cs-stat-label">More Qualified Leads</div>
+      </div>
+      <div>
+        <div class="cs-stat-num">4.5min</div>
+        <div class="cs-stat-label">Avg Session Time</div>
+      </div>
+      <div>
+        <div class="cs-stat-num">6wk</div>
+        <div class="cs-stat-label">Concept to Live</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brand-wrap">
+    <div class="brand-shell">
+      <div class="brand-nav">
+        <div class="brand-logo-text">Nexus</div>
+        <div class="brand-nav-links">
+          <div class="bnl active" onclick="showSection(this,'hero')">Home</div>
+          <div class="bnl" onclick="showSection(this,'services')">Services</div>
+          <div class="bnl" onclick="showSection(this,'contact')">Contact</div>
+        </div>
+        <button class="brand-nav-cta" onclick="showSection(document.querySelectorAll('.bnl')[2],'contact')">Work With
+          Us</button>
+      </div>
+
+      <!-- Hero -->
+      <div class="brand-section active" id="section-hero">
+        <div class="brand-hero">
+          <div class="brand-hero-inner">
+            <div class="brand-hero-tag">B2B Growth Consultancy</div>
+            <div class="brand-hero-h">We make brands<br><em>impossible to ignore</em></div>
+            <p class="brand-hero-p">Strategy, positioning, and digital presence — built for companies that are done
+              blending in. We work with founders and CMOs who want to lead their market, not follow it.</p>
+            <div class="brand-hero-actions">
+              <button class="bha-pri" onclick="showSection(document.querySelectorAll('.bnl')[2],'contact')">Get
+                Started</button>
+              <div class="bha-sec" onclick="showSection(document.querySelectorAll('.bnl')[1],'services')">View Services
+                →</div>
+            </div>
+          </div>
+        </div>
+        <div class="glow-bar">
+          <div class="glow-bar-inner"></div>
+        </div>
+        <div class="brand-partners">
+          <div class="bp-label">Partners</div>
+          <div class="bp-pill" style="width:44px"></div>
+          <div class="bp-pill" style="width:32px"></div>
+          <div class="bp-pill" style="width:58px"></div>
+          <div class="bp-pill" style="width:36px"></div>
+          <div class="bp-pill" style="width:50px"></div>
+          <div class="bp-pill" style="width:42px"></div>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="brand-section" id="section-services">
+        <div class="brand-services">
+          <div class="bs-header">
+            <div class="bs-tag">What We Do</div>
+            <div class="bs-title">Built for results</div>
+          </div>
+          <div class="bs-grid">
+            <div class="bs-card">
+              <div class="bs-num">01</div>
+              <div class="bs-name">Brand Strategy</div>
+              <div class="bs-desc">Positioning, messaging architecture, and competitive differentiation. The foundation
+                everything else is built on.</div>
+            </div>
+            <div class="bs-card">
+              <div class="bs-num">02</div>
+              <div class="bs-name">Digital Presence</div>
+              <div class="bs-desc">Website, content system, and SEO foundation. Built to rank, built to convert, built
+                to represent you accurately.</div>
+            </div>
+            <div class="bs-card">
+              <div class="bs-num">03</div>
+              <div class="bs-name">Demand Generation</div>
+              <div class="bs-desc">Paid search, content marketing, and outbound sequences that fill the pipeline without
+                burning your brand.</div>
+            </div>
+            <div class="bs-card">
+              <div class="bs-num">04</div>
+              <div class="bs-name">Sales Enablement</div>
+              <div class="bs-desc">Decks, one-pagers, and case studies that make your sales team close more deals with
+                less effort.</div>
+            </div>
+            <div class="bs-card">
+              <div class="bs-num">05</div>
+              <div class="bs-name">Identity & Design</div>
+              <div class="bs-desc">Logo systems, typography, colour — the visual language that makes your brand
+                recognisable at a glance.</div>
+            </div>
+            <div class="bs-card">
+              <div class="bs-num">06</div>
+              <div class="bs-name">Growth Retainer</div>
+              <div class="bs-desc">Monthly partnership for brands that want continuous momentum. Strategy, execution,
+                and measurement — ongoing.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="brand-section" id="section-contact">
+        <div class="brand-contact">
+          <div class="bc-title">Let's build something <em>together</em></div>
+          <div class="bc-sub">Fill in the form and we'll be in touch within 24 hours.</div>
+          <div class="bc-form">
+            <input class="bc-input" type="text" placeholder="Your name" id="bcName">
+            <input class="bc-input" type="email" placeholder="Email address" id="bcEmail">
+            <input class="bc-input" type="text" placeholder="Company" id="bcCo">
+            <textarea class="bc-input" rows="3" placeholder="What are you working on?" id="bcMsg"
+              style="resize:none"></textarea>
+            <button class="bc-submit" onclick="submitBrand()">Send Message</button>
+            <div class="bc-sent" id="bcSent">✓ Message received — we'll be in touch shortly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-body">
+    <div class="stag">The Problem</div>
+    <h2>A consultancy that <em>undersold itself</em></h2>
+    <p>Nexus had a decade of results and a client roster that any firm would envy. Their website had none of that energy
+      — it was a static WordPress site with a stock photo hero and a contact form that went to a generic inbox.</p>
+    <p>Prospects were doing due diligence, landing on the site, and moving on. The work was excellent. The presentation
+      wasn't keeping up.</p>
+    <div class="div"></div>
+    <div class="stag">The Build</div>
+    <h2>Every section <em>doing work</em></h2>
+    <p>We built a fully custom Next.js site with animated section transitions, a built-in contact flow, and a services
+      matrix that made their offering immediately scannable. Every element was designed to reduce time-to-trust for cold
+      visitors.</p>
+    <div class="feats">
+      <div class="feat">
+        <div class="feat-i">◉</div>
+        <div class="feat-t">Animated Hero</div>
+        <div class="feat-d">Gold sweep animations, radial glows, and a headline that commands attention on first load.
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-i">⬡</div>
+        <div class="feat-t">Tabbed Navigation</div>
+        <div class="feat-d">Single-page app feel — sections switch instantly without reload, keeping session momentum
+          high.</div>
+      </div>
+      <div class="feat">
+        <div class="feat-i">▣</div>
+        <div class="feat-t">Built-In Contact Flow</div>
+        <div class="feat-d">Form captures name, email, company, and brief — qualified leads arrive pre-contextualized.
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-i">◈</div>
+        <div class="feat-t">Services Matrix</div>
+        <div class="feat-d">Six services displayed in a hoverable card grid — each with a gold underline reveal on
+          interaction.</div>
+      </div>
+    </div>
+    <div class="div"></div>
+    <div class="stag">The Results</div>
+    <h2>The site started <em>selling for them</em></h2>
+    <div class="results">
+      <div class="res">
+        <div class="res-n">180%</div>
+        <div class="res-l">More Qualified Leads</div>
+      </div>
+      <div class="res">
+        <div class="res-n">4.5min</div>
+        <div class="res-l">Avg Session Time</div>
+      </div>
+      <div class="res">
+        <div class="res-n">62%</div>
+        <div class="res-l">Lower Bounce Rate</div>
+      </div>
+      <div class="res">
+        <div class="res-n">6wk</div>
+        <div class="res-l">To Launch</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Your brand deserves a site that <em>performs.</em></h2>
+    <p>We build digital presences that convert. Let's talk.</p>
+    <a href="index.html#contact" class="cta-btn">Start the Conversation →</a>
+  </div>
+
+  <script>
+    function showSection(el, name) {
+      document.querySelectorAll('.bnl').forEach(function (e) { e.classList.remove('active'); });
+      if (el) el.classList.add('active');
+      document.querySelectorAll('.brand-section').forEach(function (e) { e.classList.remove('active'); });
+      var s = document.getElementById('section-' + name);
+      if (s) s.classList.add('active');
+    }
+    function submitBrand() {
+      var n = document.getElementById('bcName').value.trim();
+      var e = document.getElementById('bcEmail').value.trim();
+      if (!n || !e) { alert('Please enter your name and email.'); return; }
+      document.getElementById('bcName').value = ''; document.getElementById('bcEmail').value = '';
+      document.getElementById('bcCo').value = ''; document.getElementById('bcMsg').value = '';
+      document.getElementById('bcSent').style.display = 'block';
+      setTimeout(function () { document.getElementById('bcSent').style.display = 'none'; }, 4000);
+    }
+  </script>
+</body>
+
+</html>

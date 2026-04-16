@@ -1,0 +1,85 @@
+// Qalaam Pro - Website Skeleton using React + Tailwind CSS
+// This will be a clean, scalable foundation for your platform
+
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
+export default function HomePage() {
+  return (
+    <div className="min-h-screen bg-white text-gray-800 p-6">
+      <header className="flex justify-between items-center py-4 border-b">
+        <h1 className="text-3xl font-bold">Qalaam Pro</h1>
+        <nav className="space-x-4">
+          <a href="#features" className="hover:underline">Features</a>
+          <a href="#pricing" className="hover:underline">Pricing</a>
+          <a href="#contact" className="hover:underline">Contact</a>
+        </nav>
+      </header>
+
+      <section className="mt-12 text-center">
+        <h2 className="text-4xl font-semibold">Learn Arabic. Live the Culture.</h2>
+        <p className="mt-4 text-lg max-w-xl mx-auto">
+          Personalized tutoring matched by dialect, culture, and learning style. Qalaam Pro blends AI with professional educators to immerse you in real-world Arabic.
+        </p>
+        <Button className="mt-6 text-lg px-8 py-4">Book a Free Consultation</Button>
+      </section>
+
+      <section id="features" className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Card>
+          <CardContent className="p-6">
+            <h3 className="text-xl font-bold mb-2">AI-Powered Lessons</h3>
+            <p>Lessons evolve based on your performance, interests, and background.</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <h3 className="text-xl font-bold mb-2">Cultural Matchmaking</h3>
+            <p>Choose tutors based on region, dialect, and teaching style.</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <h3 className="text-xl font-bold mb-2">Immersive Experience</h3>
+            <p>Games, quizzes, and writing sessions bring language to life.</p>
+          </CardContent>
+        </Card>
+      </section>
+
+      <section id="pricing" className="mt-24 text-center">
+        <h2 className="text-3xl font-semibold mb-4">Simple Pricing</h2>
+        <p className="mb-8">Choose a plan that works best for your schedule</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="text-2xl font-bold">2x / Week</h3>
+              <ul className="mt-4 text-left list-disc list-inside">
+                <li>Standard (1 hr): $60/hr → $480/month</li>
+                <li>Premium (2 hr): $50/hr → $800/month</li>
+              </ul>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="text-2xl font-bold">3x / Week</h3>
+              <ul className="mt-4 text-left list-disc list-inside">
+                <li>Standard (1 hr): $90/hr → $1,080/month</li>
+                <li>Premium (2 hr): $75/hr → $1,800/month</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section id="contact" className="mt-24 text-center">
+        <h2 className="text-3xl font-semibold mb-4">Get In Touch</h2>
+        <p className="mb-4">Questions? Partnerships? Just say salaam!</p>
+        <Button className="text-lg px-6 py-3">Contact Us</Button>
+      </section>
+
+      <footer className="mt-24 py-6 text-center text-gray-500 border-t">
+        &copy; {new Date().getFullYear()} Qalaam Pro. All rights reserved.
+      </footer>
+    </div>
+  );
+}

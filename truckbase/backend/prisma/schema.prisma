@@ -1,0 +1,256 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String  @id @default(uuid())
+  email     String  @unique
+  password  String
+  firstName String
+  lastName  String
+  phone     String?
+  role      Role    @default(OWNER)
+
+  truckId String?
+  truck   Truck?  @relation("TruckStaff", fields: [truckId], references: [id])
+
+  ownedTruck Truck? @relation("TruckOwner")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Truck {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  cuisineType String?
+
+  ownerId String @unique
+  owner   User   @relation("TruckOwner", fields: [ownerId], references: [id])
+
+  staff User[] @relation("TruckStaff")
+
+  logoUrl   String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  locations      Location[]
+  permits        Permit[]
+  inventoryItems InventoryItem[]
+  events         Event[]
+  schedules      Schedule[]
+  socialPosts    SocialPost[]
+  dailyReports   DailyReport[]
+
+  @@map("trucks")
+}
+
+// Location tracking for food trucks
+model Location {
+  id          String    @id @default(uuid())
+  truckId     String
+  truck       Truck     @relation(fields: [truckId], references: [id], onDelete: Cascade)
+  name        String
+  address     String
+  city        String
+  state       String
+  zipCode     String
+  latitude    Float?
+  longitude   Float?
+  notes       String?
+  avgRevenue  Float?
+  visitCount  Int       @default(0)
+  lastVisited DateTime?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  schedules Schedule[]
+
+  @@map("locations")
+}
+
+// Permit tracking with expiry alerts
+model Permit {
+  id           String       @id @default(uuid())
+  truckId      String
+  truck        Truck        @relation(fields: [truckId], references: [id], onDelete: Cascade)
+  type         PermitType
+  name         String
+  permitNumber String?
+  issuedDate   DateTime
+  expiryDate   DateTime
+  status       PermitStatus @default(ACTIVE)
+  fileUrl      String?
+  notes        String?
+  notified     Boolean      @default(false)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@map("permits")
+}
+
+enum PermitType {
+  HEALTH_PERMIT
+  BUSINESS_LICENSE
+  FIRE_SAFETY
+  PARKING_PERMIT
+  VENDOR_LICENSE
+  OTHER
+}
+
+enum PermitStatus {
+  ACTIVE
+  EXPIRED
+  PENDING
+  SUSPENDED
+}
+
+// Inventory management (space-aware for mobile kitchens)
+model InventoryItem {
+  id            String    @id @default(uuid())
+  truckId       String
+  truck         Truck     @relation(fields: [truckId], references: [id], onDelete: Cascade)
+  name          String
+  category      Category
+  quantity      Int
+  unit          String
+  minQuantity   Int
+  maxQuantity   Int
+  spaceRequired Float // in cubic feet or liters
+  costPerUnit   Float?
+  supplier      String?
+  lastRestocked DateTime?
+  expiryDate    DateTime?
+  location      String? // Storage location in truck
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("inventory_items")
+}
+
+enum Category {
+  FOOD
+  BEVERAGE
+  SUPPLIES
+  EQUIPMENT
+  CLEANING
+  OTHER
+}
+
+// Event calendar for bookings and festivals
+model Event {
+  id          String      @id @default(uuid())
+  truckId     String
+  truck       Truck       @relation(fields: [truckId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  startDate   DateTime
+  endDate     DateTime
+  location    String
+  address     String?
+  type        EventType
+  status      EventStatus @default(SCHEDULED)
+  fee         Float?
+  notes       String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@map("events")
+}
+
+enum EventType {
+  FESTIVAL
+  CATERING
+  PRIVATE_EVENT
+  REGULAR_SPOT
+  OTHER
+}
+
+enum EventStatus {
+  SCHEDULED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+// Daily schedule for operations
+model Schedule {
+  id         String    @id @default(uuid())
+  truckId    String
+  truck      Truck     @relation(fields: [truckId], references: [id], onDelete: Cascade)
+  locationId String?
+  location   Location? @relation(fields: [locationId], references: [id])
+  date       DateTime
+  startTime  String
+  endTime    String
+  notes      String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@map("schedules")
+}
+
+// Social media posts tracking
+model SocialPost {
+  id           String         @id @default(uuid())
+  truckId      String
+  truck        Truck          @relation(fields: [truckId], references: [id], onDelete: Cascade)
+  platform     SocialPlatform
+  content      String
+  imageUrl     String?
+  scheduledFor DateTime?
+  postedAt     DateTime?
+  status       PostStatus     @default(DRAFT)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@map("social_posts")
+}
+
+enum SocialPlatform {
+  INSTAGRAM
+  FACEBOOK
+  TWITTER
+  TIKTOK
+  LINKEDIN
+}
+
+enum PostStatus {
+  DRAFT
+  SCHEDULED
+  POSTED
+  FAILED
+}
+
+// Analytics and reporting
+model DailyReport {
+  id        String   @id @default(uuid())
+  truckId   String
+  truck     Truck    @relation(fields: [truckId], references: [id], onDelete: Cascade)
+  date      DateTime
+  revenue   Float    @default(0)
+  orders    Int      @default(0)
+  expenses  Float    @default(0)
+  location  String?
+  notes     String?
+  createdAt DateTime @default(now())
+
+  @@unique([truckId, date])
+  @@map("daily_reports")
+}
+
+enum Role {
+  OWNER
+  MANAGER
+  EMPLOYEE
+}
