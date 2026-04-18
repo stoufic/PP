@@ -1,622 +1,2012 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fast, Reliable Plumbing in Northern Virginia | Northern Pro Plumbing</title>
-    <meta name="description" content="Licensed plumbing experts serving Arlington, Alexandria, Fairfax, Loudoun & Prince William. 24/7 emergency service. Upfront pricing. Call (703) 555-1234.">
-    
-    <!-- Preconnect & Preload -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            900: '#0B1F3A',
-                            600: '#144C8B',
-                            300: '#7CC7F4',
-                        },
-                        accent: {
-                            500: '#2DD4BF',
-                        },
-                        neutral: {
-                            900: '#0F172A',
-                            600: '#475569',
-                            100: '#F1F5F9',
-                        },
-                        success: {
-                            500: '#22C55E',
-                        },
-                        warning: {
-                            500: '#F59E0B',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 300ms ease-in-out',
-                        'slide-up': 'slideUp 500ms ease-out',
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Custom CSS -->
-    <style>
-        @keyframes ripple {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(3); opacity: 0; }
-        }
-        
-        .ripple-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .ripple-effect:after {
-            content: "";
-            display: block;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            background-image: radial-gradient(circle, #7CC7F4 10%, transparent 10.01%);
-            background-repeat: no-repeat;
-            background-position: 50%;
-            transform: scale(10,10);
-            opacity: 0;
-            transition: transform .5s, opacity 1s;
-        }
-        
-        .ripple-effect:active:after {
-            transform: scale(0,0);
-            opacity: 0.3;
-            transition: 0s;
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            .animate, .animation-ripple, [class*="animate-"] {
-                animation: none !important;
-                transition: none !important;
-            }
-        }
-        
-        .hero-bg {
-            background-image: linear-gradient(to bottom, rgba(11, 31, 58, 0.7), rgba(11, 31, 58, 0.4)), url('https://images.unsplash.com/photo-1600889687702-4b8805f86e0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-bg {
-                background-attachment: scroll;
-            }
-        }
-    </style>
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚰</text></svg>">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "PlumbingBusiness",
-        "name": "Northern Pro Plumbing",
-        "image": "https://images.unsplash.com/photo-1600889687702-4b8805f86e0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-        "@id": "",
-        "url": "https://www.northernproplumbing.com",
-        "telephone": "(703) 555-1234",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "123 Main St",
-            "addressLocality": "Fairfax",
-            "addressRegion": "VA",
-            "postalCode": "22030",
-            "addressCountry": "US"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 38.8462,
-            "longitude": -77.3064
-        },
-        "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday"
-            ],
-            "opens": "07:00",
-            "closes": "19:00"
-        },
-        "priceRange": "$$",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "200"
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>50fty — Digital Solutions</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
     }
-    </script>
+
+    :root {
+      --black: #000;
+      --black2: #0a0a0a;
+      --black3: #111;
+      --black4: #1a1a1a;
+      --black5: #222;
+      --gold: #c9a84c;
+      --gold2: #e8c97a;
+      --gold3: #f5e0a0;
+      --gold-dim: rgba(201, 168, 76, 0.15);
+      --gold-glow: rgba(201, 168, 76, 0.12);
+      --white: #fff;
+      --white2: #f0f0f0;
+      --white3: rgba(255, 255, 255, 0.85);
+      --white4: rgba(255, 255, 255, 0.5);
+      --white5: rgba(255, 255, 255, 0.15);
+      --white6: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(201, 168, 76, 0.3);
+      --font: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden
+    }
+
+    #bgCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 1
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 70px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none
+    }
+
+    .nav-links a {
+      color: var(--white4);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .5px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .2s
+    }
+
+    .nav-links a:hover,
+    .nav-links a.gold {
+      color: var(--gold2)
+    }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--border-gold);
+      color: var(--gold2);
+      padding: 10px 22px;
+      border-radius: 3px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .5px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all .25s
+    }
+
+    .nav-cta:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold2);
+      color: var(--white)
+    }
+
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 5vw
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding-top: 70px
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--gold)
+    }
+
+    .hero-h1 {
+      font-size: clamp(42px, 5vw, 72px);
+      font-weight: 700;
+      line-height: 1.07;
+      letter-spacing: -2px;
+      color: var(--white);
+      margin-bottom: 28px
+    }
+
+    .hero-h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--gold2) 0%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--white4);
+      max-width: 480px;
+      margin-bottom: 44px;
+      font-weight: 300
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      color: var(--black);
+      padding: 16px 36px;
+      border-radius: 3px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .5px;
+      border: none;
+      cursor: pointer;
+      transition: all .25s;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.15);
+      opacity: 0;
+      transition: opacity .25s
+    }
+
+    .btn-primary:hover::after {
+      opacity: 1
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(201, 168, 76, 0.3)
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--white3);
+      padding: 15px 36px;
+      border-radius: 3px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: .5px;
+      cursor: pointer;
+      transition: all .25s;
+      text-transform: uppercase
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--white4);
+      color: var(--white);
+      background: var(--white6)
+    }
+
+    .hero-canvas-wrap {
+      position: relative;
+      height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .marquee-section {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      z-index: 2
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 64px;
+      white-space: nowrap;
+      animation: marquee 22s linear infinite
+    }
+
+    .marquee-item {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white5);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0
+    }
+
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold)
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    section {
+      padding: 120px 5vw;
+      position: relative;
+      z-index: 2
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px
+    }
+
+    .label::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--gold)
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 20px
+    }
+
+    .section-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .section-sub {
+      font-size: 16px;
+      color: var(--white4);
+      max-width: 520px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 72px
+    }
+
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center
+    }
+
+    .about-visual {
+      position: relative;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .about-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--border-gold);
+      animation: spin-slow linear infinite
+    }
+
+    .about-ring:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      animation-duration: 20s
+    }
+
+    .about-ring:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      border-color: var(--border);
+      animation-duration: 35s;
+      animation-direction: reverse
+    }
+
+    .about-ring:nth-child(3) {
+      width: 480px;
+      height: 480px;
+      border-color: rgba(201, 168, 76, 0.06);
+      animation-duration: 50s
+    }
+
+    .about-ring::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold2);
+      transform: translateX(-50%)
+    }
+
+    .about-center-box {
+      position: relative;
+      z-index: 2;
+      width: 140px;
+      height: 140px;
+      background: var(--black3);
+      border: 1px solid var(--border-gold);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px
+    }
+
+    .about-center-num {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .about-center-label {
+      font-size: 10px;
+      color: var(--white4);
+      letter-spacing: 1.5px;
+      text-transform: uppercase
+    }
+
+    @keyframes spin-slow {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .about-copy {
+      font-size: 16px;
+      color: var(--white4);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 24px
+    }
+
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 40px
+    }
+
+    .pillar {
+      padding: 20px;
+      background: var(--black3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color .2s
+    }
+
+    .pillar:hover {
+      border-color: var(--border-gold)
+    }
+
+    .pillar-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white2);
+      margin-bottom: 6px;
+      margin-top: 10px
+    }
+
+    .pillar-desc {
+      font-size: 12px;
+      color: var(--white4);
+      line-height: 1.6
+    }
+
+    .why-diff-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border-gold);
+      padding: 14px 28px;
+      border-radius: 3px;
+      cursor: pointer;
+      background: transparent;
+      font-family: var(--font);
+      transition: all .25s;
+      text-decoration: none
+    }
+
+    .why-diff-btn:hover {
+      background: var(--gold-dim);
+      color: var(--white)
+    }
+
+    .why-diff-btn svg {
+      transition: transform .2s
+    }
+
+    .why-diff-btn:hover svg {
+      transform: translateX(4px)
+    }
+
+    #services {
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(4px)
+    }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 72px
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden
+    }
+
+    .service-card {
+      background: var(--black2);
+      padding: 44px 36px;
+      transition: background .3s;
+      cursor: default;
+      position: relative;
+      overflow: hidden
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 100% 100% at 0% 100%, var(--gold-glow), transparent);
+      opacity: 0;
+      transition: opacity .4s
+    }
+
+    .service-card:hover {
+      background: var(--black3)
+    }
+
+    .service-card:hover::after {
+      opacity: 1
+    }
+
+    .service-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: .7
+    }
+
+    .service-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white2);
+      margin-bottom: 12px;
+      letter-spacing: -.3px;
+      margin-top: 16px
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--white4);
+      line-height: 1.75;
+      font-weight: 300
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 24px
+    }
+
+    .tag {
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 4px 10px;
+      border: 1px solid var(--border-gold);
+      border-radius: 2px;
+      font-weight: 500
+    }
+
+    #metrics {
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 100px 5vw;
+      backdrop-filter: blur(4px)
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden
+    }
+
+    .metric-item {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 52px 40px;
+      text-align: center;
+      transition: background .3s
+    }
+
+    .metric-item:hover {
+      background: var(--black3)
+    }
+
+    .metric-num {
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--white4);
+      letter-spacing: 1.5px;
+      text-transform: uppercase
+    }
+
+    #process {
+      background: rgba(17, 17, 17, 0.7);
+      backdrop-filter: blur(6px)
+    }
+
+    .process-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 100px;
+      align-items: start
+    }
+
+    .process-steps {
+      display: flex;
+      flex-direction: column
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 28px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all .3s;
+      cursor: default
+    }
+
+    .process-step:first-child {
+      border-top: 1px solid var(--border)
+    }
+
+    .process-step:hover .step-num {
+      color: var(--gold2);
+      border-color: var(--border-gold)
+    }
+
+    .step-num {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--white5);
+      border: 1px solid var(--border);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s;
+      flex-shrink: 0;
+      margin-top: 4px
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white2);
+      margin-bottom: 8px
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: var(--white4);
+      line-height: 1.7;
+      font-weight: 300
+    }
+
+    .process-visual {
+      position: sticky;
+      top: 120px;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    #casestudies {
+      background: transparent
+    }
+
+    .case-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 60px
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px
+    }
+
+    .case-card {
+      background: rgba(17, 17, 17, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color .3s, transform .3s;
+      cursor: default;
+      backdrop-filter: blur(4px)
+    }
+
+    .case-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-4px)
+    }
+
+    .case-card-top {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .case-card-body {
+      padding: 32px
+    }
+
+    .case-industry {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px
+    }
+
+    .case-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--white2);
+      margin-bottom: 12px;
+      letter-spacing: -.3px
+    }
+
+    .case-desc {
+      font-size: 14px;
+      color: var(--white4);
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 24px
+    }
+
+    .case-stats {
+      display: flex;
+      gap: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border)
+    }
+
+    .case-stat-val {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.5px;
+      background: linear-gradient(135deg, var(--gold2), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .case-stat-label {
+      font-size: 11px;
+      color: var(--white4);
+      margin-top: 2px
+    }
+
+    .case-card.featured {
+      grid-column: 1/-1;
+      display: grid;
+      grid-template-columns: 1fr 1fr
+    }
+
+    .case-card.featured .case-card-top {
+      height: auto;
+      min-height: 320px
+    }
+
+    .case-card.featured .case-card-body {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center
+    }
+
+    #why {
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(4px)
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center
+    }
+
+    .why-items {
+      display: flex;
+      flex-direction: column
+    }
+
+    .why-item {
+      display: flex;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all .3s
+    }
+
+    .why-item:first-child {
+      border-top: 1px solid var(--border)
+    }
+
+    .why-item:hover .why-icon-wrap {
+      border-color: var(--border-gold)
+    }
+
+    .why-icon-wrap {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--black3);
+      transition: border-color .2s
+    }
+
+    .why-text h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white2);
+      margin-bottom: 6px
+    }
+
+    .why-text p {
+      font-size: 13px;
+      color: var(--white4);
+      line-height: 1.7;
+      font-weight: 300
+    }
+
+    #contact {
+      background: rgba(0, 0, 0, 0.6);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(4px)
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start
+    }
+
+    .form-group {
+      margin-bottom: 24px
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white4);
+      margin-bottom: 10px
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: var(--black3);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 14px 16px;
+      border-radius: 3px;
+      font-family: var(--font);
+      font-size: 14px;
+      transition: border-color .2s
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--border-gold)
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical
+    }
+
+    .form-submit {
+      width: 100%
+    }
+
+    #ctabanner {
+      padding: 120px 5vw;
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(4px)
+    }
+
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 70% 90% at 50% 50%, rgba(201, 168, 76, 0.06), transparent)
+    }
+
+    .cta-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative
+    }
+
+    .cta-inner .label {
+      justify-content: center
+    }
+
+    .cta-inner .label::before {
+      display: none
+    }
+
+    .cta-title {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      margin-bottom: 20px
+    }
+
+    .cta-sub {
+      font-size: 17px;
+      color: var(--white4);
+      margin-bottom: 48px;
+      font-weight: 300;
+      line-height: 1.7
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.95);
+      padding: 80px 5vw 40px;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 2
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .footer-brand .nav-logo {
+      display: block;
+      margin-bottom: 16px
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: var(--white4);
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 240px
+    }
+
+    .footer-col h5 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white4);
+      margin-bottom: 20px
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .footer-col a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.35);
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    .footer-col a:hover {
+      color: var(--gold2)
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.25);
+      letter-spacing: .3px
+    }
+
+    .footer-badge {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .6
+    }
+  </style>
 </head>
-<body class="font-sans antialiased text-neutral-900 bg-neutral-100">
-    <!-- Announcement Bar -->
-    <div class="bg-accent-500 text-white text-sm font-medium text-center py-2 px-4">
-        <p>24/7 Emergency Service • Same-Day Appointments Available</p>
+
+<body>
+
+  <canvas id="bgCanvas"></canvas>
+
+  <nav>
+    <a class="nav-logo" href="#">50fty</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#casestudies">Work</a></li>
+      <li><a href="why-different.html" class="gold">Why We're Different</a></li>
+    </ul>
+    <button class="nav-cta" onclick="location.href='#contact'">Book a Call</button>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">Digital Solutions Studio</div>
+        <h1 class="hero-h1">Built to move<br>your business<br><em>forward.</em></h1>
+        <p class="hero-sub">Custom websites, full-stack development, AI integrations, and automation systems —
+          engineered for businesses that demand more than ordinary.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="location.href='#contact'">Start Your Project</button>
+          <button class="btn-ghost" onclick="location.href='#services'">View Services</button>
+        </div>
+      </div>
+      <div class="hero-canvas-wrap">
+        <canvas id="heroCanvas" width="480" height="480"></canvas>
+      </div>
     </div>
-    
-    <!-- Skip to Content Link -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:bg-white focus:px-4 focus:py-2 focus:rounded focus:shadow-lg focus:z-50 focus:font-bold focus:text-brand-600">
-        Skip to Content
-    </a>
-    
-    <!-- Header -->
-    <header class="sticky top-0 z-40 bg-white shadow-sm">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16 md:h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="/" class="flex items-center">
-                        <span class="text-2xl font-bold text-brand-600">Northern Pro Plumbing</span>
-                    </a>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="/" class="text-brand-600 font-medium border-b-2 border-brand-600 px-1 py-4">Home</a>
-                    <a href="/services.html" class="text-neutral-600 hover:text-brand-600 font-medium px-1 py-4">Services</a>
-                    <a href="/about.html" class="text-neutral-600 hover:text-brand-600 font-medium px-1 py-4">About</a>
-                    <a href="/reviews.html" class="text-neutral-600 hover:text-brand-600 font-medium px-1 py-4">Reviews</a>
-                    <a href="/contact.html" class="text-neutral-600 hover:text-brand-600 font-medium px-1 py-4">Contact</a>
-                </nav>
-                
-                <!-- CTA Button - Desktop -->
-                <div class="hidden md:flex items-center">
-                    <a href="tel:7035551234" class="ripple-effect bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                        </svg>
-                        Call Now
-                    </a>
-                </div>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button type="button" id="mobile-menu-button" class="text-neutral-600 hover:text-brand-600 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
+  </section>
+
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Custom Web Development
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>AI Integration
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Automation Systems
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Full-Stack Engineering
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Custom Chatbots
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>API Development
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Database Dashboards
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Conversion Design
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Custom Web Development
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>AI Integration
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Automation Systems
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Full-Stack Engineering
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Custom Chatbots
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>API Development
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Database Dashboards
+      </div>
+      <div class="marquee-item">
+        <div class="marquee-dot"></div>Conversion Design
+      </div>
+    </div>
+  </div>
+
+  <section id="metrics">
+    <div class="section-inner">
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <div class="metric-num" data-target="120">0</div>
+          <div class="metric-label">Projects Delivered</div>
         </div>
-        
-        <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-neutral-200">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-brand-600 bg-brand-50">Home</a>
-                <a href="/services.html" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50">Services</a>
-                <a href="/about.html" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50">About</a>
-                <a href="/reviews.html" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50">Reviews</a>
-                <a href="/contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50">Contact</a>
-                <a href="tel:7035551234" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-brand-600 hover:bg-brand-700 text-center">
-                    Call Now
-                </a>
-            </div>
+        <div class="metric-item">
+          <div class="metric-num" data-target="98">0</div>
+          <div class="metric-label">Client Satisfaction</div>
         </div>
-    </header>
-    
-    <main id="main-content">
-        <!-- Hero Section -->
-        <section class="relative hero-bg text-white min-h-[80vh] flex items-center">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-900 to-transparent opacity-90"></div>
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 animate-fade-in">
-                <div class="max-w-3xl mx-auto text-center">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-slide-up">
-                        Fast, Reliable Plumbing in Northern Virginia
-                    </h1>
-                    <p class="text-xl md:text-2xl mb-8 animate-slide-up animation-delay-100">
-                        Licensed experts with 15+ Years. Upfront pricing. 24/7 emergencies.
-                    </p>
-                    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-10 animate-slide-up animation-delay-200">
-                        <a href="tel:7035551234" class="ripple-effect bg-accent-500 hover:bg-accent-600 text-white px-6 py-3 rounded-lg font-bold text-lg transition-colors duration-200 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                            </svg>
-                            Call Now
-                        </a>
-                        <a href="#quote" class="ripple-effect bg-white hover:bg-neutral-100 text-brand-600 px-6 py-3 rounded-lg font-bold text-lg transition-colors duration-200 flex items-center justify-center">
-                            Get Free Quote
-                        </a>
-                    </div>
-                    
-                    <div class="flex flex-wrap justify-center gap-4 mt-8 animate-slide-up animation-delay-300">
-                        <div class="flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-sm font-medium">Licensed & Insured VA #000000</span>
-                        </div>
-                        <div class="flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-sm font-medium">A+ BBB Rated</span>
-                        </div>
-                        <div class="flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-sm font-medium">Background-Checked Techs</span>
-                        </div>
-                        <div class="flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <span class="text-sm font-medium">Same-Day Service</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="metric-item">
+          <div class="metric-num" data-target="4">0</div>
+          <div class="metric-label">Years of Precision</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-num" data-target="3">0</div>
+          <div class="metric-label">Avg Load Time (s)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-ring"></div>
+          <div class="about-ring"></div>
+          <div class="about-ring"></div>
+          <div class="about-center-box">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect x="4" y="4" width="10" height="10" rx="1" stroke="#c9a84c" stroke-width="1" />
+              <rect x="18" y="4" width="10" height="10" rx="1" stroke="#c9a84c" stroke-width="1"
+                stroke-dasharray="2 2" />
+              <rect x="4" y="18" width="10" height="10" rx="1" stroke="#c9a84c" stroke-width="1"
+                stroke-dasharray="2 2" />
+              <rect x="18" y="18" width="10" height="10" rx="1" stroke="#c9a84c" stroke-width="1" />
+            </svg>
+            <div class="about-center-num">50fty</div>
+            <div class="about-center-label">Est. 2021</div>
+          </div>
+        </div>
+        <div class="about-content">
+          <div class="label">About 50fty</div>
+          <h2 class="section-title">More than a<br>web agency.<br><em>A digital partner.</em></h2>
+          <p class="about-copy">We build digital systems that make businesses perform better — not just look better.
+            From the first pixel to the last API call, every solution is engineered with both technical depth and
+            commercial clarity.</p>
+          <p class="about-copy">50fty operates at the intersection of design precision and engineering capability. We
+            work with founders, operators, and growth-focused teams who need solutions that actually move the needle.
+          </p>
+          <div class="about-pillars">
+            <div class="pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="2" y="2" width="7" height="7" rx="1" stroke="#c9a84c" stroke-width="1" />
+                <rect x="11" y="2" width="7" height="7" rx="1" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+                <rect x="2" y="11" width="7" height="7" rx="1" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+                <rect x="11" y="11" width="7" height="7" rx="1" stroke="#c9a84c" stroke-width="1" />
+              </svg>
+              <div class="pillar-name">Design Systems</div>
+              <div class="pillar-desc">Polished interfaces built on purposeful structure.</div>
             </div>
-        </section>
-        
-        <!-- Quick Quote Section -->
-        <section id="quote" class="py-12 bg-white relative -mt-16 z-20 shadow-lg rounded-t-3xl">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="max-w-4xl mx-auto glass-card p-6 md:p-8 rounded-2xl shadow-lg">
-                    <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-brand-900">Get a Free Quote Today</h2>
-                    <form id="quote-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-neutral-700 mb-1">Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-brand-600">
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-sm font-medium text-neutral-700 mb-1">Phone</label>
-                            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-brand-600">
-                        </div>
-                        <div>
-                            <label for="zip" class="block text-sm font-medium text-neutral-700 mb-1">Zip Code</label>
-                            <input type="text" id="zip" name="zip" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-brand-600">
-                        </div>
-                        <div>
-                            <label for="service" class="block text-sm font-medium text-neutral-700 mb-1">Service Needed</label>
-                            <select id="service" name="service" class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-brand-600">
-                                <option value="">Select a service</option>
-                                <option value="emergency">Emergency Plumbing</option>
-                                <option value="drain">Drain Cleaning</option>
-                                <option value="water-heater">Water Heater</option>
-                                <option value="fixtures">Fixture Installation</option>
-                                <option value="sewer">Sewer Line</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="issue" class="block text-sm font-medium text-neutral-700 mb-1">Describe Your Issue</label>
-                            <textarea id="issue" name="issue" rows="3" class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-600 focus:border-brand-600"></textarea>
-                        </div>
-                        <div class="md:col-span-2">
-                            <button type="submit" class="w-full ripple-effect bg-brand-600 hover:bg-brand-700 text-white px-6 py-3 rounded-lg font-bold text-lg transition-colors duration-200">
-                                Get Free Quote
-                            </button>
-                        </div>
-                        <p class="text-sm text-neutral-500 text-center md:col-span-2">
-                            We'll respond within 10 minutes during business hours.
-                        </p>
-                    </form>
-                    
-                    <div id="quote-success" class="hidden text-center py-8">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-success-500 mx-auto mb-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                        <h3 class="text-2xl font-bold text-brand-900 mb-2">Thank You!</h3>
-                        <p class="text-neutral-600 mb-4">We've received your request and will call you within 10 minutes.</p>
-                        <p class="text-neutral-600 font-medium">For immediate assistance, call us now at <a href="tel:7035551234" class="text-brand-600 hover:underline">(703) 555-1234</a></p>
-                    </div>
-                </div>
+            <div class="pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <polyline points="2,14 6,8 10,11 14,5 18,9" stroke="#c9a84c" stroke-width="1" fill="none" />
+                <circle cx="18" cy="9" r="1.5" fill="#c9a84c" />
+              </svg>
+              <div class="pillar-name">Growth Focus</div>
+              <div class="pillar-desc">Every build optimized for real business outcomes.</div>
             </div>
-        </section>
-        
-        <!-- Services Section -->
-        <section class="py-16 bg-neutral-100">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-4">Our Plumbing Services</h2>
-                    <p class="text-xl text-neutral-600 max-w-3xl mx-auto">Comprehensive solutions for homes and businesses across Northern Virginia.</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Service Card 1 -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                        <div class="h-48 bg-brand-600 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-white group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-900 mb-2">Emergency Plumbing</h3>
-                            <p class="text-neutral-600 mb-4">24/7 rapid response to burst pipes, leaks, and urgent plumbing issues.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-brand-600 font-bold">From $99</span>
-                                <a href="/services.html#emergency" class="text-accent-500 font-medium hover:underline flex items-center">
-                                    Learn More
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Service Card 2 -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                        <div class="h-48 bg-brand-600 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-white group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-900 mb-2">Drain Cleaning</h3>
-                            <p class="text-neutral-600 mb-4">Professional drain cleaning to clear stubborn clogs and prevent backups.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-brand-600 font-bold">From $129</span>
-                                <a href="/services.html#drain" class="text-accent-500 font-medium hover:underline flex items-center">
-                                    Learn More
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Service Card 3 -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                        <div class="h-48 bg-brand-600 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-white group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-900 mb-2">Water Heaters</h3>
-                            <p class="text-neutral-600 mb-4">Installation, repair, and maintenance of tank and tankless water heaters.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-brand-600 font-bold">From $299</span>
-                                <a href="/services.html#water-heater" class="text-accent-500 font-medium hover:underline flex items-center">
-                                    Learn More
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Service Card 4 -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                        <div class="h-48 bg-brand-600 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-white group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-900 mb-2">Fixture Installation</h3>
-                            <p class="text-neutral-600 mb-4">Expert installation of sinks, faucets, toilets, showers, and more.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-brand-600 font-bold">From $149</span>
-                                <a href="/services.html#fixtures" class="text-accent-500 font-medium hover:underline flex items-center">
-                                    Learn More
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Service Card 5 -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                        <div class="h-48 bg-brand-600 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-white group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-900 mb-2">Sewer Line Services</h3>
-                            <p class="text-neutral-600 mb-4">Diagnosis, cleaning, and repair of main sewer lines and lateral connections.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-brand-600 font-bold">From $399</span>
-                                <a href="/services.html#sewer" class="text-accent-500 font-medium hover:underline flex items-center">
-                                    Learn More
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Service Card 6 -->
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
-                        <div class="h-48 bg-brand-600 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-white group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-brand-900 mb-2">Plumbing Maintenance</h3>
-                            <p class="text-neutral-600 mb-4">Preventative maintenance to keep your plumbing system running smoothly.</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-brand-600 font-bold">From $89</span>
-                                <a href="/services.html#maintenance" class="text-accent-500 font-medium hover:underline flex items-center">
-                                    Learn More
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-12">
-                    <a href="/services.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-accent-500 hover:bg-accent-600 ripple-effect">
-                        View All Services
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                </div>
+            <div class="pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="7" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+                <circle cx="10" cy="10" r="3" stroke="#c9a84c" stroke-width="1" />
+                <line x1="10" y1="3" x2="10" y2="7" stroke="#c9a84c" stroke-width="1" />
+                <line x1="10" y1="13" x2="10" y2="17" stroke="#c9a84c" stroke-width="1" />
+                <line x1="3" y1="10" x2="7" y2="10" stroke="#c9a84c" stroke-width="1" />
+                <line x1="13" y1="10" x2="17" y2="10" stroke="#c9a84c" stroke-width="1" />
+              </svg>
+              <div class="pillar-name">Technical Depth</div>
+              <div class="pillar-desc">Backend systems, APIs, and scalable architecture.</div>
             </div>
-        </section>
-        
-        <!-- Testimonials Section -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-4">Trusted by Northern Virginia Homeowners</h2>
-                    <p class="text-xl text-neutral-600 max-w-3xl mx-auto">Here's what our customers in Arlington, Alexandria, Fairfax, Loudoun, and Prince William are saying.</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Testimonial 1 -->
-                    <div class="bg-neutral-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="flex -space-x-1 overflow-hidden">
-                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Sarah M.">
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium text-brand-900">Sarah M.</h4>
-                                <p class="text-neutral-600">Arlington</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-2">
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                        </div>
-                        <p class="text-neutral-600 italic">"Northern Pro Plumbing saved us from a major disaster when our water heater burst on a Sunday night. They arrived within 45 minutes and had the situation under control. Professional, knowledgeable, and fair pricing. Highly recommend!"</p>
-                    </div>
-                    
-                    <!-- Testimonial 2 -->
-                    <div class="bg-neutral-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="flex -space-x-1 overflow-hidden">
-                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="James R.">
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium text-brand-900">James R.</h4>
-                                <p class="text-neutral-600">Fairfax</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-2">
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                        </div>
-                        <p class="text-neutral-600 italic">"I've used several plumbing companies over the years, but Northern Pro is by far the best. They installed a tankless water heater in my home and explained everything clearly. The work was clean, efficient, and they even cleaned up better than when they arrived!"</p>
-                    </div>
-                    
-                    <!-- Testimonial 3 -->
-                    <div class="bg-neutral-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="flex -space-x-1 overflow-hidden">
-                                <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="Michael T.">
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium text-brand-900">Michael T.</h4>
-                                <p class="text-neutral-600">Alexandria</p>
-                            </div>
-                        </div>
-                        <div class="flex mb-2">
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                        </div>
-                        <p class="text-neutral-600 italic">"Our basement flooded due to a sewer backup. Northern Pro Plumbing responded immediately, diagnosed the issue, and had everything fixed by the next day. Their team was professional, courteous, and went above and beyond to help us through a stressful situation."</p>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-12">
-                    <p class="text-lg text-neutral-600 mb-6">Backed by <span class="font-bold">4.8★ (200+ reviews)</span> on Google</p>
-                    <a href="/reviews.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 ripple-effect">
-                        Read More Reviews
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                </div>
+            <div class="pillar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4 10 L10 4 L16 10 L10 16 Z" stroke="#c9a84c" stroke-width="1" fill="none" />
+                <circle cx="10" cy="10" r="2" fill="#c9a84c" />
+              </svg>
+              <div class="pillar-name">AI-Forward</div>
+              <div class="pillar-desc">Intelligent integrations that automate and elevate.</div>
             </div>
-        </section>
-        
-        <!-- Why Choose Us Section -->
-        <section class="
+          </div>
+          <a href="why-different.html" class="why-diff-btn">
+            Why We're Different
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <line x1="2" y1="8" x2="13" y2="8" stroke="#c9a84c" stroke-width="1.2" />
+              <polyline points="9,4 13,8 9,12" stroke="#c9a84c" stroke-width="1.2" fill="none" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="section-inner">
+      <div class="services-header">
+        <div>
+          <div class="label">What We Build</div>
+          <h2 class="section-title">End-to-end<br><em>digital solutions.</em></h2>
+        </div>
+        <p class="section-sub" style="margin-bottom:0">From a conversion-optimized landing page to a full AI-powered
+          platform — we scope, design, build, and deliver.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="6" width="24" height="16" rx="2" stroke="#c9a84c" stroke-width="1" />
+            <line x1="2" y1="11" x2="26" y2="11" stroke="#c9a84c" stroke-width="1" opacity="0.5" />
+            <circle cx="5.5" cy="8.5" r="1" fill="#c9a84c" opacity="0.6" />
+            <circle cx="9" cy="8.5" r="1" fill="#c9a84c" opacity="0.4" />
+          </svg>
+          <div class="service-title">Custom Website Design</div>
+          <div class="service-desc">Premium, conversion-focused design built from scratch. No templates. Every pixel
+            intentional.</div>
+          <div class="service-tags"><span class="tag">UX/UI</span><span class="tag">Figma</span><span
+              class="tag">CRO</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <polyline points="6,10 2,14 6,18" stroke="#c9a84c" stroke-width="1" fill="none" />
+            <polyline points="22,10 26,14 22,18" stroke="#c9a84c" stroke-width="1" fill="none" />
+            <line x1="11" y1="20" x2="17" y2="8" stroke="#c9a84c" stroke-width="1" opacity="0.5" />
+          </svg>
+          <div class="service-title">Full-Stack Development</div>
+          <div class="service-desc">React, Next.js, Node, databases — complete front-to-back engineering with
+            production-grade architecture.</div>
+          <div class="service-tags"><span class="tag">React</span><span class="tag">Next.js</span><span
+              class="tag">Node</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="10" stroke="rgba(201,168,76,0.3)" stroke-width="1" />
+            <circle cx="14" cy="14" r="5" stroke="#c9a84c" stroke-width="1" />
+            <circle cx="14" cy="14" r="1.5" fill="#c9a84c" />
+            <line x1="14" y1="4" x2="14" y2="9" stroke="#c9a84c" stroke-width="1" />
+            <line x1="14" y1="19" x2="14" y2="24" stroke="#c9a84c" stroke-width="1" />
+            <line x1="4" y1="14" x2="9" y2="14" stroke="#c9a84c" stroke-width="1" />
+            <line x1="19" y1="14" x2="24" y2="14" stroke="#c9a84c" stroke-width="1" />
+          </svg>
+          <div class="service-title">AI Integration</div>
+          <div class="service-desc">Embed intelligent AI features directly into your product — search, generation,
+            recommendations, and analysis.</div>
+          <div class="service-tags"><span class="tag">LLM</span><span class="tag">OpenAI</span><span
+              class="tag">Claude</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="4" y="8" width="20" height="14" rx="2" stroke="#c9a84c" stroke-width="1" />
+            <path d="M10 15 L14 11 L18 15" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.6" />
+            <line x1="8" y1="8" x2="10" y2="5" stroke="#c9a84c" stroke-width="1" opacity="0.4" />
+            <line x1="20" y1="8" x2="18" y2="5" stroke="#c9a84c" stroke-width="1" opacity="0.4" />
+          </svg>
+          <div class="service-title">Custom Chatbots</div>
+          <div class="service-desc">Intelligent, on-brand conversational AI trained on your business — for support,
+            sales, and lead capture.</div>
+          <div class="service-tags"><span class="tag">NLP</span><span class="tag">RAG</span><span
+              class="tag">Training</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">05</div>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="3" y="8" width="7" height="5" rx="1" stroke="#c9a84c" stroke-width="1" />
+            <rect x="18" y="8" width="7" height="5" rx="1" stroke="#c9a84c" stroke-width="1" stroke-dasharray="2 1.5" />
+            <rect x="10.5" y="17" width="7" height="5" rx="1" stroke="#c9a84c" stroke-width="1" opacity="0.5" />
+            <line x1="10" y1="10.5" x2="18" y2="10.5" stroke="#c9a84c" stroke-width="1" opacity="0.4" />
+            <line x1="14" y1="10.5" x2="14" y2="17" stroke="#c9a84c" stroke-width="1" opacity="0.4" />
+          </svg>
+          <div class="service-title">Automation Systems</div>
+          <div class="service-desc">Eliminate repetitive ops with custom workflow automations — lead routing, invoice
+            generation, and beyond.</div>
+          <div class="service-tags"><span class="tag">Zapier</span><span class="tag">N8N</span><span
+              class="tag">Custom</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">06</div>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="4" width="24" height="20" rx="2" stroke="#c9a84c" stroke-width="1" />
+            <line x1="2" y1="10" x2="26" y2="10" stroke="#c9a84c" stroke-width="1" opacity="0.4" />
+            <rect x="5" y="13" width="5" height="7" rx="1" stroke="#c9a84c" stroke-width="1" opacity="0.5" />
+            <rect x="12" y="15" width="5" height="5" rx="1" stroke="#c9a84c" stroke-width="1" opacity="0.3" />
+            <rect x="19" y="12" width="5" height="8" rx="1" stroke="#c9a84c" stroke-width="1" opacity="0.7" />
+          </svg>
+          <div class="service-title">Dashboards & Portals</div>
+          <div class="service-desc">Database-backed internal tools, client portals, and analytics dashboards with
+            real-time data at the core.</div>
+          <div class="service-tags"><span class="tag">PostgreSQL</span><span class="tag">Realtime</span><span
+              class="tag">Auth</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">07</div>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="6" cy="14" r="3" stroke="#c9a84c" stroke-width="1" />
+            <circle cx="22" cy="14" r="3" stroke="#c9a84c" stroke-width="1" />
+            <line x1="9" y1="14" x2="19" y2="14" stroke="#c9a84c" stroke-width="1" opacity="0.5" />
+            <circle cx="14" cy="6" r="2" stroke="#c9a84c" stroke-width="1" opacity="0.4" />
+            <circle cx="14" cy="22" r="2" stroke="#c9a84c" stroke-width="1" opacity="0.4" />
+            <line x1="14" y1="8" x2="14" y2="12" stroke="#c9a84c" stroke-width="1" opacity="0.3" />
+            <line x1="14" y1="16" x2="14" y2="20" stroke="#c9a84c" stroke-width="1" opacity="0.3" />
+          </svg>
+          <div class="service-title">API Integrations</div>
+          <div class="service-desc">Connect your stack. We integrate third-party APIs, payment gateways, CRMs, booking
+            systems, and more.</div>
+          <div class="service-tags"><span class="tag">REST</span><span class="tag">Webhooks</span><span
+              class="tag">Stripe</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">08</div>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M4 22 L8 14 L13 18 L18 8 L24 12" stroke="#c9a84c" stroke-width="1" fill="none" />
+            <circle cx="24" cy="12" r="2" fill="#c9a84c" opacity="0.7" />
+            <rect x="2" y="21" width="24" height="0.8" rx="0.4" fill="rgba(201,168,76,0.15)" />
+          </svg>
+          <div class="service-title">Conversion Optimization</div>
+          <div class="service-desc">Performance audits, landing page rebuilds, and data-driven redesigns to turn traffic
+            into revenue.</div>
+          <div class="service-tags"><span class="tag">A/B Testing</span><span class="tag">SEO</span><span
+              class="tag">Analytics</span></div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">09</div>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="4" y="4" width="9" height="9" rx="1.5" stroke="#c9a84c" stroke-width="1" />
+            <rect x="15" y="4" width="9" height="9" rx="1.5" stroke="#c9a84c" stroke-width="1" opacity="0.4" />
+            <rect x="4" y="15" width="9" height="9" rx="1.5" stroke="#c9a84c" stroke-width="1" opacity="0.4" />
+            <rect x="15" y="15" width="9" height="9" rx="1.5" stroke="#c9a84c" stroke-width="1"
+              stroke-dasharray="2 1.5" />
+          </svg>
+          <div class="service-title">Custom Software</div>
+          <div class="service-desc">Bespoke business tools, CRMs, booking systems, and internal platforms built
+            precisely to your workflow.</div>
+          <div class="service-tags"><span class="tag">SaaS</span><span class="tag">CRM</span><span
+              class="tag">Custom</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="section-inner">
+      <div class="process-layout">
+        <div>
+          <div class="label">How We Work</div>
+          <h2 class="section-title" style="margin-bottom:12px">A process built<br>for <em>precision.</em></h2>
+          <p
+            style="font-size:15px;color:var(--white4);line-height:1.75;font-weight:300;margin-bottom:52px;max-width:320px">
+            Six deliberate stages. Transparent at every step. Engineered to launch fast and scale further.</p>
+          <div class="process-steps">
+            <div class="process-step">
+              <div>
+                <div class="step-num">01</div>
+              </div>
+              <div>
+                <div class="step-title">Discovery</div>
+                <div class="step-desc">We audit your digital presence, understand your goals, map your audience, and
+                  define the clearest path to outcome.</div>
+              </div>
+            </div>
+            <div class="process-step">
+              <div>
+                <div class="step-num">02</div>
+              </div>
+              <div>
+                <div class="step-title">Strategy</div>
+                <div class="step-desc">Tech stack selection, feature scoping, sitemap architecture, and a project
+                  roadmap with real timelines.</div>
+              </div>
+            </div>
+            <div class="process-step">
+              <div>
+                <div class="step-num">03</div>
+              </div>
+              <div>
+                <div class="step-title">Design</div>
+                <div class="step-desc">High-fidelity prototypes crafted for conversion. Every component reviewed and
+                  approved before code is written.</div>
+              </div>
+            </div>
+            <div class="process-step">
+              <div>
+                <div class="step-num">04</div>
+              </div>
+              <div>
+                <div class="step-title">Development</div>
+                <div class="step-desc">Clean, production-grade code. Front-end, back-end, integrations, and data layers
+                  built to scale without compromise.</div>
+              </div>
+            </div>
+            <div class="process-step">
+              <div>
+                <div class="step-num">05</div>
+              </div>
+              <div>
+                <div class="step-title">Launch</div>
+                <div class="step-desc">Full QA, performance optimization, SEO configuration, and a smooth handoff. Go
+                  live with confidence.</div>
+              </div>
+            </div>
+            <div class="process-step" style="border-bottom:none">
+              <div>
+                <div class="step-num">06</div>
+              </div>
+              <div>
+                <div class="step-title">Optimization</div>
+                <div class="step-desc">Post-launch monitoring, analytics review, iteration cycles, and ongoing support
+                  to keep performance sharp.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="process-visual">
+          <canvas id="processCanvas" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="casestudies">
+    <div class="section-inner">
+      <div class="case-header">
+        <div>
+          <div class="label">Case Studies</div>
+          <h2 class="section-title">Real builds.<br><em>Real results.</em></h2>
+        </div>
+        <button class="btn-ghost" style="align-self:flex-start;margin-top:60px">View All Work</button>
+      </div>
+      <div class="cases-grid">
+        <div class="case-card featured">
+          <div class="case-card-top" style="background:var(--black)"><canvas id="caseCanvas1" width="520"
+              height="320"></canvas></div>
+          <div class="case-card-body">
+            <div class="case-industry">SaaS / Fintech</div>
+            <div class="case-name">Meridian Capital Platform</div>
+            <div class="case-desc">End-to-end rebuild of a financial analytics portal. We replaced a legacy codebase
+              with a React/Node stack, integrated real-time market data APIs, and built a custom AI-powered reporting
+              engine — reducing report generation from 8 hours to under 4 minutes.</div>
+            <div class="case-stats">
+              <div>
+                <div class="case-stat-val">94%</div>
+                <div class="case-stat-label">faster reporting</div>
+              </div>
+              <div>
+                <div class="case-stat-val">3.2×</div>
+                <div class="case-stat-label">user engagement</div>
+              </div>
+              <div>
+                <div class="case-stat-val">$0</div>
+                <div class="case-stat-label">legacy licensing saved</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-card-top" style="background:var(--black2)"><canvas id="caseCanvas2" width="400"
+              height="220"></canvas></div>
+          <div class="case-card-body">
+            <div class="case-industry">Professional Services</div>
+            <div class="case-name">Arken Legal Group</div>
+            <div class="case-desc">Full website redesign with an integrated client portal, automated document workflows,
+              and a chatbot that qualifies leads 24/7. Leads increased by 210% in 90 days.</div>
+            <div class="case-stats">
+              <div>
+                <div class="case-stat-val">210%</div>
+                <div class="case-stat-label">lead increase</div>
+              </div>
+              <div>
+                <div class="case-stat-val">18hrs</div>
+                <div class="case-stat-label">saved per week</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-card-top" style="background:var(--black2)"><canvas id="caseCanvas3" width="400"
+              height="220"></canvas></div>
+          <div class="case-card-body">
+            <div class="case-industry">E-Commerce / Retail</div>
+            <div class="case-name">Volta Commerce Studio</div>
+            <div class="case-desc">Performance-first Shopify migration with custom AI product recommendations, an
+              automated inventory alert system, and a conversion-optimized checkout flow.</div>
+            <div class="case-stats">
+              <div>
+                <div class="case-stat-val">67%</div>
+                <div class="case-stat-label">conversion lift</div>
+              </div>
+              <div>
+                <div class="case-stat-val">1.1s</div>
+                <div class="case-stat-label">avg page load</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="section-inner">
+      <div class="why-grid">
+        <div>
+          <div class="label">Why 50fty</div>
+          <h2 class="section-title">The difference<br>is in the<br><em>details.</em></h2>
+          <p class="section-sub" style="margin-bottom:24px;margin-top:20px">We don't hand your project to a junior and
+            disappear. Senior-level thinking on every build, every time.</p>
+          <a href="why-different.html" class="why-diff-btn">See the full breakdown
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <line x1="2" y1="8" x2="13" y2="8" stroke="#c9a84c" stroke-width="1.2" />
+              <polyline points="9,4 13,8 9,12" stroke="#c9a84c" stroke-width="1.2" fill="none" />
+            </svg>
+          </a>
+        </div>
+        <div class="why-items">
+          <div class="why-item">
+            <div class="why-icon-wrap"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <polyline points="2,9 7,14 16,4" stroke="#c9a84c" stroke-width="1.2" fill="none"
+                  stroke-linecap="round" />
+              </svg></div>
+            <div class="why-text">
+              <h4>Business-first thinking</h4>
+              <p>We build toward commercial outcomes, not just specifications.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon-wrap"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <circle cx="9" cy="9" r="6" stroke="#c9a84c" stroke-width="1" />
+                <line x1="9" y1="5" x2="9" y2="9" stroke="#c9a84c" stroke-width="1" />
+                <line x1="9" y1="9" x2="12" y2="11" stroke="#c9a84c" stroke-width="1" />
+              </svg></div>
+            <div class="why-text">
+              <h4>Fast without cutting corners</h4>
+              <p>Tight timelines handled with process discipline, not shortcuts.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon-wrap"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M3 9 L9 3 L15 9 L9 15 Z" stroke="#c9a84c" stroke-width="1" fill="none" />
+              </svg></div>
+            <div class="why-text">
+              <h4>Design + engineering in one team</h4>
+              <p>No handoff gaps. Visual taste and technical depth under one roof.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon-wrap"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <rect x="3" y="3" width="5" height="5" rx="0.5" stroke="#c9a84c" stroke-width="1" />
+                <rect x="10" y="10" width="5" height="5" rx="0.5" stroke="#c9a84c" stroke-width="1" />
+              </svg></div>
+            <div class="why-text">
+              <h4>Built to scale from day one</h4>
+              <p>Architecture that grows with your business. No technical debt traps.</p>
+            </div>
+          </div>
+          <div class="why-item" style="border-bottom:none">
+            <div class="why-icon-wrap"><svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M9 2 L11.4 7 L17 7.6 L13 11.5 L14 17 L9 14.3 L4 17 L5 11.5 L1 7.6 L6.6 7 Z" stroke="#c9a84c"
+                  stroke-width="1" fill="none" />
+              </svg></div>
+            <div class="why-text">
+              <h4>AI-ready by default</h4>
+              <p>Every system built to integrate AI features now or when you're ready.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div>
+          <div class="label">Get in Touch</div>
+          <h2 class="section-title">Let's build<br>something <em>great.</em></h2>
+          <p class="section-sub" style="margin-bottom:32px">Book a 30-minute discovery call or send us your project
+            details. We'll respond within 24 hours with next steps.</p>
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;align-items:center;gap:16px">
+              <div
+                style="width:40px;height:40px;border:1px solid var(--border-gold);border-radius:3px;display:flex;align-items:center;justify-content:center;background:var(--black3)">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <rect x="2" y="4" width="14" height="10" rx="1" stroke="#c9a84c" stroke-width="1" />
+                  <path d="M2 5 L9 10 L16 5" stroke="#c9a84c" stroke-width="1" fill="none" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-size:13px;color:var(--white4);margin-bottom:2px">Email</div>
+                <div style="font-size:14px;color:var(--gold2)">hello@50fty.com</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <div
+                style="width:40px;height:40px;border:1px solid var(--border-gold);border-radius:3px;display:flex;align-items:center;justify-content:center;background:var(--black3)">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <circle cx="9" cy="9" r="7" stroke="#c9a84c" stroke-width="1" />
+                  <line x1="9" y1="5" x2="9" y2="9" stroke="#c9a84c" stroke-width="1" />
+                  <line x1="9" y1="9" x2="12" y2="11" stroke="#c9a84c" stroke-width="1" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-size:13px;color:var(--white4);margin-bottom:2px">Response Time</div>
+                <div style="font-size:14px;color:var(--white2)">Within 24 hours</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <form id="contactForm">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" required placeholder="you@company.com">
+            </div>
+            <div class="form-group">
+              <label>Project Type</label>
+              <select name="project">
+                <option>New Website Build</option>
+                <option>Website Redesign</option>
+                <option>Custom Software / Dashboard</option>
+                <option>AI Integration / Chatbot</option>
+                <option>Automation System</option>
+                <option>API Integration</option>
+                <option>Other / Not Sure</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea name="message" required placeholder="Tell us about your project and goals..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary form-submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="nav-logo" href="#">50fty</a>
+          <p class="footer-tagline">Digital solutions engineered for businesses that demand precision, performance, and
+            growth.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="#services">Web Design</a></li>
+            <li><a href="#services">Development</a></li>
+            <li><a href="#services">AI Integrations</a></li>
+            <li><a href="#services">Chatbots</a></li>
+            <li><a href="#services">Automation</a></li>
+            <li><a href="#services">Dashboards</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#process">Our Process</a></li>
+            <li><a href="#casestudies">Case Studies</a></li>
+            <li><a href="why-different.html">Why We're Different</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="#contact">Book a Call</a></li>
+            <li><a href="#contact">Request a Quote</a></li>
+            <li><a href="mailto:hello@50fty.com">hello@50fty.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 50fty. All rights reserved.</span>
+        <span class="footer-badge">Built to perform</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // ENHANCED BACKGROUND
+    (function () {
+      const canvas = document.getElementById('bgCanvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, t = 0;
+      function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight }
+      window.addEventListener('resize', resize); resize();
+
+      const particles = Array.from({ length: 180 }, () => ({ x: Math.random() * 1920, y: Math.random() * 1080, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25, r: Math.random() * 1.8 + .4, pulse: Math.random() * Math.PI * 2 }));
+      const GRID_COLS = 22, GRID_ROWS = 12;
+
+      function drawGrid() {
+        const cw = W / GRID_COLS, rh = H / GRID_ROWS;
+        ctx.strokeStyle = 'rgba(201,168,76,0.06)'; ctx.lineWidth = .7;
+        for (let c = 0; c <= GRID_COLS; c++) { ctx.beginPath(); ctx.moveTo(c * cw, 0); ctx.lineTo(c * cw, H); ctx.stroke() }
+        for (let r = 0; r <= GRID_ROWS; r++) { ctx.beginPath(); ctx.moveTo(0, r * rh); ctx.lineTo(W, r * rh); ctx.stroke() }
+      }
+
+      function drawWaves() {
+        for (let w = 0; w < 4; w++) {
+          const off = (w / 4) * Math.PI * 2, amp = 70 + w * 35, sp = .004 + w * .0012, fr = .0035 - w * .0006, yb = H * (.3 + w * .2);
+          ctx.beginPath();
+          for (let x = 0; x <= W; x += 2) { const y = yb + Math.sin(x * fr + t * sp * 45 + off) * amp + Math.sin(x * fr * 2.5 + t * sp * 28 + off) * (amp * .5); x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y) }
+          ctx.strokeStyle = `rgba(201,168,76,${.04 - w * .008})`; ctx.lineWidth = 1.2; ctx.stroke();
+        }
+      }
+
+      const RINGS = [{ x: .7, y: .4, r: 140, speed: .00015, phase: 0 }, { x: .7, y: .4, r: 220, speed: -.0001, phase: 1.2 }, { x: .7, y: .4, r: 320, speed: .00008, phase: 2.4 }, { x: .7, y: .4, r: 440, speed: -.00005, phase: 3.6 }];
+
+      function drawRings() {
+        RINGS.forEach((ring, i) => {
+          ring.phase += ring.speed * 45;
+          const cx = ring.x * W + Math.sin(t * .01 + i) * 35, cy = ring.y * H + Math.cos(t * .008 + i) * 25;
+          ctx.globalAlpha = .07 + (i === 0 ? .05 : 0); ctx.strokeStyle = '#c9a84c'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(cx, cy, ring.r, 0, Math.PI * 2); ctx.stroke();
+          const dx = cx + Math.cos(ring.phase) * ring.r, dy = cy + Math.sin(ring.phase) * ring.r;
+          ctx.globalAlpha = .7; ctx.fillStyle = '#c9a84c'; ctx.beginPath(); ctx.arc(dx, dy, 2.5, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+        });
+      }
+
+      function drawParticles() {
+        const sx = W / 1920, sy = H / 1080;
+        particles.forEach((p, i) => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = 1920; if (p.x > 1920) p.x = 0; if (p.y < 0) p.y = 1080; if (p.y > 1080) p.y = 0;
+          p.pulse += .014;
+          const px = p.x * sx, py = p.y * sy, alpha = (Math.sin(p.pulse) * .5 + .5) * .45 + .08;
+          particles.slice(i + 1, i + 9).forEach(q => { const qx = q.x * sx, qy = q.y * sy, d = Math.hypot(px - qx, py - qy); if (d < 140) { ctx.globalAlpha = (1 - d / 140) * .06; ctx.strokeStyle = '#c9a84c'; ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(qx, qy); ctx.stroke() } });
+          ctx.globalAlpha = alpha; ctx.fillStyle = '#c9a84c'; ctx.beginPath(); ctx.arc(px, py, p.r, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+        });
+      }
+
+      function drawScanline() {
+        const y = ((t * .45) % (H + 90)) - 90;
+        ctx.globalAlpha = .02; ctx.fillStyle = '#c9a84c'; ctx.fillRect(0, y, W, 2); ctx.globalAlpha = 1;
+      }
+
+      const STREAMS = Array.from({ length: 8 }, () => ({ x: Math.random() * W, y: Math.random() * -500, speed: Math.random() * 2 + 1.5, trail: [] }));
+      function drawStreams() {
+        ctx.globalAlpha = .15;
+        STREAMS.forEach(s => {
+          s.y += s.speed;
+          if (s.y > H + 100) { s.y = Math.random() * -300; s.x = Math.random() * W; s.trail = [] }
+          s.trail.push({ x: s.x, y: s.y });
+          if (s.trail.length > 15) s.trail.shift();
+          s.trail.forEach((pt, i) => {
+            const a = (i / s.trail.length) * .15;
+            ctx.globalAlpha = a; ctx.fillStyle = '#c9a84c'; ctx.beginPath(); ctx.arc(pt.x, pt.y, 1.5, 0, Math.PI * 2); ctx.fill();
+          });
+        });
+        ctx.globalAlpha = 1;
+      }
+
+      function frame() { ctx.clearRect(0, 0, W, H); t++; drawGrid(); drawWaves(); drawRings(); drawParticles(); drawScanline(); drawStreams(); requestAnimationFrame(frame) }
+      frame();
+    })();
+
+    // HERO 3D
+    (function () {
+      const c = document.getElementById('heroCanvas');
+      if (!c) return;
+      const scene = new THREE.Scene();
+      const cam = new THREE.PerspectiveCamera(50, c.width / c.height, .1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas: c, alpha: true, antialias: true });
+      renderer.setSize(c.width, c.height);
+      cam.position.z = 7;
+      const geo1 = new THREE.TorusGeometry(1.8, .06, 16, 100);
+      const mat1 = new THREE.MeshBasicMaterial({ color: 0xc9a84c, wireframe: true });
+      const torus = new THREE.Mesh(geo1, mat1);
+      scene.add(torus);
+      const geo2 = new THREE.OctahedronGeometry(1.2);
+      const mat2 = new THREE.MeshBasicMaterial({ color: 0xc9a84c, wireframe: true });
+      const oct = new THREE.Mesh(geo2, mat2);
+      scene.add(oct);
+      const particles = new THREE.BufferGeometry();
+      const pMat = new THREE.PointsMaterial({ color: 0xc9a84c, size: 0.03 });
+      const pCount = 300;
+      const posArray = new Float32Array(pCount * 3);
+      for (let i = 0; i < pCount * 3; i++)posArray[i] = (Math.random() - .5) * 10;
+      particles.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+      const mesh = new THREE.Points(particles, pMat);
+      scene.add(mesh);
+      function animate() {
+        requestAnimationFrame(animate);
+        torus.rotation.x += .005; torus.rotation.y += .007;
+        oct.rotation.x -= .003; oct.rotation.y += .006;
+        mesh.rotation.y += .002;
+        renderer.render(scene, cam);
+      }
+      animate();
+    })();
+
+    // PROCESS
+    (function () {
+      const c = document.getElementById('processCanvas');
+      if (!c) return;
+      const ctx = c.getContext('2d'), W = c.width, H = c.height, CX = W / 2, CY = H / 2;
+      let t = 0;
+      const steps = ['Discovery', 'Strategy', 'Design', 'Dev', 'Launch', 'Optimize'];
+      function frame() {
+        ctx.clearRect(0, 0, W, H); t += .008;
+        const R = 140;
+        steps.forEach((s, i) => {
+          const a = (i / steps.length) * Math.PI * 2 - Math.PI / 2, x = CX + Math.cos(a) * R, y = CY + Math.sin(a) * R;
+          if (i < steps.length - 1) { const na = ((i + 1) / steps.length) * Math.PI * 2 - Math.PI / 2, nx = CX + Math.cos(na) * R, ny = CY + Math.sin(na) * R; ctx.strokeStyle = 'rgba(201,168,76,0.15)'; ctx.lineWidth = 1; ctx.setLineDash([4, 6]); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(nx, ny); ctx.stroke(); ctx.setLineDash([]) }
+          const pulse = 1 + Math.sin(t * 2 + i * 1.05) * .15, active = Math.round(t / .8) % steps.length === i;
+          ctx.globalAlpha = active ? 1 : .5; ctx.fillStyle = '#111'; ctx.strokeStyle = active ? '#c9a84c' : 'rgba(201,168,76,0.25)'; ctx.lineWidth = active ? 1.5 : .8;
+          ctx.beginPath(); ctx.arc(x, y, 28 * (active ? pulse : 1), 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = active ? '#c9a84c' : 'rgba(201,168,76,0.4)'; ctx.font = `${active ? '600' : '400'} 9px Inter,sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText(String(i + 1).padStart(2, '0'), x, y - 6); ctx.font = '400 8px Inter,sans-serif'; ctx.fillText(s, x, y + 6); ctx.globalAlpha = 1;
+        });
+        ctx.fillStyle = '#111'; ctx.strokeStyle = 'rgba(201,168,76,0.2)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(CX, CY, 40, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = '#c9a84c'; ctx.font = '600 11px Inter,sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('50fty', CX, CY);
+        requestAnimationFrame(frame);
+      }
+      frame();
+    })();
+
+    // CASE CANVAS 1
+    (function () {
+      const c = document.getElementById('caseCanvas1'); if (!c) return;
+      const ctx = c.getContext('2d'), W = c.width, H = c.height; let t = 0;
+      function frame() {
+        ctx.clearRect(0, 0, W, H); t += .01;
+        const cols = 14, rows = 8, cw = W / cols, rh = H / rows;
+        for (let x = 0; x < cols; x++) { for (let y = 0; y < rows; y++) { const wave = Math.sin(t + x * .5 + y * .7); const h = Math.abs(wave) * (rh * .6) + 2; ctx.fillStyle = `rgba(201,168,76,${Math.abs(wave) * .4 + .05})`; ctx.fillRect(x * cw + 2, (y + 1) * rh - h, cw - 4, h) } }
+        const pts = []; for (let i = 0; i < W; i += 8)pts.push({ x: i, y: H / 2 + Math.sin(i * .015 + t * 1.5) * 40 + Math.sin(i * .03 + t) * 20 });
+        ctx.strokeStyle = 'rgba(201,168,76,0.7)'; ctx.lineWidth = 1.5; ctx.beginPath(); pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)); ctx.stroke();
+        requestAnimationFrame(frame)
+      }
+      frame();
+    })();
+
+    // CASE CANVAS 2
+    (function () {
+      const c = document.getElementById('caseCanvas2'); if (!c) return;
+      const ctx = c.getContext('2d'), W = c.width, H = c.height; let t = 0;
+      function frame() {
+        ctx.clearRect(0, 0, W, H); t += .012;
+        for (let i = 0; i < 8; i++) { const x = 40 + i * (W - 80) / 7, h = 60 + Math.sin(t * 1.2 + i * .8) * 40; ctx.fillStyle = `rgba(201,168,76,${.15 + Math.abs(Math.sin(t + i)) * .25})`; ctx.fillRect(x - 12, H / 2 - h, 24, h * 2) }
+        const nps = []; for (let i = 0; i < 6; i++) { const a = (i / 6) * Math.PI * 2 + t * .3; nps.push({ x: W / 2 + Math.cos(a) * 60, y: H / 2 + Math.sin(a) * 40 }) }
+        nps.forEach((p, i) => { nps.slice(i + 1).forEach(q => { ctx.strokeStyle = 'rgba(201,168,76,0.12)'; ctx.lineWidth = .5; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke() }); ctx.fillStyle = '#c9a84c'; ctx.globalAlpha = .7; ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1 });
+        requestAnimationFrame(frame)
+      }
+      frame();
+    })();
+
+    // CASE CANVAS 3
+    (function () {
+      const c = document.getElementById('caseCanvas3'); if (!c) return;
+      const ctx = c.getContext('2d'), W = c.width, H = c.height; let t = 0;
+      function frame() {
+        ctx.clearRect(0, 0, W, H); t += .015;
+        for (let i = 0; i < 5; i++) { const r = 30 + i * 22, sp = .4 + i * .15, a = t * sp * (i % 2 === 0 ? 1 : -1); ctx.strokeStyle = `rgba(201,168,76,${.06 + i * .03})`; ctx.lineWidth = .8; ctx.beginPath(); ctx.arc(W / 2, H / 2, r, 0, Math.PI * 2); ctx.stroke(); const px = W / 2 + Math.cos(a) * r, py = H / 2 + Math.sin(a) * r; ctx.fillStyle = '#c9a84c'; ctx.globalAlpha = .6 + Math.sin(t * 2 + i) * .3; ctx.beginPath(); ctx.arc(px, py, 2.5, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1 }
+        ctx.fillStyle = '#111'; ctx.strokeStyle = 'rgba(201,168,76,0.3)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(W / 2, H / 2, 18, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#c9a84c'; ctx.font = '500 9px Inter,sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('AI', W / 2, H / 2);
+        requestAnimationFrame(frame)
+      }
+      frame();
+    })();
+
+    // COUNTER
+    (function () {
+      const suffixes = { '120': '+', '98': '%', '4': '+', '3': 's' };
+      function animate() {
+        document.querySelectorAll('.metric-num[data-target]').forEach(el => {
+          const target = parseInt(el.dataset.target), suffix = suffixes[String(target)] || '', start = performance.now();
+          function u(now) { const p = Math.min((now - start) / 1800, 1), ease = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(ease * target) + suffix; if (p < 1) requestAnimationFrame(u) }
+          requestAnimationFrame(u);
+        });
+      }
+      const obs = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) { animate(); obs.disconnect() } }) }, { threshold: .4 });
+      const m = document.getElementById('metrics'); if (m) obs.observe(m);
+    })();
+
+    // FORM
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Form submitted! (This is a demo — no backend connected)');
+    });
+  </script>
 </body>
+
 </html>
