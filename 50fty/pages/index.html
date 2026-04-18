@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>50fty — Digital Solutions</title>
+  <title>Digital Design | 50fty</title>
+  <link rel="icon" type="image/png" href="50fty-logo.png" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -1117,6 +1118,53 @@
       color: var(--gold);
       opacity: .6
     }
+
+    .project-select-group .select-shell {
+      position: relative;
+    }
+
+    .project-select-group .select-shell {
+      position: relative;
+    }
+
+    .project-select-group .select-shell::after {
+      content: '';
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-right: 1.5px solid #c9a84c;
+      border-bottom: 1.5px solid #c9a84c;
+      transform: translateY(-60%) rotate(45deg);
+      pointer-events: none;
+    }
+
+    .project-select-group select {
+      width: 100%;
+      background: #111;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 14px 52px 14px 16px;
+      border-radius: 3px;
+      font-family: var(--font);
+      font-size: 14px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+
+    .project-select-group select:focus {
+      outline: none;
+      border-color: #c9a84c;
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+    }
+
+    .project-select-group select option {
+      background: #111;
+      color: #fff;
+    }
   </style>
 </head>
 
@@ -1594,21 +1642,201 @@
           </div>
         </div>
         <div class="case-card">
-          <div class="case-card-top" style="background:var(--black2)"><canvas id="caseCanvas3" width="400"
-              height="220"></canvas></div>
+          <div class="case-card-top" style="background:var(--black2)">
+            <canvas id="caseCanvas3" width="400" height="220"></canvas>
+          </div>
           <div class="case-card-body">
-            <div class="case-industry">E-Commerce / Retail</div>
-            <div class="case-name">Volta Commerce Studio</div>
-            <div class="case-desc">Performance-first Shopify migration with custom AI product recommendations, an
-              automated inventory alert system, and a conversion-optimized checkout flow.</div>
+            <script>
+              function initCommandCenterCanvas(canvasId) {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+
+                let w = canvas.width;
+                let h = canvas.height;
+                let t = 0;
+
+                const nodes = [
+                  { x: 0.22, y: 0.30, r: 3, pulse: 0.8 },
+                  { x: 0.38, y: 0.58, r: 2.5, pulse: 1.1 },
+                  { x: 0.52, y: 0.40, r: 3, pulse: 1.4 },
+                  { x: 0.68, y: 0.26, r: 2.5, pulse: 0.6 },
+                  { x: 0.76, y: 0.62, r: 3, pulse: 1.0 },
+                  { x: 0.58, y: 0.76, r: 2.5, pulse: 1.7 }
+                ];
+
+                function drawGrid() {
+                  ctx.strokeStyle = 'rgba(201,168,76,0.06)';
+                  ctx.lineWidth = 1;
+
+                  for (let x = 0; x < w; x += 28) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, h);
+                    ctx.stroke();
+                  }
+
+                  for (let y = 0; y < h; y += 28) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(w, y);
+                    ctx.stroke();
+                  }
+                }
+
+                function drawRadar() {
+                  const cx = w * 0.5;
+                  const cy = h * 0.48;
+
+                  for (let i = 1; i <= 4; i++) {
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, i * 28, 0, Math.PI * 2);
+                    ctx.strokeStyle = i === 4
+                      ? 'rgba(201,168,76,0.16)'
+                      : 'rgba(201,168,76,0.08)';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                  }
+
+                  ctx.beginPath();
+                  ctx.moveTo(cx - 120, cy);
+                  ctx.lineTo(cx + 120, cy);
+                  ctx.moveTo(cx, cy - 90);
+                  ctx.lineTo(cx, cy + 90);
+                  ctx.strokeStyle = 'rgba(201,168,76,0.08)';
+                  ctx.stroke();
+                }
+
+                function drawConnections() {
+                  ctx.lineWidth = 1;
+
+                  for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                      const a = nodes[i];
+                      const b = nodes[j];
+                      const ax = a.x * w;
+                      const ay = a.y * h;
+                      const bx = b.x * w;
+                      const by = b.y * h;
+
+                      const dist = Math.hypot(bx - ax, by - ay);
+                      if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(ax, ay);
+                        ctx.lineTo(bx, by);
+                        ctx.strokeStyle = 'rgba(201,168,76,0.10)';
+                        ctx.stroke();
+                      }
+                    }
+                  }
+                }
+
+                function drawNodes() {
+                  nodes.forEach((node, i) => {
+                    const x = node.x * w;
+                    const y = node.y * h;
+                    const pulse = Math.sin(t * 0.03 + node.pulse * 10) * 0.5 + 0.5;
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, node.r + pulse * 2.2, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(201,168,76,0.12)';
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, node.r, 0, Math.PI * 2);
+                    ctx.fillStyle = '#c9a84c';
+                    ctx.fill();
+
+                    if (i === 2) {
+                      ctx.beginPath();
+                      ctx.arc(x, y, 14 + pulse * 5, 0, Math.PI * 2);
+                      ctx.strokeStyle = 'rgba(201,168,76,0.22)';
+                      ctx.stroke();
+                    }
+                  });
+                }
+
+                function drawSweep() {
+                  const cx = w * 0.5;
+                  const cy = h * 0.48;
+                  const angle = (t * 0.02) % (Math.PI * 2);
+
+                  ctx.save();
+                  ctx.translate(cx, cy);
+                  ctx.rotate(angle);
+
+                  const gradient = ctx.createLinearGradient(0, 0, 110, 0);
+                  gradient.addColorStop(0, 'rgba(201,168,76,0.28)');
+                  gradient.addColorStop(1, 'rgba(201,168,76,0)');
+
+                  ctx.beginPath();
+                  ctx.moveTo(0, 0);
+                  ctx.lineTo(110, -10);
+                  ctx.lineTo(110, 10);
+                  ctx.closePath();
+                  ctx.fillStyle = gradient;
+                  ctx.fill();
+
+                  ctx.restore();
+                }
+
+                function drawPanels() {
+                  const panels = [
+                    { x: 18, y: 18, w: 82, h: 26, label: 'LIVE' },
+                    { x: w - 110, y: 18, w: 92, h: 26, label: 'SYSTEM' },
+                    { x: 18, y: h - 40, w: 118, h: 22, label: 'AI MONITORING' }
+                  ];
+
+                  panels.forEach(panel => {
+                    ctx.strokeStyle = 'rgba(201,168,76,0.20)';
+                    ctx.fillStyle = 'rgba(10,10,10,0.88)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.roundRect(panel.x, panel.y, panel.w, panel.h, 3);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#c9a84c';
+                    ctx.font = '10px Inter, sans-serif';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(panel.label, panel.x + 10, panel.y + panel.h / 2 + 0.5);
+                  });
+                }
+
+                function draw() {
+                  ctx.clearRect(0, 0, w, h);
+
+                  drawGrid();
+                  drawRadar();
+                  drawConnections();
+                  drawSweep();
+                  drawNodes();
+                  drawPanels();
+
+                  t++;
+                  requestAnimationFrame(draw);
+                }
+
+                draw();
+              }
+
+              initCommandCenterCanvas('caseCanvas3');
+            </script>
+            <div class="case-industry">Operations / Intelligence</div>
+            <div class="case-name">Apex Command Center</div>
+            <div class="case-desc">
+              Unified operational dashboard designed to centralize live system activity, AI-assisted alerts,
+              workflow monitoring, and performance visibility in one command layer. Built for teams that need
+              instant oversight, faster decisions, and cleaner execution.
+            </div>
             <div class="case-stats">
               <div>
-                <div class="case-stat-val">67%</div>
-                <div class="case-stat-label">conversion lift</div>
+                <div class="case-stat-val">24/7</div>
+                <div class="case-stat-label">system visibility</div>
               </div>
               <div>
-                <div class="case-stat-val">1.1s</div>
-                <div class="case-stat-label">avg page load</div>
+                <div class="case-stat-val">3.4×</div>
+                <div class="case-stat-label">faster response</div>
               </div>
             </div>
           </div>
@@ -1727,35 +1955,115 @@
           </div>
         </div>
         <div>
-          <form id="contactForm">
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              const form = document.getElementById('contactForm');
+              const formStatus = document.getElementById('formStatus');
+
+              if (!form) {
+                console.error('contactForm not found');
+                return;
+              }
+
+              form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.textContent;
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+                if (formStatus) formStatus.textContent = '';
+
+                const formData = new FormData(form);
+
+                try {
+                  const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                      'Accept': 'application/json'
+                    }
+                  });
+
+                  if (response.ok) {
+                    form.reset();
+                    if (formStatus) formStatus.textContent = 'Message sent successfully.';
+                  } else {
+                    const data = await response.json().catch(() => null);
+                    if (formStatus) {
+                      formStatus.textContent =
+                        data?.errors?.[0]?.message || 'Something went wrong. Please try again.';
+                    }
+                  }
+                } catch (error) {
+                  if (formStatus) formStatus.textContent = 'Network error. Please try again.';
+                } finally {
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = originalBtnText;
+                }
+              });
+            });
+          </script>
+          <form id="contactForm" action="https://formspree.io/f/xbdqovgj" method="POST">
             <div class="form-group">
               <label>Name</label>
               <input type="text" name="name" required placeholder="Your name">
             </div>
+
             <div class="form-group">
               <label>Email</label>
               <input type="email" name="email" required placeholder="you@company.com">
             </div>
-            <div class="form-group">
-              <label>Project Type</label>
-              <select name="project">
-                <option>New Website Build</option>
-                <option>Website Redesign</option>
-                <option>Custom Software / Dashboard</option>
-                <option>AI Integration / Chatbot</option>
-                <option>Automation System</option>
-                <option>API Integration</option>
-                <option>Other / Not Sure</option>
-              </select>
+
+            <script>
+
+              document.addEventListener('DOMContentLoaded', function () {
+                const projectSelect = document.getElementById('projectSelect');
+                if (!projectSelect) return;
+
+                function syncProjectSelect() {
+                  if (projectSelect.value) {
+                    projectSelect.classList.add('has-value');
+                  } else {
+                    projectSelect.classList.remove('has-value');
+                  }
+                }
+
+                syncProjectSelect();
+                projectSelect.addEventListener('change', syncProjectSelect);
+              });
+
+            </script>
+            <div class="form-group project-select-group">
+              <label for="projectSelect">Project Type</label>
+              <div class="select-shell">
+                <select name="project" id="projectSelect" required>
+                  <option value="">Select a project type</option>
+                  <option value="New Website Build">New Website Build</option>
+                  <option value="Website Redesign">Website Redesign</option>
+                  <option value="Custom Software / Dashboard">Custom Software / Dashboard</option>
+                  <option value="AI Integration / Chatbot">AI Integration / Chatbot</option>
+                  <option value="Automation System">Automation System</option>
+                  <option value="API Integration">API Integration</option>
+                  <option value="Other / Not Sure">Other / Not Sure</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Message</label>
-              <textarea name="message" required placeholder="Tell us about your project and goals..."></textarea>
-            </div>
-            <button type="submit" class="btn-primary form-submit">Send Message</button>
-          </form>
+      
+
+        <div class="form-group">
+          <label>Message</label>
+          <textarea name="message" required placeholder="Tell us about your project and goals..."></textarea>
         </div>
+
+        <input type="text" name="_gotcha" style="display:none">
+
+        <button type="submit" class="btn-primary form-submit">Send Message</button>
+        <p id="formStatus" style="margin-top:14px;font-size:13px;color:var(--white4);"></p>
+        </form>
       </div>
+    </div>
     </div>
   </section>
 
@@ -1975,17 +2283,17 @@
     })();
 
     // CASE CANVAS 3
-    (function () {
-      const c = document.getElementById('caseCanvas3'); if (!c) return;
-      const ctx = c.getContext('2d'), W = c.width, H = c.height; let t = 0;
-      function frame() {
-        ctx.clearRect(0, 0, W, H); t += .015;
-        for (let i = 0; i < 5; i++) { const r = 30 + i * 22, sp = .4 + i * .15, a = t * sp * (i % 2 === 0 ? 1 : -1); ctx.strokeStyle = `rgba(201,168,76,${.06 + i * .03})`; ctx.lineWidth = .8; ctx.beginPath(); ctx.arc(W / 2, H / 2, r, 0, Math.PI * 2); ctx.stroke(); const px = W / 2 + Math.cos(a) * r, py = H / 2 + Math.sin(a) * r; ctx.fillStyle = '#c9a84c'; ctx.globalAlpha = .6 + Math.sin(t * 2 + i) * .3; ctx.beginPath(); ctx.arc(px, py, 2.5, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1 }
-        ctx.fillStyle = '#111'; ctx.strokeStyle = 'rgba(201,168,76,0.3)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(W / 2, H / 2, 18, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#c9a84c'; ctx.font = '500 9px Inter,sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('AI', W / 2, H / 2);
-        requestAnimationFrame(frame)
-      }
-      frame();
-    })();
+    // (function () {
+    //   const c = document.getElementById('caseCanvas3'); if (!c) return;
+    //   const ctx = c.getContext('2d'), W = c.width, H = c.height; let t = 0;
+    //   function frame() {
+    //     ctx.clearRect(0, 0, W, H); t += .015;
+    //     for (let i = 0; i < 5; i++) { const r = 30 + i * 22, sp = .4 + i * .15, a = t * sp * (i % 2 === 0 ? 1 : -1); ctx.strokeStyle = `rgba(201,168,76,${.06 + i * .03})`; ctx.lineWidth = .8; ctx.beginPath(); ctx.arc(W / 2, H / 2, r, 0, Math.PI * 2); ctx.stroke(); const px = W / 2 + Math.cos(a) * r, py = H / 2 + Math.sin(a) * r; ctx.fillStyle = '#c9a84c'; ctx.globalAlpha = .6 + Math.sin(t * 2 + i) * .3; ctx.beginPath(); ctx.arc(px, py, 2.5, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1 }
+    //     ctx.fillStyle = '#111'; ctx.strokeStyle = 'rgba(201,168,76,0.3)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(W / 2, H / 2, 18, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#c9a84c'; ctx.font = '500 9px Inter,sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('AI', W / 2, H / 2);
+    //     requestAnimationFrame(frame)
+    //   }
+    //   frame();
+    // })();
 
     // COUNTER
     (function () {
