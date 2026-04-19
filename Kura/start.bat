@@ -1,0 +1,13 @@
+@echo off
+echo Starting Kura...
+echo.
+echo Starting backend server (port 3001)...
+start "Kura Server" cmd /k "cd server && npm run dev"
+echo.
+echo Starting frontend (port 3000)...
+start "Kura Client" cmd /k "cd client && npm run dev"
+echo.
+echo Kura is starting...
+echo Backend: http://localhost:3001
+echo Frontend: http://localhost:3000
+echo Dashboard: http://localhost:3000/dashboard/parent

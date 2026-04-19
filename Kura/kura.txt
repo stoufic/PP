@@ -1,0 +1,245 @@
+Build a full-stack web application called Kura.
+
+Kura is a youth soccer transfer and exposure platform for players under 18. It helps players and parents create profiles, upload stats, videos, and updates, and gives verified coaches a clean way to discover talent, filter players, save watchlists, and request contact access. The platform should feel fast, modern, trustworthy, and premium.
+
+Important product rules:
+- Players are minors, so privacy and parent control are core features.
+- Parents manually create and manage player profiles.
+- Players and parents pay a registration fee plus a monthly fee per player.
+- Coaches pay a registration fee.
+- Coaches must upload their coaching license for manual verification before they can access protected player contact details.
+- Player contact information must never be publicly visible.
+- Contact info is visible only to verified coaches.
+- Parents should have full control over their child’s profile, edits, and uploads.
+- The platform should be simple, direct, and polished, not overloaded with unnecessary features.
+
+Goal:
+Create a minimal but complete full-stack MVP with a beautiful front end, functional backend, authentication, database, payments-ready structure, file uploads, role-based access control, and an admin verification flow.
+
+Tech stack:
+- Frontend: Next.js + TypeScript + Tailwind CSS
+- Backend: Next.js server actions or API routes
+- Database: PostgreSQL with Prisma ORM
+- Auth: Clerk or NextAuth, but role-based and production-structured
+- Storage: UploadThing, S3, or equivalent for player photos, videos, and coach license uploads
+- Payments: Stripe integration structure for registration and monthly subscriptions
+- UI: modern, premium, gradient-based, smooth hover effects, subtle animation, responsive, clean spacing
+- Design style: fast, sporty, sleek, trustworthy, premium startup feel
+- Keep functionality focused. Do not bloat with extra dashboards or unnecessary complex modules.
+
+Create these roles:
+1. Guest
+2. Parent
+3. Coach
+4. Admin
+
+Core platform behavior:
+
+1. Home page
+- Sticky navbar with logo and clean navigation
+- Search bar for player discovery
+- Dropdown or nav links for:
+  - News
+  - Players
+  - Kura Agency / About
+  - Sign In
+- Hero section with a strong headline explaining the platform:
+  “A smarter way for young players to get discovered.”
+- Supporting copy explaining that parents manage profiles and verified coaches discover talent safely
+- CTA buttons for:
+  - Create Player Profile
+  - Join as Coach
+- Featured player cards or preview section
+- Review/testimonial slider
+- News/articles section with manually posted updates
+- “Why Choose Kura” section
+- Premium footer
+
+2. Players directory page
+- Display player cards in grid layout
+- Each card should include:
+  - profile image
+  - full name
+  - age
+  - position
+  - league/club
+  - country/location
+  - key stats preview
+- Hover interaction should reveal more details cleanly
+- Filters:
+  - age
+  - position
+  - location
+  - club/league
+  - verified profile
+- Search functionality
+- Clicking “Read More” opens full player profile page
+
+3. Full player profile page
+- Show:
+  - profile image / gallery
+  - name
+  - age
+  - position
+  - preferred foot
+  - height / weight if added
+  - club
+  - league
+  - nationality
+  - bio / overview
+  - stats
+  - achievements
+  - highlight videos
+  - recent updates
+- Public viewers can see general profile information
+- Protected contact section should be blurred/locked unless the user is a verified coach
+- If coach is unverified, show message:
+  “Verify your coaching account to unlock player contact access.”
+
+4. Sign in / sign up flow
+- Let users choose account type:
+  - Parent
+  - Coach
+- Parent signup should include:
+  - full name
+  - email
+  - password
+  - child consent acknowledgment
+  - optional identity verification placeholder
+- Coach signup should include:
+  - full name
+  - organization/club
+  - email
+  - password
+  - coaching license upload
+  - country
+- Coach accounts must default to unverified until admin approves them
+
+5. Parent dashboard
+- Parents can:
+  - create a player profile
+  - edit player profile
+  - upload photos
+  - upload highlight videos or video links
+  - add stats
+  - add achievements
+  - post updates/news about player
+  - view profile traffic
+  - view number of coach views/clicks
+  - manage subscription/payment status
+- Keep the dashboard simple and clean
+
+6. Coach dashboard
+- Coaches can:
+  - search players
+  - save players to watchlist
+  - view saved players
+  - see whether their account is verified
+  - once verified, unlock protected contact info
+- Unverified coaches can still browse public player profiles but cannot access contact details
+
+7. Admin dashboard
+- Admin can:
+  - view coach verification requests
+  - review uploaded coaching licenses
+  - approve or reject coaches
+  - manage users
+  - manage player profiles
+  - post/edit/delete news articles
+  - monitor subscriptions at a simple level
+- Do not overcomplicate the admin area. Just make it functional and clean.
+
+Database models needed:
+- User
+- ParentProfile
+- CoachProfile
+- PlayerProfile
+- PlayerStats
+- PlayerMedia
+- PlayerUpdate
+- Watchlist
+- CoachVerification
+- NewsPost
+- Subscription
+- ProfileViewEvent
+- ContactUnlockLog
+
+Suggested schema behavior:
+- A User has one role
+- A Parent can own one or multiple PlayerProfiles
+- A Coach has verification status
+- A PlayerProfile belongs to a Parent
+- A Coach can save many PlayerProfiles in a watchlist
+- A PlayerProfile has many media items and updates
+- Views/clicks should be logged for analytics shown to parents
+- Protected contact data should be stored separately and securely
+
+Security / permissions:
+- Public users can browse public profiles and news
+- Parents can edit only their own players
+- Coaches can access protected contact data only if verified
+- Admin has moderation and verification powers
+- Validate uploads and secure all protected routes
+- Do not expose sensitive data in frontend responses
+- Handle minors’ data carefully and conservatively
+
+Payments structure:
+- Add Stripe-ready billing logic, even if using placeholder checkout pages
+- Parent plan:
+  - registration fee
+  - monthly fee per player
+- Coach plan:
+  - registration fee
+- Build the backend structure cleanly so payment logic can be expanded later
+- Include subscription status fields in database and protect premium workflows where needed
+
+Design requirements:
+- Make it visually impressive without being cluttered
+- Premium sports-tech aesthetic
+- Strong gradients, elegant dark/light contrast, clean cards, soft shadows
+- Smooth hover states
+- Nice typography
+- Responsive on desktop and mobile
+- Fast-feeling UI
+- Use reusable components and keep the design system consistent
+
+Implementation rules:
+- Build the whole thing end-to-end
+- Keep it minimal in scope but complete in architecture
+- Prioritize quality over too many features
+- Use seed data so the app looks alive immediately
+- Create a few example players, one parent, one coach, one admin, sample stats, and news posts
+- Include clear README setup instructions
+- Use environment variables properly
+- Make the app runnable locally with minimal setup
+- Structure the code cleanly and professionally
+- Avoid unnecessary abstractions or overengineering
+- Use realistic placeholder content and images if needed
+
+Pages to create:
+- /
+- /players
+- /players/[id]
+- /news
+- /about
+- /sign-in
+- /sign-up
+- /dashboard/parent
+- /dashboard/coach
+- /dashboard/admin
+
+Deliverables:
+- Full source code
+- Prisma schema
+- Database migrations
+- Seed script
+- Authentication
+- Role-based protected routes
+- Upload flow
+- Stripe-ready billing structure
+- Clean UI components
+- README with setup steps
+- Demo credentials for parent, coach, and admin
+
+Final instruction:
+Do not give me a toy mockup. Build a real, clean MVP with both frontend and backend working. Make it look polished and startup-grade. Keep functions focused and minimal, but ensure it is truly full stack and usable.
