@@ -310,4 +310,5 @@ export class ReadingsService {
 
     return this.prisma.measurementReading.count({ where });
   }
+  
 }
