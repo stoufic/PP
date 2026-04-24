@@ -1,0 +1,455 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  LEGAL_MANAGER
+  REVIEWER
+  APPROVER
+  SIGNER
+  VIEWER
+}
+
+enum AgreementStatus {
+  DRAFT
+  IN_REVIEW
+  NEEDS_CHANGES
+  APPROVED
+  AWAITING_SIGNATURE
+  EXECUTED
+  EXPIRED
+  ARCHIVED
+}
+
+enum ApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CHANGES_REQUESTED
+}
+
+enum SignatureStatus {
+  PENDING
+  SENT
+  COMPLETED
+  DECLINED
+}
+
+enum DocumentFormat {
+  PDF
+  DOCX
+  TXT
+}
+
+enum JobStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+model Organization {
+  id             String            @id @default(cuid())
+  name           String
+  slug           String            @unique
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  users          User[]
+  workspaces     Workspace[]
+  departments    Department[]
+  counterparties Counterparty[]
+  agreements     Agreement[]
+  templates      Template[]
+  playbooks      Playbook[]
+  auditLogs      AuditLog[]
+  notifications  Notification[]
+  settings       Json?
+}
+
+model Workspace {
+  id             String        @id @default(cuid())
+  organizationId String
+  name           String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  agreements     Agreement[]
+  templates      Template[]
+  playbooks      Playbook[]
+  jobs           Job[]
+
+  @@unique([organizationId, name])
+}
+
+model Department {
+  id             String        @id @default(cuid())
+  organizationId String
+  name           String
+  description    String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  users          User[]
+  agreements     Agreement[]
+
+  @@unique([organizationId, name])
+}
+
+model User {
+  id             String             @id @default(cuid())
+  organizationId String
+  departmentId   String?
+  email          String             @unique
+  name           String
+  role           UserRole
+  passwordHash   String
+  title          String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  department     Department?        @relation(fields: [departmentId], references: [id])
+  ownedAgreements Agreement[]       @relation("AgreementOwner")
+  comments       Comment[]
+  approvalSteps  ApprovalStep[]     @relation("ApprovalAssignee")
+  decisions      ApprovalDecision[]
+  signatures     SignatureRequest[]
+  sessions       Session[]
+  notifications  Notification[]
+  uploadedVersions AgreementVersion[] @relation("VersionUploader")
+}
+
+model Session {
+  id             String    @id @default(cuid())
+  userId         String
+  organizationId String
+  token          String    @unique
+  expiresAt      DateTime
+  createdAt      DateTime  @default(now())
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, userId])
+}
+
+model Counterparty {
+  id             String      @id @default(cuid())
+  organizationId String
+  name           String
+  category       String?
+  country        String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  agreements     Agreement[]
+
+  @@unique([organizationId, name])
+}
+
+model Agreement {
+  id               String             @id @default(cuid())
+  organizationId   String
+  workspaceId      String
+  departmentId     String?
+  counterpartyId   String?
+  ownerId          String
+  templateId       String?
+  title            String
+  agreementType    String
+  status           AgreementStatus
+  summary          String?
+  riskLevel        String?
+  effectiveDate    DateTime?
+  expirationDate   DateTime?
+  renewalTerms     String?
+  tags             String[]
+  metadata         Json?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  organization     Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace        Workspace          @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  department       Department?        @relation(fields: [departmentId], references: [id])
+  counterparty     Counterparty?      @relation(fields: [counterpartyId], references: [id])
+  owner            User               @relation("AgreementOwner", fields: [ownerId], references: [id])
+  template         Template?          @relation(fields: [templateId], references: [id])
+  versions         AgreementVersion[]
+  documents        Document[]
+  clauses          Clause[]
+  comments         Comment[]
+  approvalSteps    ApprovalStep[]
+  signatures       SignatureRequest[]
+  aiReviews        AIReviewResult[]
+  obligations      Obligation[]
+  auditLogs        AuditLog[]
+
+  @@index([organizationId, workspaceId, status])
+  @@index([organizationId, departmentId])
+}
+
+model AgreementVersion {
+  id             String      @id @default(cuid())
+  agreementId    String
+  versionNumber  Int
+  title          String
+  uploadedById   String
+  content        String
+  summary        String?
+  createdAt      DateTime    @default(now())
+  agreement      Agreement   @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  uploadedBy     User        @relation("VersionUploader", fields: [uploadedById], references: [id])
+  clauses        Clause[]
+  documents      Document[]
+
+  @@unique([agreementId, versionNumber])
+}
+
+model Document {
+  id              String          @id @default(cuid())
+  organizationId  String
+  agreementId     String
+  versionId       String?
+  fileName        String
+  mimeType        String
+  filePath        String
+  format          DocumentFormat
+  sizeBytes       Int
+  extractedText   String?
+  extractedMeta   Json?
+  parseStatus     String          @default("queued")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  agreement       Agreement       @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  version         AgreementVersion? @relation(fields: [versionId], references: [id])
+  chunks          DocumentChunk[]
+
+  @@index([organizationId, agreementId])
+}
+
+model DocumentChunk {
+  id            String    @id @default(cuid())
+  documentId    String
+  sectionTitle  String?
+  ordinal       Int
+  text          String
+  sourceAnchor  String?
+  embedding     Json?
+  tokens        Int?
+  createdAt     DateTime  @default(now())
+  document      Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@index([documentId, ordinal])
+}
+
+model Clause {
+  id             String             @id @default(cuid())
+  organizationId String
+  agreementId    String
+  versionId      String?
+  heading        String
+  body           String
+  category       String?
+  riskLevel      String?
+  sourceAnchor   String?
+  confidence     Float?
+  createdAt      DateTime           @default(now())
+  agreement      Agreement          @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  version        AgreementVersion?  @relation(fields: [versionId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, agreementId])
+}
+
+model Comment {
+  id             String      @id @default(cuid())
+  organizationId String
+  agreementId    String
+  authorId       String
+  sectionAnchor  String?
+  body           String
+  mentions       String[]
+  resolved       Boolean     @default(false)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  agreement      Agreement   @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  author         User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, agreementId])
+}
+
+model ApprovalStep {
+  id             String            @id @default(cuid())
+  organizationId String
+  agreementId    String
+  assigneeId     String
+  stageOrder     Int
+  status         ApprovalStatus    @default(PENDING)
+  required       Boolean           @default(true)
+  dueAt          DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime          @default(now())
+  agreement      Agreement         @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  assignee       User              @relation("ApprovalAssignee", fields: [assigneeId], references: [id], onDelete: Cascade)
+  decisions      ApprovalDecision[]
+
+  @@index([organizationId, agreementId, stageOrder])
+}
+
+model ApprovalDecision {
+  id             String          @id @default(cuid())
+  organizationId String
+  approvalStepId String
+  userId         String
+  status         ApprovalStatus
+  note           String?
+  createdAt      DateTime        @default(now())
+  approvalStep   ApprovalStep    @relation(fields: [approvalStepId], references: [id], onDelete: Cascade)
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, userId])
+}
+
+model SignatureRequest {
+  id             String          @id @default(cuid())
+  organizationId String
+  agreementId    String
+  signerId       String
+  orderIndex     Int
+  status         SignatureStatus @default(PENDING)
+  requestedAt    DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime        @default(now())
+  agreement      Agreement       @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  signer         User            @relation(fields: [signerId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, agreementId, orderIndex])
+}
+
+model Template {
+  id               String       @id @default(cuid())
+  organizationId   String
+  workspaceId      String
+  name             String
+  agreementType    String
+  description      String?
+  defaultMetadata  Json?
+  clauseBlocks     Json?
+  workflowDefaults Json?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  organization     Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace        Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  agreements       Agreement[]
+
+  @@index([organizationId, workspaceId])
+}
+
+model Playbook {
+  id             String         @id @default(cuid())
+  organizationId String
+  workspaceId    String
+  name           String
+  description    String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  rules          PlaybookRule[]
+  aiReviews      AIReviewResult[]
+
+  @@unique([workspaceId, name])
+}
+
+model PlaybookRule {
+  id             String       @id @default(cuid())
+  playbookId     String
+  category       String
+  preferredText  String?
+  fallbackText   String?
+  unacceptable   String?
+  approvalPath   String?
+  riskCategory   String
+  required       Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  playbook       Playbook     @relation(fields: [playbookId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id             String       @id @default(cuid())
+  organizationId String
+  agreementId    String?
+  actorEmail     String
+  action         String
+  entityType     String
+  entityId       String?
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  agreement      Agreement?   @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, createdAt])
+  @@index([organizationId, action])
+}
+
+model Notification {
+  id             String       @id @default(cuid())
+  organizationId String
+  userId         String
+  title          String
+  body           String
+  readAt         DateTime?
+  createdAt      DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, userId, readAt])
+}
+
+model AIReviewResult {
+  id             String       @id @default(cuid())
+  organizationId String
+  agreementId    String
+  playbookId     String?
+  status         String
+  summary        String
+  findings       Json
+  confidence     Float?
+  createdAt      DateTime     @default(now())
+  agreement      Agreement    @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+  playbook       Playbook?    @relation(fields: [playbookId], references: [id])
+
+  @@index([organizationId, agreementId, createdAt])
+}
+
+model Obligation {
+  id             String       @id @default(cuid())
+  organizationId String
+  agreementId    String
+  party          String
+  obligation     String
+  dueDate        DateTime?
+  sourceAnchor   String?
+  status         String       @default("open")
+  createdAt      DateTime     @default(now())
+  agreement      Agreement    @relation(fields: [agreementId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, agreementId])
+}
+
+model Job {
+  id             String       @id @default(cuid())
+  organizationId String
+  workspaceId    String
+  type           String
+  payload        Json
+  status         JobStatus    @default(PENDING)
+  errorMessage   String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  workspace      Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, workspaceId, status, createdAt])
+}

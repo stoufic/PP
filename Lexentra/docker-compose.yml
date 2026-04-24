@@ -1,0 +1,74 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: lexentra-postgres
+    environment:
+      POSTGRES_DB: lexentra
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: lexentra-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lexentra-app
+    depends_on:
+      - postgres
+      - ollama
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/lexentra?schema=public
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      SESSION_SECRET: change-me-in-real-deployments
+      LOCAL_STORAGE_PATH: /app/uploads
+      LOCAL_LLM_BASE_URL: http://ollama:11434
+      LOCAL_LLM_CHAT_MODEL: local-instruct-model
+      LOCAL_LLM_EMBED_MODEL: local-embed-model
+      ENABLE_DEMO_FALLBACK: "true"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - app-node-modules:/app/node_modules
+      - uploads-data:/app/uploads
+    command: sh -c "npm run db:generate && npm run db:push && npm run db:seed && npm run dev"
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lexentra-worker
+    depends_on:
+      - postgres
+      - ollama
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/lexentra?schema=public
+      SESSION_SECRET: change-me-in-real-deployments
+      LOCAL_STORAGE_PATH: /app/uploads
+      LOCAL_LLM_BASE_URL: http://ollama:11434
+      LOCAL_LLM_CHAT_MODEL: local-instruct-model
+      LOCAL_LLM_EMBED_MODEL: local-embed-model
+    volumes:
+      - .:/app
+      - app-node-modules:/app/node_modules
+      - uploads-data:/app/uploads
+    command: sh -c "npm run db:generate && npm run worker"
+
+volumes:
+  postgres-data:
+  ollama-data:
+  uploads-data:
+  app-node-modules:
