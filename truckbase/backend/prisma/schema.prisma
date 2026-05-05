@@ -8,40 +8,40 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())
-  email     String  @unique
-  password  String
-  firstName String
-  lastName  String
-  phone     String?
-  role      Role    @default(OWNER)
+  id         String   @id @default(uuid())
+  email      String   @unique
+  password   String
+  firstName  String
+  lastName   String
+  phone      String?
+  role       Role     @default(OWNER)
 
-  truckId String?
-  truck   Truck?  @relation("TruckStaff", fields: [truckId], references: [id])
+  truckId    String?
+  truck      Truck?   @relation("TruckStaff", fields: [truckId], references: [id])
 
-  ownedTruck Truck? @relation("TruckOwner")
+  ownedTruck Truck?   @relation("TruckOwner")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@map("users")
 }
 
 model Truck {
-  id          String  @id @default(uuid())
-  name        String
-  description String?
-  cuisineType String?
+  id             String          @id @default(uuid())
+  name           String
+  description    String?
+  cuisineType    String?
 
-  ownerId String @unique
-  owner   User   @relation("TruckOwner", fields: [ownerId], references: [id])
+  ownerId        String          @unique
+  owner          User            @relation("TruckOwner", fields: [ownerId], references: [id])
 
-  staff User[] @relation("TruckStaff")
+  staff          User[]          @relation("TruckStaff")
 
-  logoUrl   String?
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  logoUrl        String?
+  active         Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 
   locations      Location[]
   permits        Permit[]
