@@ -1,11 +1,10 @@
 import { ReactNode } from "react";
-import { Badge } from "@/components/ui/badge";
 
 export function PageHeader({
   eyebrow,
   title,
   description,
-  actions
+  actions,
 }: {
   eyebrow?: string;
   title: string;
@@ -13,17 +12,15 @@ export function PageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-5 border-b border-border pb-6 lg:flex-row lg:items-end lg:justify-between">
+    <div className="flex flex-col gap-6 border-b border-border pb-8 lg:flex-row lg:items-end lg:justify-between">
       <div className="space-y-2">
-        {eyebrow ? <Badge>{eyebrow}</Badge> : null}
-        <div className="space-y-1">
-          <h1 className="text-3xl font-semibold tracking-[-0.04em] text-slate-950">
-            {title}
-          </h1>
-          <p className="max-w-3xl text-sm leading-6 text-slate-600">{description}</p>
-        </div>
+        {eyebrow && (
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted">{eyebrow}</p>
+        )}
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h1>
+        <p className="max-w-2xl text-sm leading-relaxed text-muted">{description}</p>
       </div>
-      {actions ? <div className="flex items-center gap-3">{actions}</div> : null}
+      {actions && <div className="flex items-center gap-3">{actions}</div>}
     </div>
   );
 }

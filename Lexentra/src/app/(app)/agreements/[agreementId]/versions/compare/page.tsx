@@ -18,7 +18,7 @@ export default async function AgreementComparePage({
   const [left, right] = agreement.versions;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <PageHeader
         eyebrow="Version comparison"
         title={`${agreement.title} changes`}
@@ -26,7 +26,7 @@ export default async function AgreementComparePage({
       />
 
       <Card className="p-6">
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-muted">
           Comparing version {left.versionNumber} and version {right.versionNumber}. The current draft tightens security notice, shortens cure periods, and expands liability carve-outs.
         </p>
       </Card>

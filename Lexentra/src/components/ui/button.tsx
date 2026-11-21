@@ -5,22 +5,15 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "ghost" | "danger";
 };
 
-export function Button({
-  className,
-  variant = "primary",
-  type = "button",
-  ...props
-}: ButtonProps) {
+export function Button({ className, variant = "primary", type = "button", ...props }: ButtonProps) {
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-accent/50 disabled:cursor-not-allowed disabled:opacity-60",
-        variant === "primary" &&
-          "bg-foreground text-white shadow-panel hover:bg-slate-800",
-        variant === "secondary" &&
-          "border border-border bg-white text-foreground hover:bg-slate-50",
-        variant === "ghost" && "text-slate-600 hover:bg-slate-100",
-        variant === "danger" && "bg-danger text-white hover:bg-red-700",
+        "inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        variant === "primary" && "bg-accent text-white hover:bg-[var(--accent-hover)]",
+        variant === "secondary" && "border border-border bg-surface text-foreground hover:bg-surface-raised",
+        variant === "ghost" && "text-muted hover:bg-surface-raised hover:text-foreground",
+        variant === "danger" && "bg-danger text-white hover:opacity-90",
         className
       )}
       type={type}

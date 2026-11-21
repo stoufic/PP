@@ -1,53 +1,67 @@
 import Link from "next/link";
-import { Card } from "@/components/ui/card";
 import { LoginForm } from "@/components/app/login-form";
 import { demoCredentials } from "@/lib/fixtures";
+import { CheckCircle2 } from "lucide-react";
+
+const highlights = [
+  "Local AI review with playbook enforcement and source citations",
+  "Structured workflows across reviewers, approvers, and signers",
+  "Searchable audit trail for all actions, changes, and policy outcomes",
+];
 
 export default function LoginPage() {
   return (
-    <div className="grid min-h-screen bg-[#f4f2ed] lg:grid-cols-[0.9fr_1.1fr]">
-      <div className="flex items-center justify-center px-6 py-10">
-        <Card className="w-full max-w-md p-8">
-          <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Lexentra</p>
-          <h1 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-slate-950">
-            Sign in to your agreement workspace
-          </h1>
-          <p className="mt-3 text-sm leading-6 text-slate-600">
-            Access review queues, approvals, playbooks, and audit-grade activity from one secure workspace.
-          </p>
-          <div className="mt-8">
-            <LoginForm
-              demoHint={`${demoCredentials.email} / ${demoCredentials.password}`}
-            />
+    <div className="flex min-h-screen bg-background">
+      {/* Form side */}
+      <div className="flex flex-1 items-center justify-center px-6 py-12">
+        <div className="w-full max-w-sm space-y-8">
+          <div>
+            <Link href="/" className="flex items-center gap-2.5">
+              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">
+                LX
+              </div>
+              <span className="text-sm font-semibold text-foreground">Lexentra</span>
+            </Link>
+            <h1 className="mt-8 text-2xl font-semibold tracking-tight text-foreground">
+              Sign in to your workspace
+            </h1>
+            <p className="mt-2 text-sm text-muted">
+              Access review queues, approvals, playbooks, and audit-grade activity.
+            </p>
           </div>
-          <p className="mt-6 text-sm text-slate-500">
+
+          <LoginForm demoHint={`${demoCredentials.email} / ${demoCredentials.password}`} />
+
+          <p className="text-sm text-muted">
             Need a workspace?{" "}
-            <Link className="font-semibold text-slate-900" href="/signup">
+            <Link className="font-medium text-accent hover:underline" href="/signup">
               Create one
             </Link>
           </p>
-        </Card>
+        </div>
       </div>
 
-      <div className="hidden bg-[#111827] px-10 py-12 text-slate-200 lg:block">
-        <div className="mx-auto flex h-full max-w-xl flex-col justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.32em] text-slate-500">Why Lexentra</p>
-            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-white">
-              Contract infrastructure for organizations where precision is operational.
-            </h2>
-          </div>
-          <div className="space-y-4">
-            {[
-              "Local AI review with playbook enforcement and source citations",
-              "Structured workflows across reviewers, approvers, and signers",
-              "Searchable audit trail for actions, changes, and policy outcomes"
-            ].map((item) => (
-              <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5" key={item}>
-                <p className="text-sm leading-7 text-slate-300">{item}</p>
-              </div>
-            ))}
-          </div>
+      {/* Panel side */}
+      <div className="hidden w-[480px] flex-shrink-0 bg-[#111827] p-12 lg:flex lg:flex-col lg:justify-between">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+            Why Lexentra
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-white">
+            Contract infrastructure for organizations where precision is operational.
+          </h2>
+        </div>
+
+        <div className="space-y-3">
+          {highlights.map((item) => (
+            <div
+              key={item}
+              className="flex gap-3 rounded-xl border border-white/8 bg-white/5 p-5"
+            >
+              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
+              <p className="text-sm leading-relaxed text-slate-300">{item}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

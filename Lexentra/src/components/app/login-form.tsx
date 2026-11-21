@@ -42,22 +42,22 @@ export function LoginForm({ demoHint }: { demoHint: string }) {
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
       <div className="space-y-2">
-        <label className="text-sm font-medium text-slate-700" htmlFor="email">
+        <label className="text-sm font-medium text-foreground" htmlFor="email">
           Work email
         </label>
         <Input id="email" name="email" placeholder="legal@company.com" required type="email" />
       </div>
       <div className="space-y-2">
-        <label className="text-sm font-medium text-slate-700" htmlFor="password">
+        <label className="text-sm font-medium text-foreground" htmlFor="password">
           Password
         </label>
         <Input id="password" name="password" placeholder="Enter password" required type="password" />
       </div>
-      {error ? <p className="text-sm text-rose-700">{error}</p> : null}
+      {error ? <p className="text-sm text-danger">{error}</p> : null}
       <Button className="h-11 w-full" disabled={loading} type="submit">
         {loading ? "Signing in..." : "Sign in"}
       </Button>
-      <p className="rounded-3xl bg-slate-100 px-4 py-3 text-xs leading-5 text-slate-600">
+      <p className="rounded-lg bg-surface-raised px-4 py-3 text-xs text-muted">
         Demo access: {demoHint}
       </p>
     </form>

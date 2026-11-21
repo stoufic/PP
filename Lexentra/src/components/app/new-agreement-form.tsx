@@ -60,7 +60,7 @@ export function NewAgreementForm() {
         <Input name="expirationDate" type="date" />
       </div>
       <select
-        className="h-11 rounded-2xl border border-border bg-white px-4 text-sm text-foreground"
+        className="h-11 rounded-lg border border-border bg-surface px-4 text-sm text-foreground outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         defaultValue="DRAFT"
         name="status"
       >
@@ -70,7 +70,7 @@ export function NewAgreementForm() {
       </select>
       <Textarea name="renewalTerms" placeholder="Renewal terms" />
       <Input name="tags" placeholder="Tags, comma separated" />
-      {error ? <p className="text-sm text-rose-700">{error}</p> : null}
+      {error ? <p className="text-sm text-danger">{error}</p> : null}
       <div className="flex justify-end">
         <Button disabled={loading} type="submit">
           {loading ? "Creating..." : "Create agreement"}

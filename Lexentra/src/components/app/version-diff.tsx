@@ -21,15 +21,15 @@ export function VersionDiff({
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <Card className="p-5">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
           Prior version
         </p>
-        <div className="space-y-3 text-sm leading-6 text-slate-700">
+        <div className="space-y-3 text-sm leading-relaxed text-foreground">
           {Array.from({ length: size }).map((_, index) => {
             const value = leftLines[index];
             const changed = value && value !== rightLines[index];
             return (
-              <p className={changed ? "rounded-xl bg-rose-50 px-3 py-2 text-rose-900" : ""} key={index}>
+              <p className={changed ? "rounded-lg bg-danger-soft px-3 py-2 text-danger" : "text-muted"} key={index}>
                 {value || " "}
               </p>
             );
@@ -37,15 +37,15 @@ export function VersionDiff({
         </div>
       </Card>
       <Card className="p-5">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
           Current version
         </p>
-        <div className="space-y-3 text-sm leading-6 text-slate-700">
+        <div className="space-y-3 text-sm leading-relaxed text-foreground">
           {Array.from({ length: size }).map((_, index) => {
             const value = rightLines[index];
             const changed = value && value !== leftLines[index];
             return (
-              <p className={changed ? "rounded-xl bg-emerald-50 px-3 py-2 text-emerald-900" : ""} key={index}>
+              <p className={changed ? "rounded-lg bg-success-soft px-3 py-2 text-success" : "text-muted"} key={index}>
                 {value || " "}
               </p>
             );

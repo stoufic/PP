@@ -8,7 +8,7 @@ export default async function ReportsPage() {
   const highRisk = agreements.filter((item) => item.riskLevel === "High" || item.riskLevel === "Critical");
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <PageHeader
         eyebrow="Reporting"
         title="Operational analytics"
@@ -22,27 +22,28 @@ export default async function ReportsPage() {
           ["Open compliance issues", String(dashboard.complianceIssues.length)]
         ].map(([label, value]) => (
           <Card className="p-6" key={label}>
-            <p className="text-sm text-slate-500">{label}</p>
-            <p className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-slate-950">{value}</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-muted">{label}</p>
+            <p className="mt-3 text-4xl font-semibold tracking-tight text-foreground">{value}</p>
           </Card>
         ))}
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1fr_1fr]">
         <Card className="p-6">
-          <p className="text-lg font-semibold text-slate-950">Agreements by status</p>
-          <div className="mt-6 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted">Distribution</p>
+          <p className="mt-1 mb-5 text-base font-semibold text-foreground">Agreements by status</p>
+          <div className="space-y-4">
             {["IN_REVIEW", "APPROVED", "AWAITING_SIGNATURE", "EXECUTED", "NEEDS_CHANGES"].map((status) => {
               const count = agreements.filter((agreement) => agreement.status === status).length;
               return (
                 <div className="space-y-2" key={status}>
-                  <div className="flex items-center justify-between text-sm text-slate-600">
-                    <span>{status.replace(/_/g, " ")}</span>
-                    <span>{count}</span>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted">{status.replace(/_/g, " ")}</span>
+                    <span className="font-semibold text-foreground">{count}</span>
                   </div>
-                  <div className="h-2 rounded-full bg-slate-100">
+                  <div className="h-1.5 rounded-full bg-surface-raised">
                     <div
-                      className="h-2 rounded-full bg-[#1f2937]"
+                      className="h-1.5 rounded-full bg-accent"
                       style={{ width: `${(count / agreements.length) * 100 || 4}%` }}
                     />
                   </div>
@@ -53,12 +54,13 @@ export default async function ReportsPage() {
         </Card>
 
         <Card className="p-6">
-          <p className="text-lg font-semibold text-slate-950">Review bottlenecks</p>
-          <div className="mt-6 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-widest text-muted">Operations</p>
+          <p className="mt-1 mb-5 text-base font-semibold text-foreground">Review bottlenecks</p>
+          <div className="space-y-3">
             {dashboard.reviewBottlenecks.map((item) => (
-              <div className="rounded-[1.25rem] border border-border p-4" key={item.label}>
-                <p className="text-sm font-semibold text-slate-900">{item.label}</p>
-                <p className="mt-2 text-sm text-slate-600">{item.value}</p>
+              <div className="rounded-xl border border-border p-4" key={item.label}>
+                <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                <p className="mt-2 text-sm text-muted">{item.value}</p>
               </div>
             ))}
           </div>

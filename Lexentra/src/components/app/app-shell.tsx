@@ -14,162 +14,110 @@ import {
   Settings,
   ShieldCheck,
   Signature,
-  Users
+  Users,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/app/theme-toggle";
 import { hasPermission } from "@/lib/rbac";
 import { SessionUser } from "@/lib/types";
 import { cn, initials } from "@/lib/utils";
 
 const navItems = [
-  {
-    href: "/dashboard",
-    label: "Dashboard",
-    icon: LayoutDashboard,
-    permission: "agreements:view" as const
-  },
-  {
-    href: "/agreements",
-    label: "Agreements",
-    icon: FileText,
-    permission: "agreements:view" as const
-  },
-  {
-    href: "/review-center",
-    label: "Review Center",
-    icon: ShieldCheck,
-    permission: "agreements:review" as const
-  },
-  {
-    href: "/approval-queue",
-    label: "Approval Queue",
-    icon: Activity,
-    permission: "agreements:approve" as const
-  },
-  {
-    href: "/signature-queue",
-    label: "Signature Queue",
-    icon: Signature,
-    permission: "agreements:sign" as const
-  },
-  {
-    href: "/templates",
-    label: "Templates",
-    icon: BookCopy,
-    permission: "templates:manage" as const
-  },
-  {
-    href: "/playbooks",
-    label: "Playbooks",
-    icon: Scale,
-    permission: "playbooks:manage" as const
-  },
-  {
-    href: "/search",
-    label: "Search",
-    icon: Search,
-    permission: "agreements:view" as const
-  },
-  {
-    href: "/reports",
-    label: "Reports",
-    icon: Activity,
-    permission: "reports:view" as const
-  },
-  {
-    href: "/admin/users",
-    label: "Users",
-    icon: Users,
-    permission: "admin:manage-users" as const
-  },
-  {
-    href: "/admin/audit-logs",
-    label: "Audit Log",
-    icon: History,
-    permission: "admin:view-audit" as const
-  },
-  {
-    href: "/admin/settings",
-    label: "Settings",
-    icon: Settings,
-    permission: "settings:manage-ai" as const
-  }
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, permission: "agreements:view" as const },
+  { href: "/agreements", label: "Agreements", icon: FileText, permission: "agreements:view" as const },
+  { href: "/review-center", label: "Review Center", icon: ShieldCheck, permission: "agreements:review" as const },
+  { href: "/approval-queue", label: "Approval Queue", icon: Activity, permission: "agreements:approve" as const },
+  { href: "/signature-queue", label: "Signature Queue", icon: Signature, permission: "agreements:sign" as const },
+  { href: "/templates", label: "Templates", icon: BookCopy, permission: "templates:manage" as const },
+  { href: "/playbooks", label: "Playbooks", icon: Scale, permission: "playbooks:manage" as const },
+  { href: "/search", label: "Search", icon: Search, permission: "agreements:view" as const },
+  { href: "/reports", label: "Reports", icon: Activity, permission: "reports:view" as const },
+  { href: "/admin/users", label: "Users", icon: Users, permission: "admin:manage-users" as const },
+  { href: "/admin/audit-logs", label: "Audit Log", icon: History, permission: "admin:view-audit" as const },
+  { href: "/admin/settings", label: "Settings", icon: Settings, permission: "settings:manage-ai" as const },
 ];
 
-export function AppShell({
-  user,
-  children
-}: {
-  user: SessionUser;
-  children: ReactNode;
-}) {
+export function AppShell({ user, children }: { user: SessionUser; children: ReactNode }) {
   const pathname = usePathname();
+  const visible = navItems.filter((item) => hasPermission(user.role, item.permission));
 
   return (
-    <div className="min-h-screen bg-[#f4f2ed]">
-      <div className="mx-auto grid min-h-screen max-w-[1600px] gap-6 px-4 py-4 lg:grid-cols-[280px_minmax(0,1fr)]">
-        <aside className="flex flex-col rounded-panel border border-white/70 bg-[#111827] px-5 py-6 text-slate-200 shadow-panel">
-          <Link className="block border-b border-slate-800 pb-6" href="/dashboard">
-            <div className="flex items-center gap-3">
-              <div className="rounded-2xl bg-accent px-3 py-2 text-sm font-bold text-slate-950">
-                LX
-              </div>
-              <div>
-                <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Lexentra</p>
-                <p className="text-base font-semibold text-white">
-                  AI infrastructure for agreements
-                </p>
-              </div>
-            </div>
-          </Link>
+    <div className="flex min-h-screen bg-background">
+      {/* Sidebar spacer */}
+      <div className="w-16 flex-shrink-0" />
 
-          <nav className="mt-6 space-y-1">
-            {navItems
-              .filter((item) => hasPermission(user.role, item.permission))
-              .map((item) => {
-                const Icon = item.icon;
-                const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-
-                return (
-                  <Link
-                    className={cn(
-                      "flex items-center gap-3 rounded-2xl px-3 py-3 text-sm transition",
-                      active
-                        ? "bg-white/10 text-white"
-                        : "text-slate-400 hover:bg-white/5 hover:text-white"
-                    )}
-                    href={item.href}
-                    key={item.href}
-                  >
-                    <Icon className="h-4 w-4" />
-                    {item.label}
-                  </Link>
-                );
-              })}
-          </nav>
-
-          <div className="mt-8 rounded-[1.25rem] border border-slate-800 bg-white/5 p-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Workspace</p>
-            <p className="mt-2 text-sm font-semibold text-white">Enterprise Legal</p>
-            <p className="mt-1 text-sm text-slate-400">Northbridge Health</p>
+      {/* Fixed sidebar */}
+      <aside className="group fixed left-0 top-0 z-40 flex h-full w-16 flex-col overflow-hidden border-r border-border bg-surface transition-[width] duration-300 ease-in-out hover:w-60">
+        {/* Logo */}
+        <Link
+          href="/dashboard"
+          className="flex h-16 flex-shrink-0 items-center border-b border-border px-4"
+        >
+          <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-accent text-xs font-bold text-white">
+            LX
           </div>
+          <div className="ml-3 min-w-0 overflow-hidden">
+            <p className="whitespace-nowrap text-[11px] font-semibold uppercase tracking-widest text-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              Lexentra
+            </p>
+            <p className="whitespace-nowrap text-sm font-semibold text-foreground opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              Agreement ops
+            </p>
+          </div>
+        </Link>
 
-          <div className="mt-auto pt-8">
-            <div className="flex items-center gap-3 rounded-[1.25rem] border border-slate-800 bg-white/5 p-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-700 text-sm font-semibold">
-                {initials(user.name)}
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-white">{user.name}</p>
-                <p className="text-xs text-slate-400">{user.title}</p>
-              </div>
+        {/* Nav */}
+        <nav className="flex-1 overflow-y-auto overflow-x-hidden py-3">
+          {visible.map((item) => {
+            const Icon = item.icon;
+            const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "relative flex h-10 items-center rounded-lg mx-2 my-0.5 transition-colors",
+                  active
+                    ? "bg-accent-soft text-accent"
+                    : "text-muted hover:bg-surface-raised hover:text-foreground"
+                )}
+              >
+                {active && (
+                  <span className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-accent" />
+                )}
+                <div className="flex w-10 flex-shrink-0 items-center justify-center">
+                  <Icon className="h-4 w-4" />
+                </div>
+                <span className="overflow-hidden whitespace-nowrap text-sm font-medium opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Footer */}
+        <div className="flex-shrink-0 border-t border-border p-2">
+          <div className="flex items-center gap-2 rounded-lg px-2 py-2">
+            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-surface-raised text-xs font-semibold text-foreground">
+              {initials(user.name)}
+            </div>
+            <div className="min-w-0 flex-1 overflow-hidden opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              <p className="whitespace-nowrap text-sm font-semibold text-foreground">{user.name}</p>
+              <p className="whitespace-nowrap text-xs text-muted">{user.title}</p>
+            </div>
+            <div className="flex-shrink-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              <ThemeToggle />
             </div>
           </div>
-        </aside>
+        </div>
+      </aside>
 
-        <main className="rounded-panel border border-white/70 bg-[#fbfaf7] p-6 shadow-panel">
+      {/* Main */}
+      <main className="flex-1 min-w-0 overflow-auto">
+        <div className="mx-auto max-w-[1400px] px-8 py-10">
           {children}
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }

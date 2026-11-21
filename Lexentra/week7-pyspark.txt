@@ -1,0 +1,80 @@
+from pyspark import SparkContext
+
+sc = SparkContext("local", "Assignment")
+
+
+# Task 1
+ages = [15, 22, 35, 42, 60, 18, 27, 19, 75, 29]
+
+age_rdd = sc.parallelize(ages)
+
+# Use map to label each age as minor, adult, or senior
+categories = age_rdd.map(lambda age: "minor" if age < 18 else ("adult" if age < 65 else "senior"))
+
+# Count how many people are in each category
+print("Category counts:", categories.countByValue())
+
+# Use filter to get only adults from the original RDD
+adults = age_rdd.filter(lambda age: age >= 18 and age <= 64)
+
+# collect returns the adults as a list
+print("Adults:", adults.collect())
+
+
+# Task 2
+reviews = [
+    "love this product",
+    "not worth the price",
+    "highly recommend",
+    "do not buy",
+    "amazing quality",
+    "very bad experience"
+]
+
+review_rdd = sc.parallelize(reviews)
+
+# flatMap splits each review into individual words
+words = review_rdd.flatMap(lambda x: x.split())
+
+# Count the total number of words
+print("Total words:", words.count())
+
+# Create (word, 1) pairs for each word
+word_pairs = words.map(lambda word: (word, 1))
+
+# reduceByKey adds together the values for the same word
+word_counts = word_pairs.reduceByKey(lambda x, y: x + y)
+
+print("Word counts:", word_counts.collect())
+
+positive = ["love", "recommend", "amazing", "quality", "highly"]
+
+# Filter the word counts to only show positive words
+positive_words = word_counts.filter(lambda x: x[0] in positive)
+
+print("Positive words:", positive_words.collect())
+
+
+# Task 3
+revenue = [
+    ("hat", 25),
+    ("shirt", 40),
+    ("hat", 30),
+    ("shoes", 80),
+    ("shirt", 20)
+]
+
+revenue_rdd = sc.parallelize(revenue)
+
+# Add the revenue for products with the same name
+total = revenue_rdd.reduceByKey(lambda x, y: x + y)
+
+print("Total revenue:", total.collect())
+
+# Find the product with the highest total revenue
+highest = total.max(key=lambda x: x[1])
+
+print("Highest grossing product:", highest)
+
+
+sc.stop()

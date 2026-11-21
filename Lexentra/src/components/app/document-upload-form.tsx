@@ -32,16 +32,16 @@ export function DocumentUploadForm({ agreementId }: { agreementId: string }) {
 
   return (
     <form
-      className="space-y-4 rounded-[1.25rem] border border-dashed border-border p-5"
+      className="space-y-4 rounded-xl border border-dashed border-border p-5"
       onSubmit={handleSubmit}
     >
       <div>
-        <p className="text-sm font-semibold text-slate-900">Upload source document</p>
-        <p className="mt-1 text-sm text-slate-600">Supports PDF, DOCX, and TXT. Uploads are stored locally and queued for indexing.</p>
+        <p className="text-sm font-semibold text-foreground">Upload source document</p>
+        <p className="mt-1 text-sm text-muted">Supports PDF, DOCX, and TXT. Uploads are stored locally and queued for indexing.</p>
       </div>
       <input
         accept=".pdf,.docx,.txt"
-        className="block w-full rounded-2xl border border-border bg-white px-4 py-3 text-sm"
+        className="block w-full rounded-lg border border-border bg-surface px-4 py-3 text-sm text-foreground"
         name="file"
         required
         type="file"
@@ -49,7 +49,7 @@ export function DocumentUploadForm({ agreementId }: { agreementId: string }) {
       <Button disabled={loading} type="submit">
         {loading ? "Uploading..." : "Upload document"}
       </Button>
-      {message ? <p className="text-sm text-slate-600">{message}</p> : null}
+      {message ? <p className="text-sm text-muted">{message}</p> : null}
     </form>
   );
 }

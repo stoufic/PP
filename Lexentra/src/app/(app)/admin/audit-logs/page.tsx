@@ -7,7 +7,7 @@ export default async function AuditLogsPage() {
   const logs = await getAuditLogs();
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <PageHeader
         eyebrow="Administration"
         title="Audit log"
@@ -15,26 +15,26 @@ export default async function AuditLogsPage() {
       />
 
       <Table>
-        <thead className="bg-slate-50 text-left text-xs uppercase tracking-[0.18em] text-slate-500">
-          <tr>
-            <th className="px-5 py-4">Action</th>
-            <th className="px-5 py-4">Actor</th>
-            <th className="px-5 py-4">Entity</th>
-            <th className="px-5 py-4">Timestamp</th>
+        <thead>
+          <tr className="border-b border-border bg-surface-raised">
+            <th className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-widest text-muted">Action</th>
+            <th className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-widest text-muted">Actor</th>
+            <th className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-widest text-muted">Entity</th>
+            <th className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-widest text-muted">Timestamp</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-border bg-white">
+        <tbody className="divide-y divide-border">
           {logs.map((log) => (
-            <tr key={log.id}>
+            <tr key={log.id} className="transition-colors hover:bg-surface-raised">
               <td className="px-5 py-4">
-                <p className="font-semibold text-slate-950">{log.action}</p>
-                <p className="mt-1 text-sm text-slate-500">{log.detail}</p>
+                <p className="font-semibold text-foreground">{log.action}</p>
+                <p className="mt-1 text-sm text-muted">{log.detail}</p>
               </td>
-              <td className="px-5 py-4 text-sm text-slate-600">{log.actorEmail}</td>
-              <td className="px-5 py-4 text-sm text-slate-600">
-                {log.entityType} • {log.entityId}
+              <td className="px-5 py-4 text-sm text-muted">{log.actorEmail}</td>
+              <td className="px-5 py-4 text-sm text-muted">
+                {log.entityType} · {log.entityId}
               </td>
-              <td className="px-5 py-4 text-sm text-slate-600">{formatDate(log.createdAt)}</td>
+              <td className="px-5 py-4 text-sm text-muted">{formatDate(log.createdAt)}</td>
             </tr>
           ))}
         </tbody>

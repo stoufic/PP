@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 
 export default function NewAgreementPage() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <PageHeader
         eyebrow="Create agreement"
         title="Start a new agreement record"

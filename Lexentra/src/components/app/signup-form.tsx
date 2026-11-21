@@ -49,7 +49,7 @@ export function SignupForm() {
       <Input name="name" placeholder="Your full name" required />
       <Input name="email" placeholder="Work email" required type="email" />
       <Input name="password" placeholder="Create a strong password" required type="password" />
-      {error ? <p className="text-sm text-rose-700">{error}</p> : null}
+      {error ? <p className="text-sm text-danger">{error}</p> : null}
       <Button className="h-11 w-full" disabled={loading} type="submit">
         {loading ? "Creating workspace..." : "Create organization"}
       </Button>

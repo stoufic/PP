@@ -23,7 +23,7 @@ export default async function AgreementDetailsPage({
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <PageHeader
         eyebrow={agreement.agreementNumber}
         title={agreement.title}
@@ -51,38 +51,38 @@ export default async function AgreementDetailsPage({
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Counterparty</p>
-              <p className="mt-2 text-sm font-semibold text-slate-900">{agreement.counterparty}</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted">Counterparty</p>
+              <p className="mt-2 text-sm font-semibold text-foreground">{agreement.counterparty}</p>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Department</p>
-              <p className="mt-2 text-sm font-semibold text-slate-900">{agreement.department}</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted">Department</p>
+              <p className="mt-2 text-sm font-semibold text-foreground">{agreement.department}</p>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Effective date</p>
-              <p className="mt-2 text-sm font-semibold text-slate-900">{formatDate(agreement.effectiveDate)}</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted">Effective date</p>
+              <p className="mt-2 text-sm font-semibold text-foreground">{formatDate(agreement.effectiveDate)}</p>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Expiration date</p>
-              <p className="mt-2 text-sm font-semibold text-slate-900">{formatDate(agreement.expirationDate)}</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted">Expiration date</p>
+              <p className="mt-2 text-sm font-semibold text-foreground">{formatDate(agreement.expirationDate)}</p>
             </div>
           </div>
-          <div className="mt-6 rounded-[1.5rem] bg-slate-100 p-5">
-            <p className="text-sm font-semibold text-slate-900">Renewal terms</p>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{agreement.renewalTerms}</p>
+          <div className="mt-6 rounded-xl bg-surface-raised p-5">
+            <p className="text-sm font-semibold text-foreground">Renewal terms</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted">{agreement.renewalTerms}</p>
           </div>
           <div className="mt-6">
-            <p className="text-lg font-semibold text-slate-950">Clause extraction</p>
+            <p className="text-base font-semibold text-foreground">Clause extraction</p>
             <div className="mt-4 space-y-4">
               {agreement.clauses.map((clause) => (
-                <div className="rounded-[1.25rem] border border-border p-4" key={clause.id}>
+                <div className="rounded-xl border border-border p-4" key={clause.id}>
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-semibold text-slate-950">{clause.heading}</p>
-                    <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                    <p className="text-sm font-semibold text-foreground">{clause.heading}</p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted">
                       {clause.sourceAnchor}
                     </p>
                   </div>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{clause.body}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{clause.body}</p>
                 </div>
               ))}
             </div>
@@ -92,22 +92,22 @@ export default async function AgreementDetailsPage({
         <div className="space-y-6">
           <DocumentUploadForm agreementId={agreement.id} />
           <Card className="p-6">
-            <p className="text-lg font-semibold text-slate-950">Workflow</p>
+            <p className="text-base font-semibold text-foreground">Workflow</p>
             <div className="mt-4 space-y-4">
               {agreement.approvalSteps.map((step) => (
-                <div className="rounded-[1.25rem] border border-border p-4" key={step.id}>
+                <div className="rounded-xl border border-border p-4" key={step.id}>
                   <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-sm font-semibold text-slate-900">{step.assignee}</p>
-                      <p className="text-sm text-slate-500">
-                        Stage {step.stageOrder} • {step.role}
+                      <p className="text-sm font-semibold text-foreground">{step.assignee}</p>
+                      <p className="text-sm text-muted">
+                        Stage {step.stageOrder} · {step.role}
                       </p>
                     </div>
                     <Badge tone={step.status === "APPROVED" ? "success" : step.status === "CHANGES_REQUESTED" ? "warning" : "default"}>
                       {sentenceCase(step.status)}
                     </Badge>
                   </div>
-                  {step.note ? <p className="mt-3 text-sm leading-6 text-slate-600">{step.note}</p> : null}
+                  {step.note ? <p className="mt-3 text-sm leading-relaxed text-muted">{step.note}</p> : null}
                 </div>
               ))}
             </div>
@@ -118,33 +118,33 @@ export default async function AgreementDetailsPage({
 
       <section className="grid gap-6 xl:grid-cols-[1fr_1fr]">
         <Card className="p-6">
-          <p className="text-lg font-semibold text-slate-950">Obligations</p>
+          <p className="text-base font-semibold text-foreground">Obligations</p>
           <div className="mt-4 space-y-4">
             {agreement.obligations.map((obligation) => (
-              <div className="rounded-[1.25rem] border border-border p-4" key={obligation.id}>
+              <div className="rounded-xl border border-border p-4" key={obligation.id}>
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-semibold text-slate-900">{obligation.party}</p>
-                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                  <p className="text-sm font-semibold text-foreground">{obligation.party}</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-muted">
                     {obligation.sourceAnchor}
                   </p>
                 </div>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{obligation.obligation}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{obligation.obligation}</p>
               </div>
             ))}
           </div>
         </Card>
         <Card className="p-6">
-          <p className="text-lg font-semibold text-slate-950">Comments and notes</p>
+          <p className="text-base font-semibold text-foreground">Comments and notes</p>
           <div className="mt-4 space-y-4">
             {agreement.comments.map((comment) => (
-              <div className="rounded-[1.25rem] border border-border p-4" key={comment.id}>
+              <div className="rounded-xl border border-border p-4" key={comment.id}>
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-semibold text-slate-900">{comment.author}</p>
-                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400">
+                  <p className="text-sm font-semibold text-foreground">{comment.author}</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-muted">
                     {comment.sectionAnchor}
                   </p>
                 </div>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{comment.body}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{comment.body}</p>
               </div>
             ))}
           </div>
@@ -152,7 +152,7 @@ export default async function AgreementDetailsPage({
       </section>
 
       <div>
-        <p className="mb-4 text-lg font-semibold text-slate-950">Activity timeline</p>
+        <p className="mb-4 text-base font-semibold text-foreground">Activity timeline</p>
         <Timeline items={agreement.timeline} />
       </div>
     </div>

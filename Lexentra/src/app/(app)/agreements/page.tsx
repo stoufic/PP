@@ -11,11 +11,11 @@ export default async function AgreementsPage() {
   const agreements = await getAgreements();
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <PageHeader
         eyebrow="Agreement register"
-        title="Agreement lifecycle management"
-        description="Track agreements across draft, review, approval, signature, execution, expiration, and archive states with structured ownership."
+        title="Agreement lifecycle"
+        description="Track agreements across draft, review, approval, signature, execution, expiration, and archive with structured ownership."
         actions={
           <Link href="/agreements/new">
             <Button>
@@ -27,39 +27,58 @@ export default async function AgreementsPage() {
       />
 
       <Table>
-        <thead className="bg-slate-50 text-left text-xs uppercase tracking-[0.18em] text-slate-500">
-          <tr>
-            <th className="px-5 py-4">Agreement</th>
-            <th className="px-5 py-4">Counterparty</th>
-            <th className="px-5 py-4">Status</th>
-            <th className="px-5 py-4">Risk</th>
-            <th className="px-5 py-4">Effective</th>
-            <th className="px-5 py-4 text-right">Open</th>
+        <thead>
+          <tr className="border-b border-border bg-surface-raised">
+            <th className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-widest text-muted">Agreement</th>
+            <th className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-widest text-muted">Counterparty</th>
+            <th className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-widest text-muted">Status</th>
+            <th className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-widest text-muted">Risk</th>
+            <th className="px-5 py-3.5 text-left text-xs font-semibold uppercase tracking-widest text-muted">Effective</th>
+            <th className="px-5 py-3.5 text-right text-xs font-semibold uppercase tracking-widest text-muted"></th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-border bg-white">
+        <tbody className="divide-y divide-border">
           {agreements.map((agreement) => (
-            <tr key={agreement.id}>
+            <tr key={agreement.id} className="transition-colors hover:bg-surface-raised">
               <td className="px-5 py-4">
-                <p className="font-semibold text-slate-950">{agreement.title}</p>
-                <p className="mt-1 text-sm text-slate-500">
-                  {agreement.agreementNumber} • {agreement.agreementType}
+                <p className="font-semibold text-foreground">{agreement.title}</p>
+                <p className="mt-1 text-xs text-muted">
+                  {agreement.agreementNumber} · {agreement.agreementType}
                 </p>
               </td>
-              <td className="px-5 py-4 text-sm text-slate-600">{agreement.counterparty}</td>
+              <td className="px-5 py-4 text-sm text-muted">{agreement.counterparty}</td>
               <td className="px-5 py-4">
-                <Badge tone={agreement.status === "NEEDS_CHANGES" ? "warning" : agreement.status === "EXECUTED" ? "success" : "default"}>
+                <Badge
+                  tone={
+                    agreement.status === "NEEDS_CHANGES"
+                      ? "warning"
+                      : agreement.status === "EXECUTED"
+                      ? "success"
+                      : "default"
+                  }
+                >
                   {sentenceCase(agreement.status)}
                 </Badge>
               </td>
               <td className="px-5 py-4">
-                <Badge tone={agreement.riskLevel === "High" || agreement.riskLevel === "Critical" ? "danger" : agreement.riskLevel === "Medium" ? "warning" : "success"}>
+                <Badge
+                  tone={
+                    agreement.riskLevel === "High" || agreement.riskLevel === "Critical"
+                      ? "danger"
+                      : agreement.riskLevel === "Medium"
+                      ? "warning"
+                      : "success"
+                  }
+                >
                   {agreement.riskLevel}
                 </Badge>
               </td>
-              <td className="px-5 py-4 text-sm text-slate-600">{formatDate(agreement.effectiveDate)}</td>
+              <td className="px-5 py-4 text-sm text-muted">{formatDate(agreement.effectiveDate)}</td>
               <td className="px-5 py-4 text-right">
-                <Link className="text-sm font-semibold text-slate-900" href={`/agreements/${agreement.id}`}>
+                <Link
+                  href={`/agreements/${agreement.id}`}
+                  className="text-sm font-medium text-accent hover:underline"
+                >
                   Open
                 </Link>
               </td>
